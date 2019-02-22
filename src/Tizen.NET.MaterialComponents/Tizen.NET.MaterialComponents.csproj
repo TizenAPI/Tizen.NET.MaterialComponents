@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Tizen.NET.MaterialComponents</AssemblyName>
+    <RootNamespace>Tizen.NET.MaterialComponents</RootNamespace>
+    <PackageId>Tizen.NET.MaterialComponents</PackageId>
+    <authors>Samsung Electronics</authors>
+    <owners>Samsung Electronics</owners>
+    <Description>Material Components for Tizen (ElmSharp) helps developers execute Material Design.</Description>
+    <PackageVersion>0.9.0-preview</PackageVersion>
+    <PackageLicense>https://www.apache.org/licenses/LICENSE-2.0</PackageLicense>
+    <PackageProjectUrl>https://github.com/TizenAPI/Tizen.NET.MaterialComponents</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/TizenAPI/Tizen.NET.MaterialComponents/master/assets/images/logo.png</PackageIconUrl>
+    <PackageTags>tizen;tizen.net;material</PackageTags>
+    <Copyright>© Samsung Electronics Co., Ltd All Rights Reserved</Copyright>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Theme\elmsharp-theme-material-tv.edj">
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="Theme\elmsharp-theme-material-wearable.edj">
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="Theme\elmsharp-theme-material.edj">
+      <Pack>true</Pack>
+    </Content>
+    <None Include="Tizen.NET.MaterialComponents.targets">
+      <Pack>true</Pack>
+      <PackagePath>build/$(TargetFramework)</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  </ItemGroup>
+
+</Project>

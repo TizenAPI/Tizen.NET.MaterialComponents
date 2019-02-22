@@ -1,0 +1,13 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ThemeFileDirectory>$(MSBuildThisFileDirectory)..\..\content\Theme\</ThemeFileDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TizenTpkUserIncludeFiles Include="$(ThemeFileDirectory)*.edj">
+      <TizenTpkSubDir>res</TizenTpkSubDir>
+    </TizenTpkUserIncludeFiles>
+  </ItemGroup>
+
+</Project>

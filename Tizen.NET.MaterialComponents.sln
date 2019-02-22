@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tizen.NET.MaterialComponents", "src\Tizen.NET.MaterialComponents\Tizen.NET.MaterialComponents.csproj", "{F153FFD6-CECB-442B-8C3F-EF9D4CBF06DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{15E9CB96-079B-41DF-8CCF-F64B06C1768A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialGallery", "test\MaterialGallery\MaterialGallery.csproj", "{DB495E98-3386-4A8C-90FD-67CDFD055F5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F153FFD6-CECB-442B-8C3F-EF9D4CBF06DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F153FFD6-CECB-442B-8C3F-EF9D4CBF06DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F153FFD6-CECB-442B-8C3F-EF9D4CBF06DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F153FFD6-CECB-442B-8C3F-EF9D4CBF06DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB495E98-3386-4A8C-90FD-67CDFD055F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB495E98-3386-4A8C-90FD-67CDFD055F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB495E98-3386-4A8C-90FD-67CDFD055F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB495E98-3386-4A8C-90FD-67CDFD055F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DB495E98-3386-4A8C-90FD-67CDFD055F5F} = {15E9CB96-079B-41DF-8CCF-F64B06C1768A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8797E93-FEBE-45D1-BAE9-B412D58A637F}
+	EndGlobalSection
+EndGlobal
