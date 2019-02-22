@@ -1,10 +1,13 @@
-﻿namespace Tizen.NET.MaterialComponents
+using ElmSharp;
+
+namespace Tizen.NET.MaterialComponents
 {
     public static class Styles
     {
         public static readonly string Material = "material";
         public static readonly string Singleline = "singleline";
         public static readonly string MaterialCircular = "material_circular";
+        public static readonly string MaterialNavigation = "material_navigation";
     }
 
     public static class Parts
@@ -37,5 +40,10 @@
     public static class Events
     {
         public static readonly string Changed = "changed";
+    }
+
+    public static class Colors
+    {
+        public static readonly Color OnSurfaceColorAlpha = new Color(0, 0, 0, 82);
     }
 }

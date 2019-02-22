@@ -13,6 +13,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MCard**
   A cards contain content about a single subject. ([guideline](https://material.io/design/components/cards.html))
 
+- **MNavigationDrawer**
+  A Navigation drawers provide access to destinations and app functionality, such as switching accounts. ([guideline](https://material.io/design/components/navigation-drawer.html))
+
 - **MProgressIndicator**
   A linear progress indicator that supports determinate and indeterminate linear progress indicators. ([guideline](https://material.io/design/components/progress-indicators.html#linear-progress-indicators))
   
