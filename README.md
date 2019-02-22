@@ -1,4 +1,4 @@
-# Tizen.NET.MaterialComponents
+# Tizen.NET.MaterialComponents  [![NuGet](https://img.shields.io/nuget/v/Tizen.NET.MaterialComponents.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/Tizen.NET.MaterialComponents/)
 
 Material Components for Tizen .NET help developers execute [Material Design](https://material.io). 
 
