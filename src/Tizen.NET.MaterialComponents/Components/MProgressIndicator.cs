@@ -11,6 +11,11 @@ namespace Tizen.NET.MaterialComponents
             Style = Styles.Material;
         }
 
+        protected MProgressIndicator(EvasObject parent, string style) : base(parent)
+        {
+            Style = style;
+        }
+
         public MProgressIndicatorType Type
         {
             get => _type;
