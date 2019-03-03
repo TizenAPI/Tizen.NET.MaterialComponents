@@ -26,11 +26,11 @@ namespace Tizen.NET.MaterialComponents
                 _hasShadow = value;
                 if (_hasShadow)
                 {
-                    _layout.SignalEmit(Action.ShowShadow, "");
+                    _layout.SignalEmit(Actions.ShowShadow, "");
                 }
                 else
                 {
-                    _layout.SignalEmit(Action.HideShadow, "");
+                    _layout.SignalEmit(Actions.HideShadow, "");
                 }
             }
         }
@@ -46,11 +46,11 @@ namespace Tizen.NET.MaterialComponents
                 _borderColor = value;
                 if (_borderColor == Color.Default)
                 {
-                    _layout.SetPartColor(PartName.Border, Color.Transparent);
+                    _layout.SetPartColor(Parts.Border, Color.Transparent);
                 }
                 else
                 {
-                    _layout.SetPartColor(PartName.Border, _borderColor);
+                    _layout.SetPartColor(Parts.Border, _borderColor);
                 }
             }
         }
@@ -71,8 +71,8 @@ namespace Tizen.NET.MaterialComponents
             Handle = handle;
 
             _layout.SetTheme("layout", "frame", Styles.Material);
-            _layout.SetPartContent(PartName.Content, this);
-            _layout.SignalEmit(Action.ShowShadow, "");
+            _layout.SetPartContent(Parts.Content, this);
+            _layout.SignalEmit(Actions.ShowShadow, "");
 
             return _layout;
         }
