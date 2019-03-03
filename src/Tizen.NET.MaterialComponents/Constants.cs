@@ -4,6 +4,7 @@
     {
         public static readonly string Material = "material";
         public static readonly string Singleline = "singleline";
+        public static readonly string MaterialCircular = "material_circular";
     }
 
     public static class Parts
