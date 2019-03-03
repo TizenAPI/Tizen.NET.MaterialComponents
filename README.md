@@ -4,6 +4,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 
 ## Components
 
+- **MActivityIndicator**
+  A circular progress indicator that supports determinate and indeterminate circular progress indicators. ([guideline](https://material.io/design/components/progress-indicators.html#circular-progress-indicators))
+
 - **MButton**
   A material buttons, including contained button, text button, outlined button and toggle button. ([guideline](https://material.io/design/components/buttons.html)) 
 
@@ -18,6 +21,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
   
 - **MTab**
   A material tab bar that supports fixed tabs and scrollable tabs for switching between groups of content. ([guideline](https://material.io/design/components/tabs.html))
+  
+- **MTextField**
+  A material text fields that supports filled text fields and outlined text fields. ([guideline](https://material.io/design/components/text-fields.html))  
  
 ## Getting Started
 ### Install package 
