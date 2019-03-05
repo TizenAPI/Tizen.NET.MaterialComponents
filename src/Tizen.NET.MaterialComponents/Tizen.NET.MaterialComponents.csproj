@@ -8,7 +8,7 @@
     <authors>Samsung Electronics</authors>
     <owners>Samsung Electronics</owners>
     <Description>Material Components for Tizen (ElmSharp) helps developers execute Material Design.</Description>
-    <PackageVersion>0.9.0-preview</PackageVersion>
+    <PackageVersion>0.9.1-preview</PackageVersion>
     <PackageLicense>https://www.apache.org/licenses/LICENSE-2.0</PackageLicense>
     <PackageProjectUrl>https://github.com/TizenAPI/Tizen.NET.MaterialComponents</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/TizenAPI/Tizen.NET.MaterialComponents/master/assets/images/logo.png</PackageIconUrl>
