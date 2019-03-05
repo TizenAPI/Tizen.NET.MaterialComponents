@@ -178,7 +178,6 @@ namespace Tizen.NET.MaterialComponents
             }
             Handle = handle;
 
-            _layout.SetTheme("layout", "editfield", Styles.Singleline);
             _layout.SetTheme("layout", Styles.Material, "textfields");
             _layout.SetPartContent(Parts.Content, this);
 
