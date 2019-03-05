@@ -70,7 +70,7 @@ namespace Tizen.NET.MaterialComponents
             }
             Handle = handle;
 
-            _layout.SetTheme("layout", "frame", Styles.Material);
+            _layout.SetTheme("layout", Styles.Material, "frame");
             _layout.SetPartContent(Parts.Content, this);
             _layout.SignalEmit(Actions.ShowShadow, "");
 

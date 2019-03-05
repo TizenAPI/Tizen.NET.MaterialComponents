@@ -10,6 +10,7 @@ namespace Tizen.NET.MaterialComponents
         Color _defaultTextColor;
         Color _defaultLabelColor;
         Color _defaultBackgroundColor;
+        Color _backgroundColor;
         MTextFieldType _type = MTextFieldType.Default;
 
         public event EventHandler TextChanged;
@@ -87,11 +88,42 @@ namespace Tizen.NET.MaterialComponents
                 _layout.SetPartColor(Parts.Underline, color);
                 _layout.SetPartColor(Parts.UnderlineFocused, color);
 
-                var bgColor = value.IsDefault ? _defaultBackgroundColor : value.Blending(Color.White, 95);
-                _layout.BackgroundColor = bgColor;
+                if (_backgroundColor.IsDefault)
+                {
+                    var bgColor = value.IsDefault ? _defaultBackgroundColor : value.Blending(Color.White, 95);
+                    _layout.BackgroundColor = bgColor;
+                }
             }
         }
 
+        public override Color BackgroundColor
+        {
+            get
+            {
+                return _backgroundColor;
+            }
+            set
+            {
+                _backgroundColor = value;
+                if(value.IsDefault)
+                {
+                    var color = TextColor.IsDefault ? _defaultBackgroundColor : TextColor.Blending(Color.White, 95);
+                    _layout.BackgroundColor = color;
+                }
+                else
+                {
+                    _layout.BackgroundColor = value;
+                }
+            }
+        }
+
+        protected Layout Layout
+        {
+            get
+            {
+                return _layout;
+            }
+        }
 
         public MTextField(EvasObject parent) : base(parent)
         {
@@ -116,7 +148,7 @@ namespace Tizen.NET.MaterialComponents
 
         void OnUnfocused(object sender, EventArgs args)
         {
-            if(string.IsNullOrEmpty(Text))
+            if (string.IsNullOrEmpty(Text))
             {
                 Deactivate();
             }
@@ -140,19 +172,36 @@ namespace Tizen.NET.MaterialComponents
         {
             var handle = base.CreateHandle(parent);
             _layout = new Layout(parent);
-
-            if(RealHandle == IntPtr.Zero)
+            if (RealHandle == IntPtr.Zero)
             {
                 RealHandle = handle;
             }
             Handle = handle;
 
             _layout.SetTheme("layout", "editfield", Styles.Singleline);
-            _layout.SetTheme("layout", "editfield", Styles.Material);
+            _layout.SetTheme("layout", Styles.Material, "textfields");
             _layout.SetPartContent(Parts.Content, this);
+
+            _layout.Focused += (s, e) =>
+            {
+                AllowFocus(true);
+                SetFocus(true);
+            };
+
+            _layout.Unfocused += (s, e) =>
+            {
+                SetFocus(false);
+                AllowFocus(false);
+            };
+
+            AllowFocus(false);
+
+            _layout.RaiseTop();
+            _layout.AllowFocus(true);
 
             return _layout;
         }
+
 
         void Activate()
         {
@@ -162,6 +211,9 @@ namespace Tizen.NET.MaterialComponents
 
         void Deactivate()
         {
+            if (IsFocused)
+                return;
+
             _layout.SignalEmit(States.Unactivate, "");
             var guide = _layout.GetPartText(Parts.TextLabel);
             SetPartText(Parts.Guide, guide);
