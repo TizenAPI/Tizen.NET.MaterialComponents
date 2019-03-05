@@ -32,11 +32,11 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 ### Install package 
 #### nuget.exe
 ```
-nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.0-preview
+nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.1-preview
 ```
 #### .csproj
 ```xml
-<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.0-preview" />
+<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.1-preview" />
 ```
  
 ### How to use Tizen.NET Material Components
