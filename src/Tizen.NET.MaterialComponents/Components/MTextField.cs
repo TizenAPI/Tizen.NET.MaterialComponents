@@ -3,7 +3,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MTextField : Entry
+    public class MTextField : Entry, IColorSchemeComponent
     {
         Layout _layout;
         SmartEvent _changed;
@@ -138,6 +138,16 @@ namespace Tizen.NET.MaterialComponents
             Unfocused += OnUnfocused;
 
             IsSingleLine = true;
+
+            MatrialColors.AddColorSchemeComponent(this);
+        }
+
+        void IColorSchemeComponent.OnColorSchemeChanged()
+        {
+            // The widget developer need to update color when ColorScheme was chagned. 
+            // Can refer current Color scheme from MatrialColors.Current object
+            TextColor = MatrialColors.Current.OnSurfaceColor;
+            LabelColor = MatrialColors.Current.PrimaryColor;
         }
 
         void OnFocused(object sender, EventArgs args)
