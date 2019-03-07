@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Tizen.NET.MaterialComponents
 {
-    interface IColorSchemeComponent
+    public interface IColorSchemeComponent
     {
-        void OnColorSchemeChanged();
+        void OnColorSchemeChanged(bool fromConstructor = false);
     }
 }

@@ -12,5 +12,11 @@ namespace Tizen.NET.MaterialComponents
 
             return new Color(r, g, b);
         }
+
+        internal static Color WithAlpha(this Color color, double alpha)
+        {
+            return new Color(color.R, color.G, color.B, (int)(255 * alpha));
+        }
+
     }
 }

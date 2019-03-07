@@ -142,7 +142,7 @@ namespace Tizen.NET.MaterialComponents
             MatrialColors.AddColorSchemeComponent(this);
         }
 
-        void IColorSchemeComponent.OnColorSchemeChanged()
+        void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
             // The widget developer need to update color when ColorScheme was chagned. 
             // Can refer current Color scheme from MatrialColors.Current object

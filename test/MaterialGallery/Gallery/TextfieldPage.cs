@@ -11,10 +11,7 @@ namespace MaterialGallery
         {
             Conformant conformant = new Conformant(window);
             conformant.Show();
-            Box box = new Box(window)
-            {
-                BackgroundColor = Color.White,
-            };
+            Box box = new ColoredBox(window);
             conformant.SetContent(box);
             box.SetPadding(0, 100);
             box.Show();
@@ -31,52 +28,50 @@ namespace MaterialGallery
             innerbox.Show();
             box.PackEnd(innerbox);
 
+            #region ThemeButton
+            Box hbox = new Box(window)
+            {
+                IsHorizontal = true,
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = -1,
+                AlignmentY = -1,
+            };
+            hbox.Show();
+            box.PackEnd(hbox);
+
             var defaultColor = new MButton(window)
             {
-                AlignmentX = -1,
-                AlignmentY = 0,
-                WeightX = 1,
+                Text = "default",
+                MinimumWidth = 200,
                 WeightY = 1,
-                Text = "Default"
+                AlignmentY = 0.9
             };
-            defaultColor.Show();
-            innerbox.PackEnd(defaultColor);
-
             var light = new MButton(window)
             {
-                AlignmentX = -1,
-                AlignmentY = 0,
-                WeightX = 1,
+                Text = "light",
+                MinimumWidth = 200,
                 WeightY = 1,
-                Text = "Light"
+                AlignmentY = 0.9
             };
-            light.Show();
-            innerbox.PackEnd(light);
-
             var dark = new MButton(window)
             {
-                AlignmentX = -1,
-                AlignmentY = 0,
-                WeightX = 1,
+                Text = "Dark",
+                MinimumWidth = 200,
                 WeightY = 1,
-                Text = "Dark"
+                AlignmentY = 0.9
             };
+            defaultColor.Show();
+            light.Show();
             dark.Show();
-            innerbox.PackEnd(dark);
+            hbox.PackEnd(defaultColor);
+            hbox.PackEnd(light);
+            hbox.PackEnd(dark);
 
-            defaultColor.Clicked += (s, e) =>
-            {
-                MatrialColors.Current = MatrialColors.Default;
-            };
-            light.Clicked += (s, e) =>
-            {
-                // Way to change the color scheme
-                MatrialColors.Current = MatrialColors.Light;
-            };
-            dark.Clicked += (s, e) =>
-            {
-                MatrialColors.Current = MatrialColors.Dark;
-            };
+            defaultColor.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Default;
+            light.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Light;
+            dark.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Dark;
+            #endregion
 
 
             var textfield = new MTextField(window)

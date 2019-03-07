@@ -46,13 +46,18 @@ namespace Tizen.NET.MaterialComponents
         public virtual Color ErrorColor { get; } = Color.FromHex("#B00020");
         public virtual Color OnErrorColor { get; } = Color.FromHex("#FFFFFF");
 
-        internal static void AddColorSchemeComponent(IColorSchemeComponent component)
+        public static void AddColorSchemeComponent(IColorSchemeComponent component)
         {
             s_colorSchemeComponents.Add(component);
             if (component is EvasObject evasObject)
             {
                 evasObject.Deleted += OnComponentDeleted;
             }
+        }
+
+        public static void RemoveColorSchemeComponent(IColorSchemeComponent component)
+        {
+            s_colorSchemeComponents.Remove(component);
         }
 
         static void OnComponentDeleted(object sender, EventArgs e)
