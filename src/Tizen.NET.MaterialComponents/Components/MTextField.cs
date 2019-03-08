@@ -139,6 +139,7 @@ namespace Tizen.NET.MaterialComponents
 
             IsSingleLine = true;
 
+            (this as IColorSchemeComponent).OnColorSchemeChanged(true);
             MatrialColors.AddColorSchemeComponent(this);
         }
 
@@ -148,6 +149,7 @@ namespace Tizen.NET.MaterialComponents
             // Can refer current Color scheme from MatrialColors.Current object
             TextColor = MatrialColors.Current.OnSurfaceColor;
             LabelColor = MatrialColors.Current.PrimaryColor;
+            BackgroundColor = MatrialColors.Current.SurfaceColor;
         }
 
         void OnFocused(object sender, EventArgs args)

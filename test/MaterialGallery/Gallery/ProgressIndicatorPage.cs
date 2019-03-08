@@ -13,12 +13,55 @@ namespace MaterialGallery
         {
             Conformant conformant = new Conformant(window);
             conformant.Show();
-            Box box = new Box(window)
-            {
-                BackgroundColor = Color.White
-            };
+            Box box = new ColoredBox(window);
             conformant.SetContent(box);
             box.Show();
+
+            #region ThemeButton
+            Box hbox = new Box(window)
+            {
+                IsHorizontal = true,
+                WeightX = 1,
+                WeightY = 0.5,
+                AlignmentX = -1,
+                AlignmentY = -1,
+            };
+            hbox.Show();
+            box.PackEnd(hbox);
+
+            var defaultColor = new MButton(window)
+            {
+                Text = "default",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            var light = new MButton(window)
+            {
+                Text = "light",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            var dark = new MButton(window)
+            {
+                Text = "Dark",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            defaultColor.Show();
+            light.Show();
+            dark.Show();
+            hbox.PackEnd(defaultColor);
+            hbox.PackEnd(light);
+            hbox.PackEnd(dark);
+
+            defaultColor.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Default;
+            light.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Light;
+            dark.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Dark;
+            #endregion
+
 
             MProgressIndicator determinatePI = new MProgressIndicator(window)
             {
@@ -40,6 +83,17 @@ namespace MaterialGallery
                 WeightY = 1,
             };
             indeterminatePI.Show();
+
+            MProgressIndicator disabledPI = new MProgressIndicator(window)
+            {
+                Text = "Disabled",
+                AlignmentX = -1,
+                AlignmentY = 0,
+                WeightX = 1,
+                WeightY = 1,
+                IsEnabled = false,
+            };
+            disabledPI.Show();
 
             Label label1 = new Label(window)
             {
@@ -65,6 +119,7 @@ namespace MaterialGallery
             box.PackEnd(determinatePI);
             box.PackEnd(label2);
             box.PackEnd(indeterminatePI);
+            box.PackEnd(disabledPI);
 
             double max = 1.0;
             double min = 0;

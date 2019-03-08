@@ -20,7 +20,7 @@ namespace MaterialGallery
             {
                 IsHorizontal = true,
                 WeightX = 1,
-                WeightY = 1,
+                WeightY = 0.2,
                 AlignmentX = -1,
                 AlignmentY = -1,
             };
@@ -32,21 +32,21 @@ namespace MaterialGallery
                 Text = "default",
                 MinimumWidth = 200,
                 WeightY = 1,
-                AlignmentY = 0.9
+                AlignmentY = 0.5
             };
             var light = new MButton(window)
             {
                 Text = "light",
                 MinimumWidth = 200,
                 WeightY = 1,
-                AlignmentY = 0.9
+                AlignmentY = 0.5
             };
             var dark = new MButton(window)
             {
                 Text = "Dark",
                 MinimumWidth = 200,
                 WeightY = 1,
-                AlignmentY = 0.9
+                AlignmentY = 0.5
             };
             defaultColor.Show();
             light.Show();
@@ -84,7 +84,7 @@ namespace MaterialGallery
 
             var button3 = new MButton(window)
             {
-                IsEnabled = false,
+                IsEnabled = true,
                 Text = "Custom Color",
                 BackgroundColor = Color.FromHex("#03A9F4"),
                 MinimumWidth = 400,
