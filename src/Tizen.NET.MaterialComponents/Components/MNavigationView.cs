@@ -9,6 +9,7 @@ namespace Tizen.NET.MaterialComponents
     {
         EvasObject _header;
         GenList _menu;
+        Color _backgroundColor = Color.Default;
         Color _defaultBackgroundColor;
         Color _defaultBackgroundColorForDisabled;
         Color _defaultTextColor;
@@ -31,6 +32,17 @@ namespace Tizen.NET.MaterialComponents
 
         public event EventHandler<GenListItemEventArgs> MenuItemSelected;
 
+
+        public override Color BackgroundColor
+        {
+            get => _backgroundColor;
+            set
+            {
+                _backgroundColor = value;
+                Color effectiveColor = _backgroundColor.IsDefault ? _defaultBackgroundColor : _backgroundColor;
+                _menu.BackgroundColor = effectiveColor;
+            }
+        }
 
         public EvasObject Header
         {
@@ -70,13 +82,16 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            Color oldDefaultBackground = _defaultBackgroundColor;
-
             _defaultBackgroundColor = MatrialColors.Current.SurfaceColor;
             _defaultBackgroundColorForDisabled = MatrialColors.Current.SurfaceColor.WithAlpha(0.32);
             _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
             _defaultActiveBackgroundColor = MatrialColors.Current.PrimaryColor.WithAlpha(0.12);
             _defaultActiveTextColor = MatrialColors.Current.PrimaryColor;
+
+            if (_backgroundColor.IsDefault)
+            {
+                BackgroundColor = _backgroundColor;
+            }
 
             if (_items != null)
             {
@@ -84,11 +99,6 @@ namespace Tizen.NET.MaterialComponents
                 {
                     if (item.GenItem != null)
                     {
-                        if (fromConstructor || item.GenItem.GetPartColor("bg") == oldDefaultBackground)
-                        {
-                            item.GenItem.SetPartColor("bg", _defaultBackgroundColor);
-                            item.GenItem.SetPartColor("bg_pressed", _defaultBackgroundColor);
-                        }
                         item.GenItem.SetPartColor("bg_disabled", _defaultBackgroundColorForDisabled);
                         item.GenItem.SetPartColor("active_bg", _defaultActiveBackgroundColor);
 
@@ -150,8 +160,8 @@ namespace Tizen.NET.MaterialComponents
                 {
                     var item = _menu.Append(_defaultClass, _items[i]);
                     _items[i].GenItem = item;
-                    item.SetPartColor("bg", _defaultBackgroundColor);
-                    item.SetPartColor("bg_pressed", _defaultBackgroundColor);
+                    item.SetPartColor("bg", Color.Transparent);
+                    item.SetPartColor("bg_pressed", Color.Transparent);
                     item.SetPartColor("bg_disabled", _defaultBackgroundColorForDisabled);
                     item.SetPartColor("active_bg", _defaultActiveBackgroundColor);
 
