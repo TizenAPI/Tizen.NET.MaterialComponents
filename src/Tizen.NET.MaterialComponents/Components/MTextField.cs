@@ -130,10 +130,6 @@ namespace Tizen.NET.MaterialComponents
             _changed = new SmartEvent(this, this.RealHandle, Events.Changed);
             _changed.On += OnChanged;
 
-            _defaultTextColor = GetPartColor(Parts.TextEdit);
-            _defaultLabelColor = _layout.GetPartColor(Parts.Label);
-            _defaultBackgroundColor = _layout.BackgroundColor;
-
             Focused += OnFocused;
             Unfocused += OnUnfocused;
 
@@ -144,11 +140,29 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            // The widget developer need to update color when ColorScheme was chagned. 
-            // Can refer current Color scheme from MatrialColors.Current object
-            TextColor = MatrialColors.Current.OnSurfaceColor;
-            LabelColor = MatrialColors.Current.PrimaryColor;
-            BackgroundColor = MatrialColors.Current.SurfaceColor;
+            bool isDefaultBackground = fromConstructor || _layout.BackgroundColor == _defaultBackgroundColor;
+            bool isDefaultTextColor = fromConstructor || GetPartColor(Parts.TextEdit) == _defaultTextColor;
+            bool isDefaultLabelColor = fromConstructor || _layout.GetPartColor(Parts.Label) == _defaultLabelColor;
+
+
+            _defaultBackgroundColor = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.04);
+            _defaultLabelColor = MatrialColors.Current.PrimaryColor;
+            _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
+
+            if (isDefaultBackground)
+            {
+                _layout.BackgroundColor = _defaultBackgroundColor;
+            }
+            if (isDefaultTextColor)
+            {
+                SetPartColor(Parts.TextEdit, _defaultTextColor);
+            }
+            if (isDefaultLabelColor)
+            {
+                _layout.SetPartColor(Parts.Label, _defaultLabelColor);
+                _layout.SetPartColor(Parts.Underline, _defaultLabelColor);
+                _layout.SetPartColor(Parts.UnderlineFocused, _defaultLabelColor);
+            }
         }
 
         void OnFocused(object sender, EventArgs args)
