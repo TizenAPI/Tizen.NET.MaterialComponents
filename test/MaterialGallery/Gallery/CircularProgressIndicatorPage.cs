@@ -13,10 +13,7 @@ namespace MaterialGallery
         {
             Conformant conformant = new Conformant(window);
             conformant.Show();
-            Box box = new ColoredBox(window)
-            {
-                BackgroundColor = Color.White
-            };
+            Box box = new ColoredBox(window);
             conformant.SetContent(box);
             box.Show();
 

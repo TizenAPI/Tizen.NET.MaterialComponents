@@ -18,7 +18,6 @@ namespace Tizen.NET.MaterialComponents
         public MSlider(EvasObject parent) : base(parent)
         {
             Style = Styles.Material;
-            (this as IColorSchemeComponent).OnColorSchemeChanged(true);
             MatrialColors.AddColorSchemeComponent(this);
         }
 

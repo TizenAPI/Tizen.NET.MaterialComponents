@@ -48,6 +48,7 @@ namespace Tizen.NET.MaterialComponents
 
         public static void AddColorSchemeComponent(IColorSchemeComponent component)
         {
+            component.OnColorSchemeChanged(true);
             s_colorSchemeComponents.Add(component);
             if (component is EvasObject evasObject)
             {

@@ -139,7 +139,6 @@ namespace Tizen.NET.MaterialComponents
 
             IsSingleLine = true;
 
-            (this as IColorSchemeComponent).OnColorSchemeChanged(true);
             MatrialColors.AddColorSchemeComponent(this);
         }
 

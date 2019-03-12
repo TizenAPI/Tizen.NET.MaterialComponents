@@ -48,7 +48,6 @@ namespace Tizen.NET.MaterialComponents
         public MButton(EvasObject parent) : base(parent)
         {
             Style = Styles.Material;
-            (this as IColorSchemeComponent).OnColorSchemeChanged(true);
             MatrialColors.AddColorSchemeComponent(this);
         }
 

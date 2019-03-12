@@ -17,7 +17,6 @@ namespace Tizen.NET.MaterialComponents
         protected MProgressIndicator(EvasObject parent, string style) : base(parent)
         {
             Style = style;
-            (this as IColorSchemeComponent).OnColorSchemeChanged(true);
             MatrialColors.AddColorSchemeComponent(this);
         }
 
