@@ -5,11 +5,16 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationView : MBox
+    public class MNavigationView : MBox, IColorSchemeComponent
     {
         EvasObject _header;
         GenList _menu;
-        Color _backgroundColor = Color.White;
+        Color _defaultBackgroundColor;
+        Color _defaultBackgroundColorForDisabled;
+        Color _defaultTextColor;
+        Color _defaultActiveBackgroundColor;
+        Color _defaultActiveTextColor;
+
 
         List<MItem> _items;
         GenItemClass _defaultClass;
@@ -21,33 +26,11 @@ namespace Tizen.NET.MaterialComponents
             {
                 UpdateChildGeometry();
             };
-            base.BackgroundColor = _backgroundColor;
+            MatrialColors.AddColorSchemeComponent(this);
         }
 
         public event EventHandler<GenListItemEventArgs> MenuItemSelected;
 
-        public override Color BackgroundColor
-        {
-            get
-            {
-                return _backgroundColor;
-            }
-            set
-            {
-                if (value == Color.Default)
-                {
-                    base.BackgroundColor = Color.White;
-                    _menu.BackgroundColor = Color.White;
-                    _backgroundColor = Color.White;
-                }
-                else
-                {
-                    base.BackgroundColor = value;
-                    _menu.BackgroundColor = value;
-                    _backgroundColor = value;
-                }
-            }
-        }
 
         public EvasObject Header
         {
@@ -85,17 +68,50 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
+        {
+            Color oldDefaultBackground = _defaultBackgroundColor;
+
+            _defaultBackgroundColor = MatrialColors.Current.SurfaceColor;
+            _defaultBackgroundColorForDisabled = MatrialColors.Current.SurfaceColor.WithAlpha(0.32);
+            _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
+            _defaultActiveBackgroundColor = MatrialColors.Current.PrimaryColor.WithAlpha(0.12);
+            _defaultActiveTextColor = MatrialColors.Current.PrimaryColor;
+
+            if (_items != null)
+            {
+                foreach (var item in _items)
+                {
+                    if (item.GenItem != null)
+                    {
+                        if (fromConstructor || item.GenItem.GetPartColor("bg") == oldDefaultBackground)
+                        {
+                            item.GenItem.SetPartColor("bg", _defaultBackgroundColor);
+                            item.GenItem.SetPartColor("bg_pressed", _defaultBackgroundColor);
+                        }
+                        item.GenItem.SetPartColor("bg_disabled", _defaultBackgroundColorForDisabled);
+                        item.GenItem.SetPartColor("active_bg", _defaultActiveBackgroundColor);
+
+                        item.GenItem.SetPartColor("text", _defaultTextColor);
+                        item.GenItem.SetPartColor("icon", _defaultTextColor);
+                        item.GenItem.SetPartColor("icon_pressed", _defaultActiveTextColor);
+                        item.GenItem.SetPartColor("text_pressed", _defaultActiveTextColor);
+                    }
+                }
+            }
+        }
+
         void Initialize(EvasObject parent)
         {
             _menu = new GenList(parent)
             {
-                BackgroundColor = _backgroundColor
+                BackgroundColor = Color.Transparent
             };
 
             _menu.ItemSelected += (s, e) =>
-                {
-                    MenuItemSelected?.Invoke(this, e);
-                };
+            {
+                MenuItemSelected?.Invoke(this, e);
+            };
 
             _menu.Show();
             PackEnd(_menu);
@@ -133,6 +149,16 @@ namespace Tizen.NET.MaterialComponents
                 for (int i = 0; i < _items.Count; i++)
                 {
                     var item = _menu.Append(_defaultClass, _items[i]);
+                    _items[i].GenItem = item;
+                    item.SetPartColor("bg", _defaultBackgroundColor);
+                    item.SetPartColor("bg_pressed", _defaultBackgroundColor);
+                    item.SetPartColor("bg_disabled", _defaultBackgroundColorForDisabled);
+                    item.SetPartColor("active_bg", _defaultActiveBackgroundColor);
+
+                    item.SetPartColor("text", _defaultTextColor);
+                    item.SetPartColor("icon", _defaultTextColor);
+                    item.SetPartColor("icon_pressed", _defaultActiveTextColor);
+                    item.SetPartColor("text_pressed", _defaultActiveTextColor);
                 }
             }
         }
@@ -160,5 +186,7 @@ namespace Tizen.NET.MaterialComponents
             Title = title;
             Icon = icon;
         }
+
+        internal GenItem GenItem { get; set; }
     }
 }
