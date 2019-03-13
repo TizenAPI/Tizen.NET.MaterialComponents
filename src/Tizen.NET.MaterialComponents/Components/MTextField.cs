@@ -3,7 +3,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MTextField : Entry
+    public class MTextField : Entry, IColorSchemeComponent
     {
         Layout _layout;
         SmartEvent _changed;
@@ -130,14 +130,39 @@ namespace Tizen.NET.MaterialComponents
             _changed = new SmartEvent(this, this.RealHandle, Events.Changed);
             _changed.On += OnChanged;
 
-            _defaultTextColor = GetPartColor(Parts.TextEdit);
-            _defaultLabelColor = _layout.GetPartColor(Parts.Label);
-            _defaultBackgroundColor = _layout.BackgroundColor;
-
             Focused += OnFocused;
             Unfocused += OnUnfocused;
 
             IsSingleLine = true;
+
+            MatrialColors.AddColorSchemeComponent(this);
+        }
+
+        void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
+        {
+            bool isDefaultBackground = fromConstructor || _layout.BackgroundColor == _defaultBackgroundColor;
+            bool isDefaultTextColor = fromConstructor || GetPartColor(Parts.TextEdit) == _defaultTextColor;
+            bool isDefaultLabelColor = fromConstructor || _layout.GetPartColor(Parts.Label) == _defaultLabelColor;
+
+
+            _defaultBackgroundColor = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.04);
+            _defaultLabelColor = MatrialColors.Current.PrimaryColor;
+            _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
+
+            if (isDefaultBackground)
+            {
+                _layout.BackgroundColor = _defaultBackgroundColor;
+            }
+            if (isDefaultTextColor)
+            {
+                SetPartColor(Parts.TextEdit, _defaultTextColor);
+            }
+            if (isDefaultLabelColor)
+            {
+                _layout.SetPartColor(Parts.Label, _defaultLabelColor);
+                _layout.SetPartColor(Parts.Underline, _defaultLabelColor);
+                _layout.SetPartColor(Parts.UnderlineFocused, _defaultLabelColor);
+            }
         }
 
         void OnFocused(object sender, EventArgs args)

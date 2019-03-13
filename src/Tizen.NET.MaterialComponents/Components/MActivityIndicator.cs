@@ -6,6 +6,6 @@ namespace Tizen.NET.MaterialComponents
     {
         public MActivityIndicator(EvasObject parent) : base(parent, Styles.MaterialCircular)
         {
-        }   
+        }
     }
 }

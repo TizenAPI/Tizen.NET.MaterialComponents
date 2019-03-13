@@ -11,12 +11,66 @@ namespace MaterialGallery
         {
             Conformant conformant = new Conformant(window);
             conformant.Show();
-            Box box = new Box(window)
-            {
-                BackgroundColor = Color.White,
-            };
-            conformant.SetContent(box);
+            Box box = new ColoredBox(window);
             box.Show();
+            conformant.SetContent(box);
+
+            #region ThemeButton
+            Box hbox = new Box(window)
+            {
+                IsHorizontal = true,
+                WeightX = 1,
+                WeightY = 0.1,
+                AlignmentX = -1,
+                AlignmentY = -1,
+            };
+            hbox.Show();
+            box.PackEnd(hbox);
+
+            var defaultColor = new MButton(window)
+            {
+                Text = "default",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            var light = new MButton(window)
+            {
+                Text = "light",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            var dark = new MButton(window)
+            {
+                Text = "Dark",
+                MinimumWidth = 200,
+                WeightY = 1,
+                AlignmentY = 0.5
+            };
+            defaultColor.Show();
+            light.Show();
+            dark.Show();
+            hbox.PackEnd(defaultColor);
+            hbox.PackEnd(light);
+            hbox.PackEnd(dark);
+
+            defaultColor.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Default;
+            light.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Light;
+            dark.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Dark;
+            #endregion
+
+
+            Box inner = new Box(window)
+            {
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = -1,
+                AlignmentY = -1,
+            };
+
+            box.PackEnd(inner);
+            inner.Show();
 
             var slider = new MSlider(window)
             {
@@ -25,7 +79,7 @@ namespace MaterialGallery
             };
             slider.Value = 50;
             slider.Show();
-            box.PackEnd(slider);
+            inner.PackEnd(slider);
 
             var disabledSlider = new MSlider(window)
             {
@@ -35,11 +89,11 @@ namespace MaterialGallery
             };
             disabledSlider.Value = 50;
             disabledSlider.Show();
-            box.PackEnd(disabledSlider);
+            inner.PackEnd(disabledSlider);
 
-            box.SetLayoutCallback(() =>
+            inner.SetLayoutCallback(() =>
             {
-                var rect = box.Geometry;
+                var rect = inner.Geometry;
                 slider.Geometry = new Rect((rect.Width / 2) - 250, (rect.Height / 2 - 100), 500, 50);
                 disabledSlider.Geometry = new Rect((rect.Width / 2) - 250, (rect.Height / 2), 500, 50);
             });
