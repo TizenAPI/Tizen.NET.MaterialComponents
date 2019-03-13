@@ -17,7 +17,7 @@ namespace Tizen.NET.MaterialComponents
         protected MProgressIndicator(EvasObject parent, string style) : base(parent)
         {
             Style = style;
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         public MProgressIndicatorType Type
@@ -45,10 +45,10 @@ namespace Tizen.NET.MaterialComponents
             bool isDefaultBackgroundColor = (fromConstructor || GetPartColor("bg") == _defaultBackgroundColor);
 
 
-            _defaultBackgroundColor = MatrialColors.Current.PrimaryColor.WithAlpha(0.32);
-            _defaultBackgroundColorForDisable = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.12);
-            _defaultBarColor = MatrialColors.Current.PrimaryColor;
-            _defaultBarColorForDisable = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.38);
+            _defaultBackgroundColor = MColors.Current.PrimaryColor.WithAlpha(0.32);
+            _defaultBackgroundColorForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.12);
+            _defaultBarColor = MColors.Current.PrimaryColor;
+            _defaultBarColorForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.38);
 
             if (isDefaultBarColor)
             {

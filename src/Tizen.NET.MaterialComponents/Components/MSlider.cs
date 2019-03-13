@@ -18,7 +18,7 @@ namespace Tizen.NET.MaterialComponents
         public MSlider(EvasObject parent) : base(parent)
         {
             Style = Styles.Material;
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
@@ -27,15 +27,15 @@ namespace Tizen.NET.MaterialComponents
             bool isDefaultBackgroundColor = fromConstructor || GetPartColor("bg") == _defaultBackgroundColor;
 
 
-            _defaultBackgroundColor = MatrialColors.Current.PrimaryColor.WithAlpha(0.5);
-            _defaultBackgroundColorForDisabled = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.12);
+            _defaultBackgroundColor = MColors.Current.PrimaryColor.WithAlpha(0.5);
+            _defaultBackgroundColorForDisabled = MColors.Current.OnSurfaceColor.WithAlpha(0.12);
 
-            _defaultBarColor = MatrialColors.Current.PrimaryColor;
-            _defaultBarColorForDisabled = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.12);
+            _defaultBarColor = MColors.Current.PrimaryColor;
+            _defaultBarColorForDisabled = MColors.Current.OnSurfaceColor.WithAlpha(0.12);
 
-            _defaultHandlerColor = MatrialColors.Current.PrimaryColor;
-            _defaultHandlerColorForExtended = MatrialColors.Current.PrimaryColor.WithAlpha(0.32);
-            _defaultHandlerColorForDisabled = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.5);
+            _defaultHandlerColor = MColors.Current.PrimaryColor;
+            _defaultHandlerColorForExtended = MColors.Current.PrimaryColor.WithAlpha(0.32);
+            _defaultHandlerColorForDisabled = MColors.Current.OnSurfaceColor.WithAlpha(0.5);
 
 
             if (isDefaultColor)

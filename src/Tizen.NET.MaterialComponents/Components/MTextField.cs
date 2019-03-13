@@ -135,7 +135,7 @@ namespace Tizen.NET.MaterialComponents
 
             IsSingleLine = true;
 
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
@@ -145,9 +145,9 @@ namespace Tizen.NET.MaterialComponents
             bool isDefaultLabelColor = fromConstructor || _layout.GetPartColor(Parts.Label) == _defaultLabelColor;
 
 
-            _defaultBackgroundColor = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.04);
-            _defaultLabelColor = MatrialColors.Current.PrimaryColor;
-            _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
+            _defaultBackgroundColor = MColors.Current.OnSurfaceColor.WithAlpha(0.04);
+            _defaultLabelColor = MColors.Current.PrimaryColor;
+            _defaultTextColor = MColors.Current.OnSurfaceColor;
 
             if (isDefaultBackground)
             {

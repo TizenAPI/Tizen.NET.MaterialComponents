@@ -68,9 +68,9 @@ namespace MaterialGallery
             hbox.PackEnd(light);
             hbox.PackEnd(dark);
 
-            defaultColor.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Default;
-            light.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Light;
-            dark.Clicked += (s, e) => MatrialColors.Current = MatrialColors.Dark;
+            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
+            light.Clicked += (s, e) => MColors.Current = MColors.Light;
+            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
             #endregion
 
 
@@ -110,7 +110,7 @@ namespace MaterialGallery
     }
 
     // Also, Can define custom color code
-    public class MyColorScheme : MatrialColors
+    public class MyColorScheme : MColors
     {
         public override Color PrimaryColor => Color.FromHex("#555555");
     }

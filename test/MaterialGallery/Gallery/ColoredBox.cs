@@ -10,12 +10,12 @@ namespace MaterialGallery
         public ColoredBox(EvasObject parent) : base(parent)
         {
             OnColorSchemeChanged(true);
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         public void OnColorSchemeChanged(bool fromConstructor = false)
         {
-            BackgroundColor = MatrialColors.Current.SurfaceColor;
+            BackgroundColor = MColors.Current.SurfaceColor;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Tizen.NET.MaterialComponents
         public MButton(EvasObject parent) : base(parent)
         {
             Style = Styles.Material;
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
@@ -58,13 +58,13 @@ namespace Tizen.NET.MaterialComponents
 
             // It comes from here
             // https://github.com/material-components/material-components-android/blob/3637c23078afc909e42833fd1c5fd47bb3271b5f/lib/java/com/google/android/material/button/res/color/mtrl_btn_bg_color_selector.xml
-            _defaultBackground = MatrialColors.Current.PrimaryColor;
-            _defaultBackgroundForPressed = MatrialColors.Current.PrimaryColor.WithAlpha(0.32);
-            _defaultBackgroundForDisable = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.12);
+            _defaultBackground = MColors.Current.PrimaryColor;
+            _defaultBackgroundForPressed = MColors.Current.PrimaryColor.WithAlpha(0.32);
+            _defaultBackgroundForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.12);
 
             // https://github.com/material-components/material-components-android/blob/3637c23078afc909e42833fd1c5fd47bb3271b5f/lib/java/com/google/android/material/button/res/color/mtrl_btn_text_color_selector.xml
-            _defaultTextColor = MatrialColors.Current.OnPrimaryColor;
-            _defaultTextColorForDisable = MatrialColors.Current.OnSurfaceColor.WithAlpha(0.38);
+            _defaultTextColor = MColors.Current.OnPrimaryColor;
+            _defaultTextColorForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.38);
 
             if (isDefaultBackground)
             {

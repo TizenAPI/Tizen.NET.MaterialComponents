@@ -19,7 +19,7 @@ namespace Tizen.NET.MaterialComponents
         {
             Style = Styles.Material;
             _toolbar.SelectionMode = ToolbarSelectionMode.Always;
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         public MTabsType Type
@@ -105,9 +105,9 @@ namespace Tizen.NET.MaterialComponents
             bool isDefaultBackgroundColor = fromConstructor || _defaultBackgroundColor == GetPartColor("bg");
             var oldDefaultBackgroundColor = _defaultBackgroundColor;
 
-            _defaultBackgroundColor = MatrialColors.Current.PrimaryColor;
-            _defaultTextColor = MatrialColors.Current.OnPrimaryColor.WithAlpha(0.32);
-            _defaultSelectedTextColor = MatrialColors.Current.OnPrimaryColor;
+            _defaultBackgroundColor = MColors.Current.PrimaryColor;
+            _defaultTextColor = MColors.Current.OnPrimaryColor.WithAlpha(0.32);
+            _defaultSelectedTextColor = MColors.Current.OnPrimaryColor;
 
             if (isDefaultBackgroundColor)
             {

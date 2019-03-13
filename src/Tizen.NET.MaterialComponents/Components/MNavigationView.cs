@@ -27,7 +27,7 @@ namespace Tizen.NET.MaterialComponents
             {
                 UpdateChildGeometry();
             };
-            MatrialColors.AddColorSchemeComponent(this);
+            MColors.AddColorSchemeComponent(this);
         }
 
         public event EventHandler<GenListItemEventArgs> MenuItemSelected;
@@ -82,11 +82,11 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            _defaultBackgroundColor = MatrialColors.Current.SurfaceColor;
-            _defaultBackgroundColorForDisabled = MatrialColors.Current.SurfaceColor.WithAlpha(0.32);
-            _defaultTextColor = MatrialColors.Current.OnSurfaceColor;
-            _defaultActiveBackgroundColor = MatrialColors.Current.PrimaryColor.WithAlpha(0.12);
-            _defaultActiveTextColor = MatrialColors.Current.PrimaryColor;
+            _defaultBackgroundColor = MColors.Current.SurfaceColor;
+            _defaultBackgroundColorForDisabled = MColors.Current.SurfaceColor.WithAlpha(0.32);
+            _defaultTextColor = MColors.Current.OnSurfaceColor;
+            _defaultActiveBackgroundColor = MColors.Current.PrimaryColor.WithAlpha(0.12);
+            _defaultActiveTextColor = MColors.Current.PrimaryColor;
 
             if (_backgroundColor.IsDefault)
             {

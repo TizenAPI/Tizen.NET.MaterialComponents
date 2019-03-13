@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using ElmSharp;
 namespace Tizen.NET.MaterialComponents
 {
-    public class MatrialColors
+    public class MColors
     {
         static List<IColorSchemeComponent> s_colorSchemeComponents = new List<IColorSchemeComponent>();
-        public static readonly MatrialColors Default = new MatrialColors();
-        public static readonly MatrialColors Light = new LightMatrialColors();
-        public static readonly MatrialColors Dark = new DarkMatrialColors();
+        public static readonly MColors Default = new MColors();
+        public static readonly MColors Light = new LightMColors();
+        public static readonly MColors Dark = new DarkMColors();
 
-        public static MatrialColors _current = Default;
-        public static MatrialColors Current
+        public static MColors _current = Default;
+        public static MColors Current
         {
             get
             {
@@ -70,7 +70,7 @@ namespace Tizen.NET.MaterialComponents
         }
     }
 
-    class LightMatrialColors : MatrialColors
+    class LightMColors : MColors
     {
         public override Color PrimaryColor { get; } = Color.FromHex("#212121");
         public override Color PrimaryColorVariant { get; } = Color.FromHex("#000000");
@@ -87,7 +87,7 @@ namespace Tizen.NET.MaterialComponents
         public override Color OnErrorColor { get; } = Color.FromHex("#FFFFFF");
     }
 
-    class DarkMatrialColors : MatrialColors
+    class DarkMColors : MColors
     {
         public override Color PrimaryColor { get; } = Color.FromHex("#212121");
         public override Color PrimaryColorVariant { get; } = Color.FromHex("#000000");
