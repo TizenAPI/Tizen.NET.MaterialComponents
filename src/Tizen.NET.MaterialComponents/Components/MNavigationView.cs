@@ -126,7 +126,7 @@ namespace Tizen.NET.MaterialComponents
             _menu.Show();
             PackEnd(_menu);
 
-            _defaultClass = new GenItemClass(Styles.MaterialNavigation)
+            _defaultClass = new GenItemClass(Styles.GenListItem.MaterialNavigation)
             {
                 GetTextHandler = (obj, part) =>
                 {
@@ -160,15 +160,15 @@ namespace Tizen.NET.MaterialComponents
                 {
                     var item = _menu.Append(_defaultClass, _items[i]);
                     _items[i].GenItem = item;
-                    item.SetPartColor("bg", Color.Transparent);
-                    item.SetPartColor("bg_pressed", Color.Transparent);
-                    item.SetPartColor("bg_disabled", _defaultBackgroundColorForDisabled);
-                    item.SetPartColor("active_bg", _defaultActiveBackgroundColor);
+                    item.SetPartColor(Parts.Widget.Background, Color.Transparent);
+                    item.SetPartColor(Parts.Widget.BackgroundPressed, Color.Transparent);
+                    item.SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColorForDisabled);
+                    item.SetPartColor(Parts.GenListItem.BackgroundActivated, _defaultActiveBackgroundColor);
 
-                    item.SetPartColor("text", _defaultTextColor);
-                    item.SetPartColor("icon", _defaultTextColor);
-                    item.SetPartColor("icon_pressed", _defaultActiveTextColor);
-                    item.SetPartColor("text_pressed", _defaultActiveTextColor);
+                    item.SetPartColor(Parts.Widget.Text, _defaultTextColor);
+                    item.SetPartColor(Parts.Widget.TextPressed, _defaultActiveTextColor);
+                    item.SetPartColor(Parts.Widget.Icon, _defaultTextColor);
+                    item.SetPartColor(Parts.Widget.IconPressed, _defaultActiveTextColor);
                 }
             }
         }

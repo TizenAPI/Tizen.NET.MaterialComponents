@@ -11,7 +11,6 @@ namespace Tizen.NET.MaterialComponents
         Color _defaultBarColor;
         Color _defaultBarColorForDisable;
 
-
         public MProgressIndicator(EvasObject parent) : this(parent, Styles.Material) { }
 
         protected MProgressIndicator(EvasObject parent, string style) : base(parent)
@@ -41,8 +40,8 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            bool isDefaultBarColor = (fromConstructor || GetPartColor("bar") == _defaultBarColor);
-            bool isDefaultBackgroundColor = (fromConstructor || GetPartColor("bg") == _defaultBackgroundColor);
+            bool isDefaultBarColor = (fromConstructor || GetPartColor(Parts.ProgressBar.Bar) == _defaultBarColor);
+            bool isDefaultBackgroundColor = (fromConstructor || GetPartColor(Parts.Widget.Background) == _defaultBackgroundColor);
 
 
             _defaultBackgroundColor = MColors.Current.PrimaryColor.WithAlpha(0.32);
@@ -52,15 +51,15 @@ namespace Tizen.NET.MaterialComponents
 
             if (isDefaultBarColor)
             {
-                SetPartColor("bar", _defaultBarColor);
+                SetPartColor(Parts.ProgressBar.Bar, _defaultBarColor);
             }
             if (isDefaultBackgroundColor)
             {
-                SetPartColor("bg", _defaultBackgroundColor);
+                SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
             }
 
-            SetPartColor("bg_disabled", _defaultBackgroundColorForDisable);
-            SetPartColor("bar_disabled", _defaultBarColorForDisable);
+            SetPartColor(Parts.ProgressBar.BarDisabled, _defaultBarColorForDisable);
+            SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColorForDisable);
         }
     }
 

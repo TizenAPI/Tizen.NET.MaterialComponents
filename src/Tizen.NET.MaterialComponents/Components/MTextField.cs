@@ -10,7 +10,7 @@ namespace Tizen.NET.MaterialComponents
         Color _defaultTextColor;
         Color _defaultLabelColor;
         Color _defaultBackgroundColor;
-        Color _backgroundColor;
+
         MTextFieldType _type = MTextFieldType.Default;
 
         public event EventHandler TextChanged;
@@ -31,25 +31,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return _layout.GetPartText(Parts.TextLabel);
+                return _layout.GetPartText(Parts.Entry.TextLabel);
             }
             set
             {
-                _layout.SetPartText(Parts.TextLabel, value);
-                SetPartText(Parts.Guide, value);
-            }
-        }
-
-        public Color LabelColor
-        {
-            get
-            {
-                return _layout.GetPartColor(Parts.Label);
-            }
-            set
-            {
-                var color = value.IsDefault ? _defaultLabelColor : value;
-                _layout.SetPartColor(Parts.Label, color);
+                _layout.SetPartText(Parts.Entry.TextLabel, value);
+                SetPartText(Parts.Entry.Guide, value);
             }
         }
 
@@ -77,43 +64,77 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.TextEdit);
+                return GetPartColor(Parts.Entry.TextEdit);
             }
             set
             {
                 var color = value.IsDefault ? _defaultTextColor : value;
-
-                SetPartColor(Parts.TextEdit, color);
-                SetPartColor(Parts.TextEditFocused, color);
-                _layout.SetPartColor(Parts.Underline, color);
-                _layout.SetPartColor(Parts.UnderlineFocused, color);
-
-                if (_backgroundColor.IsDefault)
-                {
-                    var bgColor = value.IsDefault ? _defaultBackgroundColor : value.Blending(Color.White, 95);
-                    _layout.BackgroundColor = bgColor;
-                }
+                SetPartColor(Parts.Entry.TextEdit, color);
             }
         }
 
-        public override Color BackgroundColor
+        public Color TextFocusedColor
         {
             get
             {
-                return _backgroundColor;
+                return GetPartColor(Parts.Entry.TextEditFocused);
             }
             set
             {
-                _backgroundColor = value;
-                if(value.IsDefault)
-                {
-                    var color = TextColor.IsDefault ? _defaultBackgroundColor : TextColor.Blending(Color.White, 95);
-                    _layout.BackgroundColor = color;
-                }
-                else
-                {
-                    _layout.BackgroundColor = value;
-                }
+                var color = value.IsDefault ? _defaultTextColor : value;
+                SetPartColor(Parts.Entry.TextEditFocused, color);
+            }
+        }
+
+        public Color LabelColor
+        {
+            get
+            {
+                return _layout.GetPartColor(Parts.Entry.Label);
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultLabelColor : value;
+                _layout.SetPartColor(Parts.Entry.Label, color);
+            }
+        }
+
+        public Color UnderlineColor
+        {
+            get
+            {
+                return GetPartColor(Parts.Entry.Underline);
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultLabelColor : value;
+                SetPartColor(Parts.Entry.Underline, color);
+            }
+        }
+
+        public Color UnderlineFocusedColor
+        {
+            get
+            {
+                return GetPartColor(Parts.Entry.UnderlineFocused);
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultLabelColor : value;
+                SetPartColor(Parts.Entry.UnderlineFocused, color);
+            }
+        }
+
+        public Color CursorColor
+        {
+            get
+            {
+                return GetPartColor(Parts.Entry.TextEdit);
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultTextColor : value;
+                SetPartColor(Parts.Entry.TextEdit, color);
             }
         }
 
@@ -141,9 +162,8 @@ namespace Tizen.NET.MaterialComponents
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
             bool isDefaultBackground = fromConstructor || _layout.BackgroundColor == _defaultBackgroundColor;
-            bool isDefaultTextColor = fromConstructor || GetPartColor(Parts.TextEdit) == _defaultTextColor;
-            bool isDefaultLabelColor = fromConstructor || _layout.GetPartColor(Parts.Label) == _defaultLabelColor;
-
+            bool isDefaultTextColor = fromConstructor || GetPartColor(Parts.Entry.TextEdit) == _defaultTextColor;
+            bool isDefaultLabelColor = fromConstructor || _layout.GetPartColor(Parts.Entry.Label) == _defaultLabelColor;
 
             _defaultBackgroundColor = MColors.Current.OnSurfaceColor.WithAlpha(0.04);
             _defaultLabelColor = MColors.Current.PrimaryColor;
@@ -155,13 +175,14 @@ namespace Tizen.NET.MaterialComponents
             }
             if (isDefaultTextColor)
             {
-                SetPartColor(Parts.TextEdit, _defaultTextColor);
+                SetPartColor(Parts.Entry.TextEdit, _defaultTextColor);
+                SetPartColor(Parts.Entry.Cursor, _defaultTextColor);
             }
             if (isDefaultLabelColor)
             {
-                _layout.SetPartColor(Parts.Label, _defaultLabelColor);
-                _layout.SetPartColor(Parts.Underline, _defaultLabelColor);
-                _layout.SetPartColor(Parts.UnderlineFocused, _defaultLabelColor);
+                _layout.SetPartColor(Parts.Entry.Label, _defaultLabelColor);
+                _layout.SetPartColor(Parts.Entry.Underline, _defaultLabelColor);
+                _layout.SetPartColor(Parts.Entry.UnderlineFocused, _defaultLabelColor);
             }
         }
 
@@ -204,7 +225,7 @@ namespace Tizen.NET.MaterialComponents
             Handle = handle;
 
             _layout.SetTheme("layout", Styles.Material, "textfields");
-            _layout.SetPartContent(Parts.Content, this);
+            _layout.SetPartContent(Parts.Layout.Content, this);
 
             _layout.Focused += (s, e) =>
             {
@@ -230,7 +251,7 @@ namespace Tizen.NET.MaterialComponents
         void Activate()
         {
             _layout.SignalEmit(States.Activate, "");
-            SetPartText(Parts.Guide, "");
+            SetPartText(Parts.Entry.Guide, "");
         }
 
         void Deactivate()
@@ -239,8 +260,8 @@ namespace Tizen.NET.MaterialComponents
                 return;
 
             _layout.SignalEmit(States.Unactivate, "");
-            var guide = _layout.GetPartText(Parts.TextLabel);
-            SetPartText(Parts.Guide, guide);
+            var guide = _layout.GetPartText(Parts.Entry.TextLabel);
+            SetPartText(Parts.Entry.Guide, guide);
         }
 
         public enum MTextFieldType
