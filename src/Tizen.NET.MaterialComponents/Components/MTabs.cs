@@ -84,7 +84,6 @@ namespace Tizen.NET.MaterialComponents
             set { _toolbar.TransverseExpansion = value; }
         }
 
-
         public ToolbarItem FindItemByLabel(string label) => _toolbar.FindItemByLabel(label);
 
         public ToolbarItem Append(string label, string icon) => OnItemCreated(_toolbar.Append(label, icon));
@@ -102,7 +101,7 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            bool isDefaultBackgroundColor = fromConstructor || _defaultBackgroundColor == GetPartColor("bg");
+            bool isDefaultBackgroundColor = fromConstructor || _defaultBackgroundColor == GetPartColor(Parts.Widget.Background);
             var oldDefaultBackgroundColor = _defaultBackgroundColor;
 
             _defaultBackgroundColor = MColors.Current.PrimaryColor;
@@ -111,7 +110,7 @@ namespace Tizen.NET.MaterialComponents
 
             if (isDefaultBackgroundColor)
             {
-                SetPartColor("bg", _defaultBackgroundColor);
+                SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
             }
             foreach (var item in _items)
             {
@@ -137,14 +136,14 @@ namespace Tizen.NET.MaterialComponents
 
         void UpdateItemColor(ToolbarItem item, Color oldDefaultBackgroundColor, bool fromConstructor)
         {
-            bool isDefaultBackgroundColor = fromConstructor || oldDefaultBackgroundColor == item.GetPartColor("bg");
+            bool isDefaultBackgroundColor = fromConstructor || oldDefaultBackgroundColor == item.GetPartColor(Parts.ToolbarItem.Background);
 
             if (isDefaultBackgroundColor)
             {
-                item.SetPartColor("bg", _defaultBackgroundColor);
-                item.SetPartColor("text", _defaultTextColor);
-                item.SetPartColor("text_selected", _defaultSelectedTextColor);
-                item.SetPartColor("underline", _defaultSelectedTextColor);
+                item.SetPartColor(Parts.ToolbarItem.Background, _defaultBackgroundColor);
+                item.SetPartColor(Parts.ToolbarItem.Text, _defaultTextColor);
+                item.SetPartColor(Parts.ToolbarItem.TextSelected, _defaultSelectedTextColor);
+                item.SetPartColor(Parts.ToolbarItem.Underline, _defaultSelectedTextColor);
             }
         }
 

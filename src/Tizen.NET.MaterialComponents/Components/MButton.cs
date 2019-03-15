@@ -53,8 +53,8 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            bool isDefaultBackground = fromConstructor || GetPartColor("bg") == _defaultBackground;
-            bool isDefaultTextColor = fromConstructor || GetPartColor("text") == _defaultTextColor;
+            bool isDefaultBackground = fromConstructor || GetPartColor(Parts.Widget.Background) == _defaultBackground;
+            bool isDefaultTextColor = fromConstructor || GetPartColor(Parts.Widget.Text) == _defaultTextColor;
 
             // It comes from here
             // https://github.com/material-components/material-components-android/blob/3637c23078afc909e42833fd1c5fd47bb3271b5f/lib/java/com/google/android/material/button/res/color/mtrl_btn_bg_color_selector.xml
@@ -68,15 +68,15 @@ namespace Tizen.NET.MaterialComponents
 
             if (isDefaultBackground)
             {
-                SetPartColor("bg", _defaultBackground);
-                SetPartColor("bg_pressed", _defaultBackground);
-                SetPartColor("bg_disabled", _defaultBackgroundForDisable);
+                SetPartColor(Parts.Widget.Background, _defaultBackground);
+                SetPartColor(Parts.Widget.BackgroundPressed, _defaultBackground);
+                SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundForDisable);
             }
             if (isDefaultTextColor)
             {
-                SetPartColor("text", _defaultTextColor);
-                SetPartColor("text_pressed", _defaultTextColor);
-                SetPartColor("text_disabled", _defaultTextColorForDisable);
+                SetPartColor(Parts.Widget.Text, _defaultTextColor);
+                SetPartColor(Parts.Widget.TextPressed, _defaultTextColor);
+                SetPartColor(Parts.Widget.TextDisabled, _defaultTextColorForDisable);
             }
         }
     }

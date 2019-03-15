@@ -23,8 +23,8 @@ namespace Tizen.NET.MaterialComponents
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            bool isDefaultColor = fromConstructor || GetPartColor("bar") == _defaultBarColor;
-            bool isDefaultBackgroundColor = fromConstructor || GetPartColor("bg") == _defaultBackgroundColor;
+            bool isDefaultColor = fromConstructor || GetPartColor(Parts.Slider.Bar) == _defaultBarColor;
+            bool isDefaultBackgroundColor = fromConstructor || GetPartColor(Parts.Widget.Background) == _defaultBackgroundColor;
 
 
             _defaultBackgroundColor = MColors.Current.PrimaryColor.WithAlpha(0.5);
@@ -40,23 +40,23 @@ namespace Tizen.NET.MaterialComponents
 
             if (isDefaultColor)
             {
-                SetPartColor("bar", _defaultBarColor);
-                SetPartColor("bar_pressed", _defaultBarColor); // ??
+                SetPartColor(Parts.Slider.Bar, _defaultBarColor);
+                SetPartColor(Parts.Slider.BarPressed, _defaultBarColor); // ??
 
-                SetPartColor("handler", _defaultHandlerColor);
-                SetPartColor("handler_pressed", _defaultHandlerColor);
-                SetPartColor("handler2", _defaultHandlerColorForExtended);
+                SetPartColor(Parts.Slider.Handler, _defaultHandlerColor);
+                SetPartColor(Parts.Slider.HandlerPressed, _defaultHandlerColor);
+                SetPartColor(Parts.Slider.Handler2, _defaultHandlerColorForExtended);
 
             }
 
             if (isDefaultBackgroundColor)
             {
-                SetPartColor("bg", _defaultBackgroundColor);
+                SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
             }
 
-            SetPartColor("bar_disabled", _defaultBarColorForDisabled);
-            SetPartColor("handler_disabled", _defaultHandlerColorForDisabled);
-            SetPartColor("bg_disabled", _defaultBackgroundColor);
+            SetPartColor(Parts.Slider.BarDisabled, _defaultBarColorForDisabled);
+            SetPartColor(Parts.Slider.HandlerDisabled, _defaultHandlerColorForDisabled);
+            SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColor);
         }
     }
 }
