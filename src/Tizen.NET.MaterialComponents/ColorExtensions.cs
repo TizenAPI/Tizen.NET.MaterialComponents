@@ -4,7 +4,7 @@ namespace Tizen.NET.MaterialComponents
 {
     public static class ColorExtensions
     {
-        internal static Color Blending(this Color color, Color blendingColor, int density = 80)
+        public static Color Blending(this Color color, Color blendingColor, int density = 80)
         {
             var r = color.R + (blendingColor.R - color.R) * density / 100;
             var g = color.G + (blendingColor.G - color.G) * density / 100;
@@ -13,7 +13,7 @@ namespace Tizen.NET.MaterialComponents
             return new Color(r, g, b);
         }
 
-        internal static Color WithAlpha(this Color color, double alpha)
+        public static Color WithAlpha(this Color color, double alpha)
         {
             return new Color(color.R, color.G, color.B, (int)(255 * alpha));
         }
