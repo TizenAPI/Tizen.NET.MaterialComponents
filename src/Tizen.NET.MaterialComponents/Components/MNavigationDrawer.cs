@@ -92,7 +92,7 @@ namespace Tizen.NET.MaterialComponents
                 AlignmentY = -1,
                 WeightX = 1,
                 WeightY = 1,
-                BackgroundColor = Colors.OnSurfaceColorAlpha
+                BackgroundColor = MColors.Current.OnSurfaceColor.WithAlpha(0.32)
             };
             PackEnd(_scrim);
 
