@@ -19,6 +19,8 @@ namespace Tizen.NET.MaterialComponents
         public class GenListItem
         {
             public static readonly string MaterialNavigation = "material_navigation";
+            public static readonly string MaterialNavigationSubtitle = "material_navigation_subtitle";
+            public static readonly string MaterialNavigationDivider = "material_navigation_divider";
         }
     }
 
@@ -105,10 +107,5 @@ namespace Tizen.NET.MaterialComponents
     public static class Events
     {
         public static readonly string Changed = "changed";
-    }
-
-    public static class Colors
-    {
-        public static readonly Color OnSurfaceColorAlpha = new Color(0, 0, 0, 82);
     }
 }
