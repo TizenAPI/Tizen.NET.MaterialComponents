@@ -7,7 +7,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MCard : Box
+    public class MCard : MBox
     {
         Layout _layout;
         bool _hasShadow;
