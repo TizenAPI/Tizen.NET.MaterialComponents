@@ -105,7 +105,7 @@ namespace MaterialGallery
             card.PackEnd(textBox);
             card.PackEnd(actionBox);
 
-            card.SetLayoutCallback(() =>
+            card.LayoutUpdated += (s,e) =>
             {
                 var g = card.Geometry;
 
@@ -126,7 +126,7 @@ namespace MaterialGallery
                     iconBox.Geometry.Y + iconBox.Geometry.Height + 8.ToPixel(),
                     g.Width - 32.ToPixel(),
                     actionBox.MinimumHeight);
-            });
+            };
 
             //Fill the contents
             var icon = new Image(window)
@@ -233,7 +233,7 @@ namespace MaterialGallery
             card.PackEnd(descBox);
             card.PackEnd(actionBox);
 
-            card.SetLayoutCallback(() =>
+            card.LayoutUpdated += (s,e) =>
             {
                 var g = card.Geometry;
 
@@ -268,7 +268,7 @@ namespace MaterialGallery
                     descBox.Geometry.Y + descBox.Geometry.Height + 8.ToPixel(),
                     g.Width / 2,
                     36.ToPixel());
-            });
+            };
 
             return card;
         }
