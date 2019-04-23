@@ -13,15 +13,27 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MCard**
   A cards contain content about a single subject. ([guideline](https://material.io/design/components/cards.html))
 
+- **MCheckBox**
+  A material checkbox allow the user to select one or more items from a set. ([guideline](https://material.io/design/components/selection-controls.html#checkboxes))
+
 - **MNavigationDrawer**
   A Navigation drawers provide access to destinations and app functionality, such as switching accounts. ([guideline](https://material.io/design/components/navigation-drawer.html))
 
 - **MProgressIndicator**
   A linear progress indicator that supports determinate and indeterminate linear progress indicators. ([guideline](https://material.io/design/components/progress-indicators.html#linear-progress-indicators))
-  
+
+- **MRadioButton**
+  A material radio button allow the user to select one option from a set. ([guideline](https://material.io/design/components/selection-controls.html#radio-buttons))
+
 - **MSlider**
-  A material slider for selecting from a range of values. ([guideline](https://material.io/design/components/sliders.htmlhttps://material.io/design/components/sliders.html))
-  
+  A material slider for selecting from a range of values. ([guideline](https://material.io/design/components/sliders.html))
+
+- **MSnackbar**
+  A material snackbars provide brief messages about app processes. ([guideline](https://material.io/design/components/snackbars.html))
+
+- **MSwitch**
+  A material switch toggle the state of a single setting on or off. ([guideline](https://material.io/design/components/selection-controls.html#switches))
+
 - **MTab**
   A material tab bar that supports fixed tabs and scrollable tabs for switching between groups of content. ([guideline](https://material.io/design/components/tabs.html))
   
@@ -32,11 +44,11 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 ### Install package 
 #### nuget.exe
 ```
-nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.1-preview
+nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.6-preview
 ```
 #### .csproj
 ```xml
-<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.1-preview" />
+<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.6-preview" />
 ```
  
 ### How to use Tizen.NET Material Components
