@@ -6,6 +6,11 @@ namespace Tizen.NET.MaterialComponents
     {
         public static readonly string Material = "material";
 
+        public class CheckBox
+        {
+            public static readonly string Style = "material_checkboxes";
+        }
+
         public class Entry
         {
             public static readonly string Singleline = "singleline";
@@ -14,6 +19,16 @@ namespace Tizen.NET.MaterialComponents
         public class ProgressBar
         {
             public static readonly string MaterialCircular = "material_circular";
+        }
+
+        public class RadioButton
+        {
+            public static readonly string Style = "material_radio_buttons";
+        }
+
+        public class Switch
+        {
+            public static readonly string Style = "material_switches";
         }
 
         public class GenListItem
@@ -46,6 +61,12 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string Border = "border";
         }
 
+        public class Check
+        {
+            public static readonly string Background = "bg_on";
+            public static readonly string BackgroundDisabled = "bg_on_disabled";
+        }
+
         public class Entry
         {
             public static readonly string Label = "label";
@@ -69,6 +90,12 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string BarDisabled = "bar_disabled";
         }
 
+        public class Radio
+        {
+            public static readonly string Icon = "icon";
+            public static readonly string IconDisabled = "icon_disabled";
+        }
+
         public class Slider
         {
             public static readonly string Bar = "bar";
@@ -79,6 +106,14 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string Handler2 = "handler2";
             public static readonly string HandlerPressed = "handler_pressed";
             public static readonly string HandlerDisabled = "handler_disabled";
+        }
+
+        public class Switch
+        {
+            public static readonly string SliderOn = "slider_on";
+            public static readonly string SliderDisabledOn = "slider_disabled_on";
+            public static readonly string ShapeOn = "shape_on";
+            public static readonly string ShapeDisabledOn = "shape_disabled_on";
         }
 
         public class ToolbarItem
