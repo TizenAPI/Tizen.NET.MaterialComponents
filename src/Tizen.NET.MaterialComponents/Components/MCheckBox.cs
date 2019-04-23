@@ -30,7 +30,7 @@ namespace Tizen.NET.MaterialComponents
             bool isDefaultBackground = fromConstructor || this.Color == _defaultBackground;
             
             _defaultBackground = MColors.Current.PrimaryColor;
-            _defaultBackgroundForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.32);
+            _defaultBackgroundForDisable = MColors.Current.OnSurfaceColor.WithAlpha(0.38);
 
             if (isDefaultBackground)
             {

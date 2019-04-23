@@ -111,7 +111,7 @@ namespace Tizen.NET.MaterialComponents
         public class Switch
         {
             public static readonly string SliderOn = "slider_on";
-            public static readonly string SliderOnDisabled = "slider_disabled_on";
+            public static readonly string SliderDisabledOn = "slider_disabled_on";
             public static readonly string ShapeOn = "shape_on";
             public static readonly string ShapeDisabledOn = "shape_disabled_on";
         }
