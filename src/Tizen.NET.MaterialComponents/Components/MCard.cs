@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MCard : MBox
+    public class MCard : Box
     {
         Layout _layout;
         bool _hasShadow;

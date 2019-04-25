@@ -36,7 +36,7 @@ namespace Tizen.NET.MaterialComponents
             set
             {
                 _layout.SetPartText(Parts.Entry.TextLabel, value);
-                SetPartText(Parts.Entry.Guide, value);
+                _layout.SetPartText(Parts.Entry.Guide, value);
             }
         }
 
@@ -77,12 +77,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.TextEditFocused);
+                return _layout.GetPartColor(Parts.Entry.TextEditFocused);
             }
             set
             {
                 var color = value.IsDefault ? _defaultTextColor : value;
-                SetPartColor(Parts.Entry.TextEditFocused, color);
+                _layout.SetPartColor(Parts.Entry.TextEditFocused, color);
             }
         }
 
@@ -103,12 +103,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.Underline);
+                return _layout.GetPartColor(Parts.Entry.Underline);
             }
             set
             {
                 var color = value.IsDefault ? _defaultLabelColor : value;
-                SetPartColor(Parts.Entry.Underline, color);
+                _layout.SetPartColor(Parts.Entry.Underline, color);
             }
         }
 
@@ -116,12 +116,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.UnderlineFocused);
+                return _layout.GetPartColor(Parts.Entry.UnderlineFocused);
             }
             set
             {
                 var color = value.IsDefault ? _defaultLabelColor : value;
-                SetPartColor(Parts.Entry.UnderlineFocused, color);
+                _layout.SetPartColor(Parts.Entry.UnderlineFocused, color);
             }
         }
 
@@ -129,12 +129,25 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.TextEdit);
+                return GetPartColor(Parts.Entry.Cursor);
             }
             set
             {
                 var color = value.IsDefault ? _defaultTextColor : value;
-                SetPartColor(Parts.Entry.TextEdit, color);
+                SetPartColor(Parts.Entry.Cursor, color);
+            }
+        }
+
+        public override Color BackgroundColor
+        {
+            get
+            {
+                return _layout.BackgroundColor;
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultBackgroundColor : value;
+                _layout.BackgroundColor = value;
             }
         }
 
