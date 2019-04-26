@@ -57,11 +57,16 @@ namespace Tizen.NET.MaterialComponents
                     _header.Hide();
                 }
                 _header = value;
-                if (!_header.IsVisible)
+
+                if (_header != null)
                 {
-                    _header.Show();
+                    PackStart(_header);
+                    if (!_header.IsVisible)
+                    {
+                        _header.Show();
+                    }
                 }
-                PackStart(_header);
+
                 UpdateChildGeometry();
             }
         }
