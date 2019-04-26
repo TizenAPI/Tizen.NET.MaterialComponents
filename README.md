@@ -16,6 +16,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MCheckBox**
   A material checkbox allow the user to select one or more items from a set. ([guideline](https://material.io/design/components/selection-controls.html#checkboxes))
 
+- **MMenus**
+  A material menus display a list of choices on temporary surfaces. ([guideline](https://material.io/design/components/menus.html))
+
 - **MNavigationDrawer**
   A Navigation drawers provide access to destinations and app functionality, such as switching accounts. ([guideline](https://material.io/design/components/navigation-drawer.html))
 

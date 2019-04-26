@@ -37,6 +37,7 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string MaterialNavigationSubtitle = "material_navigation_subtitle";
             public static readonly string MaterialNavigationDivider = "material_navigation_divider";
         }
+
         public class Popup
         {
             public static readonly string SnackBars = "material_snackbars";
@@ -132,6 +133,11 @@ namespace Tizen.NET.MaterialComponents
         public class Popup
         {
             public static readonly string ActionButton = "button1";
+        }
+
+        public class Menus
+        {
+            public static readonly string Divider = "divider";
         }
     }
 
