@@ -7,7 +7,7 @@ namespace Tizen.NET.MaterialComponents
     {
         MNavigationView _navigationView;
         Box _mainContainer;
-        Box _scrim;
+        Box _dimArea;
         EvasObject _main;
         Panel _drawer;
 
@@ -86,7 +86,7 @@ namespace Tizen.NET.MaterialComponents
             _mainContainer.Show();
             PackEnd(_mainContainer);
 
-            _scrim = new Box(parent)
+            _dimArea = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -94,7 +94,7 @@ namespace Tizen.NET.MaterialComponents
                 WeightY = 1,
                 BackgroundColor = MColors.Current.OnSurfaceColor.WithAlpha(0.32)
             };
-            PackEnd(_scrim);
+            PackEnd(_dimArea);
 
             _drawer = new Panel(parent);
             _drawer.SetScrollable(!_isLock);
@@ -102,7 +102,7 @@ namespace Tizen.NET.MaterialComponents
             _drawer.Direction = PanelDirection.Left;
             _drawer.Toggled += (s, e) =>
             {
-                UpdateScrim();
+                UpdateDimArea();
                 Toggled?.Invoke(this, e);
             };
 
@@ -128,8 +128,8 @@ namespace Tizen.NET.MaterialComponents
                     _navigationView.Show();
                 }
                 _drawer.SetContent(_navigationView, true);
-                UpdateScrim();
-                UpdateNavigationView();
+                UpdateDimArea();
+                UpdateNavigationViewGeomatry();
             }
             else
             {
@@ -157,15 +157,15 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
-        void UpdateScrim()
+        void UpdateDimArea()
         {
             if (_drawer.IsOpen)
             {
-                _scrim.Show();
+                _dimArea.Show();
             }
             else
             {
-                _scrim.Hide();
+                _dimArea.Hide();
             }
         }
 
@@ -176,15 +176,15 @@ namespace Tizen.NET.MaterialComponents
                 _mainContainer.Geometry = Geometry;
             }
 
-            UpdateNavigationView();
+            UpdateNavigationViewGeomatry();
         }
 
-        void UpdateNavigationView()
+        void UpdateNavigationViewGeomatry()
         {
             if (_navigationView != null)
             {
                 _drawer.Geometry = Geometry;
-                _scrim.Geometry = Geometry;
+                _dimArea.Geometry = Geometry;
             }
         }
     }
