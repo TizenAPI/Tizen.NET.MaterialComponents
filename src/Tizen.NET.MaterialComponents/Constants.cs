@@ -33,6 +33,7 @@ namespace Tizen.NET.MaterialComponents
 
         public class GenListItem
         {
+            public static readonly string Default = "default";
             public static readonly string MaterialNavigation = "material_navigation";
             public static readonly string MaterialNavigationSubtitle = "material_navigation_subtitle";
             public static readonly string MaterialNavigationDivider = "material_navigation_divider";
@@ -41,7 +42,14 @@ namespace Tizen.NET.MaterialComponents
         public class Popup
         {
             public static readonly string SnackBars = "material_snackbars";
-            public static readonly string ActionButton = "material_popup";
+            public static readonly string Alert = "material_alert";
+            public static readonly string Simple = "material_simple";
+            public static readonly string Confirmation = "material_confirmation";
+            public static readonly string FullScreen = "material_fullscreen";
+            public static readonly string FullScreenTitle = "popup_fullscreen_title";
+
+            public static readonly string PopupButton = "material_popup";
+            public static readonly string PopupButton2 = "material_popup2";
         }
 
         public class Button
@@ -62,13 +70,21 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string TextPressed = "text_pressed";
             public static readonly string TextDisabled = "text_disabled";
 
+            public static readonly string Title = "title";
+
             public static readonly string Icon = "icon";
             public static readonly string IconPressed = "icon_pressed";
+        }
+
+        public class Button
+        {
+            public static readonly string Effect = "effect";
         }
 
         public class Layout
         {
             public static readonly string Content = "elm.swallow.content";
+            public static readonly string Title = "elm.swallow.title";
             public static readonly string Border = "border";
             public static readonly string FloatingButton = "elm.swallow.floatingbutton";
         }
@@ -94,6 +110,7 @@ namespace Tizen.NET.MaterialComponents
         public class GenListItem
         {
             public static readonly string BackgroundActivated = "active_bg";
+            public static readonly string Icon = "elm.swallow.icon";
         }
 
         public class ProgressBar
@@ -138,7 +155,12 @@ namespace Tizen.NET.MaterialComponents
 
         public class Popup
         {
-            public static readonly string ActionButton = "button1";
+            public static readonly string Button1 = "button1";
+            public static readonly string Button2 = "button2";
+            public static readonly string TextLabel = "elm.text.label";
+            public static readonly string Title = "title,text";
+            public static readonly string ElmTitle = "elm.text.title";
+            public static readonly string ActionButton = "elm.swallow.action_button";
         }
 
         public class Menus
@@ -164,5 +186,10 @@ namespace Tizen.NET.MaterialComponents
     public static class Events
     {
         public static readonly string Changed = "changed";
+    }
+
+    public static class Signal
+    {
+        public static readonly string ActionClick = "elm,action,click";
     }
 }

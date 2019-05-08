@@ -4,7 +4,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MSnackBars : Popup, IColorSchemeComponent
+    public class MSnackBars : MPopup, IColorSchemeComponent
     {
         Color _defaultBackgroundColor;
         Color _defaultTextColor;
@@ -43,11 +43,11 @@ namespace Tizen.NET.MaterialComponents
                 {
                     _actionButton = new Button(this)
                     {
-                        Style = Styles.Popup.ActionButton,
+                        Style = Styles.Popup.PopupButton,
                     };
                     _actionButton.Show();
                     _actionButton.Clicked += (s, e) => { ActionClicked?.Invoke(this, EventArgs.Empty); };
-                    this.SetPartContent(Parts.Popup.ActionButton, _actionButton);
+                    this.SetPartContent(Parts.Popup.Button1, _actionButton);
                 }
                 _actionButton.Text = value;
             }
