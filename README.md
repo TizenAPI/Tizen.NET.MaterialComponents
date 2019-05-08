@@ -39,6 +39,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
   
 - **MTextField**
   A material text fields that supports filled text fields and outlined text fields. ([guideline](https://material.io/design/components/text-fields.html))  
+
+- **MTooltip**
+  A material Tooltips display informative text when users focus on, tap or long press an element. ([guideline](https://material.io/design/components/tooltips.html))
  
 ## Getting Started
 ### Install package 

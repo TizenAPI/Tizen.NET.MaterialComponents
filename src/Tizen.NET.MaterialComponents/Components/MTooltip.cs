@@ -3,47 +3,27 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MTooltip
+    public static class MTooltip
     {
-        EvasObject _evasObject;
-
-        public MTooltip(EvasObject parent, string text)
+        public static void UseMTooltip(this EvasObject control)
         {
-            if (text == null)
+            if(control == null)
             {
-                throw new ArgumentNullException(nameof(text));
+                throw new ArgumentNullException(nameof(control));
             }
-            _evasObject = parent ?? throw new ArgumentNullException(nameof(parent));
-            _evasObject.TooltipStyle = "material";
-            _evasObject.TooltipOrientation = TooltipOrientation.Bottom;
-            _evasObject.SetTooltipText(text);
+
+            control.TooltipStyle = Styles.Material;
+            control.TooltipOrientation = TooltipOrientation.Bottom;
         }
 
-        public void UpdateText(string text)
+        public static bool IsUsingMTooltip(this EvasObject control)
         {
-            if (text != null)
+            if (control == null)
             {
-                _evasObject?.SetTooltipText(text);
+                throw new ArgumentNullException(nameof(control));
             }
-            else
-            {
-                _evasObject?.UnsetTooltip();
-            }
-        }
 
-        public void UnSet()
-        {
-            _evasObject?.UnsetTooltip();
-        }
-
-        public void Show()
-        {
-            _evasObject?.ShowTooltip();
-        }
-
-        public void Hide()
-        {
-            _evasObject?.HideTooltip();
+            return control.TooltipStyle == Styles.Material && control.TooltipOrientation == TooltipOrientation.Bottom;
         }
     }
 }

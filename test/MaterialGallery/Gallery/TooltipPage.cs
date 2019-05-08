@@ -41,16 +41,20 @@ namespace MaterialGallery
             button3.Move(80, 900);
             button3.Show();
 
-            var tooltip = new MTooltip(button, "Button");
+            button.UseMTooltip();
+            button2.UseMTooltip();
+            button3.UseMTooltip();
 
-            var tooltip2 = new MTooltip(button2, "Tooltip Test");
+            button.SetTooltipText("Button");
+
+            button2.SetTooltipText("Tooltip Test");
+
+            button3.SetTooltipText("#03A9F4");
 
             button3.Clicked += (s, e) =>
             {
-                tooltip2.UpdateText("Chage Tooltip");
+                button2.SetTooltipText("Chage Tooltip");
             };
-
-            var tooltip3 = new MTooltip(button3, "#03A9F4");
         }
     }
 }
