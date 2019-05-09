@@ -6,6 +6,8 @@ namespace Tizen.NET.MaterialComponents
     {
         public static readonly string Material = "material";
 
+        public static readonly string MaterialApplication = "material_application";
+
         public class CheckBox
         {
             public static readonly string Style = "material_checkboxes";
@@ -42,6 +44,11 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string SnackBars = "material_snackbars";
             public static readonly string ActionButton = "material_popup";
         }
+
+        public class Button
+        {
+            public static readonly string FloatingButton = "floatingbutton/material";
+        }
     }
 
     public static class Parts
@@ -64,6 +71,7 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string Content = "elm.swallow.content";
             public static readonly string Border = "border";
+            public static readonly string FloatingButton = "elm.swallow.floatingbutton";
         }
 
         public class Check
