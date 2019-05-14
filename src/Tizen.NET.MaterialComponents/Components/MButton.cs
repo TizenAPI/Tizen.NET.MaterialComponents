@@ -66,6 +66,20 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public override Color BackgroundColor
+        {
+            set
+            {
+                base.BackgroundColor = value;
+
+                var pressedColor = value.WithAlpha(0.32);
+                var disabledColor = value.WithAlpha(0.12);
+
+                SetPartColor(Parts.Widget.BackgroundPressed, pressedColor);
+                SetPartColor(Parts.Widget.BackgroundDisabled, disabledColor);
+            }
+        }
+
         public MButton(EvasObject parent) : base(parent)
         {
             Style = Styles.Material;
