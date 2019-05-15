@@ -6,14 +6,11 @@ namespace Tizen.NET.MaterialComponents
     public class MTextField : Entry, IColorSchemeComponent
     {
         Layout _layout;
-        SmartEvent _changed;
         Color _defaultTextColor;
         Color _defaultLabelColor;
         Color _defaultBackgroundColor;
 
         MTextFieldType _type = MTextFieldType.Default;
-
-        public event EventHandler TextChanged;
 
         public MTextFieldType Type
         {
@@ -161,9 +158,6 @@ namespace Tizen.NET.MaterialComponents
 
         public MTextField(EvasObject parent) : base(parent)
         {
-            _changed = new SmartEvent(this, this.RealHandle, Events.Changed);
-            _changed.On += OnChanged;
-
             Focused += OnFocused;
             Unfocused += OnUnfocused;
 
@@ -216,15 +210,6 @@ namespace Tizen.NET.MaterialComponents
                 Activate();
             }
             _layout.SignalEmit(States.Unfocused, "");
-        }
-
-        void OnChanged(object sender, EventArgs args)
-        {
-            if(string.IsNullOrEmpty(Text) && !IsFocused)
-            {
-                Deactivate();
-            }
-            TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected override IntPtr CreateHandle(EvasObject parent)
