@@ -7,6 +7,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MActivityIndicator**
   A circular progress indicator that supports determinate and indeterminate circular progress indicators. ([guideline](https://material.io/design/components/progress-indicators.html#circular-progress-indicators))
 
+- **MConformant**
+  A material conformant allows the user to use a floating action button.
+
 - **MButton**
   A material buttons, including contained button, text button, outlined button and toggle button. ([guideline](https://material.io/design/components/buttons.html)) 
 
@@ -15,6 +18,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 
 - **MCheckBox**
   A material checkbox allow the user to select one or more items from a set. ([guideline](https://material.io/design/components/selection-controls.html#checkboxes))
+
+- **MFloatingActionButton**
+  A material floating action button represents the primary action of a screen. ([guideline](https://material.io/design/components/buttons-floating-action-button.html))
 
 - **MNavigationDrawer**
   A Navigation drawers provide access to destinations and app functionality, such as switching accounts. ([guideline](https://material.io/design/components/navigation-drawer.html))
