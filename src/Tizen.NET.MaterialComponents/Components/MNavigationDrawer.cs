@@ -3,7 +3,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationDrawer : MBox
+    public class MNavigationDrawer : Box
     {
         MNavigationView _navigationView;
         Box _mainContainer;
@@ -17,10 +17,10 @@ namespace Tizen.NET.MaterialComponents
         public MNavigationDrawer(EvasObject parent) : base(parent)
         {
             Initialize(parent);
-            LayoutUpdated += (s, e) =>
+            SetLayoutCallback(() =>
             {
                 UpdateChildGeometry();
-            };
+            });
         }
 
         public event EventHandler Toggled;

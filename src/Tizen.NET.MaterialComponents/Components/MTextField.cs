@@ -6,14 +6,11 @@ namespace Tizen.NET.MaterialComponents
     public class MTextField : Entry, IColorSchemeComponent
     {
         Layout _layout;
-        SmartEvent _changed;
         Color _defaultTextColor;
         Color _defaultLabelColor;
         Color _defaultBackgroundColor;
 
         MTextFieldType _type = MTextFieldType.Default;
-
-        public event EventHandler TextChanged;
 
         public MTextFieldType Type
         {
@@ -36,7 +33,7 @@ namespace Tizen.NET.MaterialComponents
             set
             {
                 _layout.SetPartText(Parts.Entry.TextLabel, value);
-                SetPartText(Parts.Entry.Guide, value);
+                _layout.SetPartText(Parts.Entry.Guide, value);
             }
         }
 
@@ -77,12 +74,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.TextEditFocused);
+                return _layout.GetPartColor(Parts.Entry.TextEditFocused);
             }
             set
             {
                 var color = value.IsDefault ? _defaultTextColor : value;
-                SetPartColor(Parts.Entry.TextEditFocused, color);
+                _layout.SetPartColor(Parts.Entry.TextEditFocused, color);
             }
         }
 
@@ -103,12 +100,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.Underline);
+                return _layout.GetPartColor(Parts.Entry.Underline);
             }
             set
             {
                 var color = value.IsDefault ? _defaultLabelColor : value;
-                SetPartColor(Parts.Entry.Underline, color);
+                _layout.SetPartColor(Parts.Entry.Underline, color);
             }
         }
 
@@ -116,12 +113,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.UnderlineFocused);
+                return _layout.GetPartColor(Parts.Entry.UnderlineFocused);
             }
             set
             {
                 var color = value.IsDefault ? _defaultLabelColor : value;
-                SetPartColor(Parts.Entry.UnderlineFocused, color);
+                _layout.SetPartColor(Parts.Entry.UnderlineFocused, color);
             }
         }
 
@@ -129,12 +126,25 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Entry.TextEdit);
+                return GetPartColor(Parts.Entry.Cursor);
             }
             set
             {
                 var color = value.IsDefault ? _defaultTextColor : value;
-                SetPartColor(Parts.Entry.TextEdit, color);
+                SetPartColor(Parts.Entry.Cursor, color);
+            }
+        }
+
+        public override Color BackgroundColor
+        {
+            get
+            {
+                return _layout.BackgroundColor;
+            }
+            set
+            {
+                var color = value.IsDefault ? _defaultBackgroundColor : value;
+                _layout.BackgroundColor = value;
             }
         }
 
@@ -148,9 +158,6 @@ namespace Tizen.NET.MaterialComponents
 
         public MTextField(EvasObject parent) : base(parent)
         {
-            _changed = new SmartEvent(this, this.RealHandle, Events.Changed);
-            _changed.On += OnChanged;
-
             Focused += OnFocused;
             Unfocused += OnUnfocused;
 
@@ -203,15 +210,6 @@ namespace Tizen.NET.MaterialComponents
                 Activate();
             }
             _layout.SignalEmit(States.Unfocused, "");
-        }
-
-        void OnChanged(object sender, EventArgs args)
-        {
-            if(string.IsNullOrEmpty(Text) && !IsFocused)
-            {
-                Deactivate();
-            }
-            TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected override IntPtr CreateHandle(EvasObject parent)
