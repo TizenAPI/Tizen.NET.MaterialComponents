@@ -6,6 +6,7 @@ namespace Tizen.NET.MaterialComponents
     public class MButton : Button, IColorSchemeComponent
     {
         string _text;
+        Image _icon = null;
         MButtonTypes _type = MButtonTypes.Contained;
 
         Color _defaultBackground;
@@ -42,6 +43,40 @@ namespace Tizen.NET.MaterialComponents
                     str = Regex.Replace(str, tagPattern, m => m.ToString().ToLower());
                 }
                 base.Text = str;
+            }
+        }
+
+        public Image Icon
+        {
+            get
+            {
+                return _icon;
+            }
+            set
+            {
+                _icon = value;
+                if (_icon != null)
+                {
+                    SetPartContent(Parts.Widget.Icon, _icon);
+                }
+                else
+                {
+                    SetPartContent(Parts.Widget.Icon, null);
+                }
+            }
+        }
+
+        public override Color BackgroundColor
+        {
+            set
+            {
+                base.BackgroundColor = value;
+
+                var pressedColor = value.WithAlpha(0.32);
+                var disabledColor = value.WithAlpha(0.12);
+
+                SetPartColor(Parts.Widget.BackgroundPressed, pressedColor);
+                SetPartColor(Parts.Widget.BackgroundDisabled, disabledColor);
             }
         }
 

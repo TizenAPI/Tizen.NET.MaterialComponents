@@ -5,7 +5,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationView : MBox, IColorSchemeComponent
+    public class MNavigationView : Box, IColorSchemeComponent
     {
         EvasObject _header;
         GenList _menu;
@@ -23,10 +23,10 @@ namespace Tizen.NET.MaterialComponents
         public MNavigationView(EvasObject parent) : base(parent)
         {
             Initialize(parent);
-            LayoutUpdated += (s, e) =>
+            SetLayoutCallback(() =>
             {
                 UpdateChildGeometry();
-            };
+            });
             MColors.AddColorSchemeComponent(this);
         }
 
@@ -57,11 +57,16 @@ namespace Tizen.NET.MaterialComponents
                     _header.Hide();
                 }
                 _header = value;
-                if (!_header.IsVisible)
+
+                if (_header != null)
                 {
-                    _header.Show();
+                    PackStart(_header);
+                    if (!_header.IsVisible)
+                    {
+                        _header.Show();
+                    }
                 }
-                PackStart(_header);
+
                 UpdateChildGeometry();
             }
         }
