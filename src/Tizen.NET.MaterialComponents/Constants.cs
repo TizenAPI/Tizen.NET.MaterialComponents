@@ -6,8 +6,6 @@ namespace Tizen.NET.MaterialComponents
     {
         public static readonly string Material = "material";
 
-        public static readonly string MaterialApplication = "material_application";
-
         public class CheckBox
         {
             public static readonly string Style = "material_checkboxes";
