@@ -250,21 +250,6 @@ namespace Tizen.NET.MaterialComponents
         }
     }
 
-    public class MItem
-    {
-        public string Title { get; set; }
-
-        public string Icon { get; set; }
-
-        public MItem(string title, string icon = null)
-        {
-            Title = title;
-            Icon = icon;
-        }
-
-        internal GenItem GenItem { get; set; }
-    }
-
     public class MGroup
     {
         public string Title { get; set; }

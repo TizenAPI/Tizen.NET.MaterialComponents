@@ -37,6 +37,9 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string MaterialNavigation = "material_navigation";
             public static readonly string MaterialNavigationSubtitle = "material_navigation_subtitle";
             public static readonly string MaterialNavigationDivider = "material_navigation_divider";
+            public static readonly string SingleLine = "material_1line";
+            public static readonly string DoubleLine = "material_2line";
+            public static readonly string TripleLine = "material_3line";
         }
 
         public class Popup
