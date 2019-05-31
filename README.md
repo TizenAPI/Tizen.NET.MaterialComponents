@@ -22,6 +22,10 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MMenus**
   A material menus display a list of choices on temporary surfaces. ([guideline](https://material.io/design/components/menus.html))
 
+- **MModalSheets**
+  Modal bottom sheets present a set of choices while blocking interaction with the rest of the screen. ([guideline](https://material.io/design/components/sheets-bottom.html#modal-bottom-sheet))
+  Modal side sheets present content while blocking interaction with the rest of the screen. ([guideline](https://material.io/design/components/sheets-side.html#modal-side-sheet))
+
 - **MFloatingActionButton**
   A material floating action button represents the primary action of a screen. ([guideline](https://material.io/design/components/buttons-floating-action-button.html))
 

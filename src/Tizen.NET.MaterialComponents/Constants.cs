@@ -71,6 +71,7 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string Content = "elm.swallow.content";
             public static readonly string Border = "border";
             public static readonly string FloatingButton = "elm.swallow.floatingbutton";
+            public static readonly string Sheets = "elm.swallow.sheets";
         }
 
         public class Check
