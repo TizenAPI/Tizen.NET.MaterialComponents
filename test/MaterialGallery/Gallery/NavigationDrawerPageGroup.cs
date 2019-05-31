@@ -105,18 +105,18 @@ namespace MaterialGallery
             nv.Header = header;
 
             var items1 = new List<MItem>();
-            items1.Add(new MItem("My Files", "icon.png"));
-            items1.Add(new MItem("Shared with me", "icon.png"));
-            items1.Add(new MItem("Starred", "icon.png"));
-            items1.Add(new MItem("Recent", "icon.png"));
-            items1.Add(new MItem("Offline", "icon.png"));
+            items1.Add(new MItem() { Title = "My Files", Icon = "icon.png" });
+            items1.Add(new MItem() { Title = "Shared with me", Icon = "icon.png" });
+            items1.Add(new MItem() { Title = "Starred", Icon = "icon.png" });
+            items1.Add(new MItem() { Title = "Recent", Icon = "icon.png" });
+            items1.Add(new MItem() { Title = "Offline", Icon = "icon.png" });
 
             var items2 = new List<MItem>();
-            items2.Add(new MItem("Uploads", "icon.png"));
-            items2.Add(new MItem("Backup", "icon.png"));
-            items2.Add(new MItem("Movie", "icon.png"));
-            items2.Add(new MItem("Music", "icon.png"));
-            items2.Add(new MItem("Play", "icon.png"));
+            items2.Add(new MItem() { Title = "Uploads", Icon = "icon.png" });
+            items2.Add(new MItem() { Title = "Backup", Icon = "icon.png" });
+            items2.Add(new MItem() { Title = "Movie", Icon = "icon.png" });
+            items2.Add(new MItem() { Title = "Music", Icon = "icon.png" });
+            items2.Add(new MItem() { Title = "Play", Icon = "icon.png" });
 
             var group1 = new MGroup(items1, "Account");
             var group2 = new MGroup(items2);

@@ -173,6 +173,14 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string Divider = "divider";
         }
+
+        public class List
+        {
+            public static readonly int IconSize = 40;
+            public static readonly string SubText = "elm.text.sub";
+            public static readonly string MetaText = "elm.text.meta";
+            public static readonly string Icon = "elm.swallow.icon";
+        }
     }
 
     public static class Actions

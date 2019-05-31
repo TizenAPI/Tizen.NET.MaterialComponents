@@ -1,14 +1,14 @@
 using ElmSharp;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 
 namespace Tizen.NET.MaterialComponents
 {
     public class MList : GenList, IColorSchemeComponent
     {
-        const int IconSize = 40;
+        ObservableCollection<MItem> _items;
 
-        IList<MItem> _items;
         Color _backgroundColor = Color.Default;
         Color _defaultBackgroundColor;
         Color _defaultBackgroundColorForDisabled;
@@ -19,6 +19,8 @@ namespace Tizen.NET.MaterialComponents
         public MList(EvasObject parent) : base(parent)
         {
             Homogeneous = true;
+            _items = new ObservableCollection<MItem>();
+            _items.CollectionChanged += OnItemsCollectionChanged;
             MColors.AddColorSchemeComponent(this);
         }
 
@@ -33,23 +35,11 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
-        public IList<MItem> Items
+        public ObservableCollection<MItem> Items
         {
             get
             {
                 return _items;
-            }
-            set
-            {
-                _items = value;
-                if (_items != null)
-                {
-                    UpdateItems();
-                }
-                else
-                {
-                    Clear();
-                }
             }
         }
 
@@ -72,78 +62,115 @@ namespace Tizen.NET.MaterialComponents
                 {
                     if (item.GenItem != null)
                     {
-                        item.GenItem.SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
-                        item.GenItem.SetPartColor(Parts.Widget.BackgroundPressed, _defaultActiveBackgroundColor);
-                        item.GenItem.SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColorForDisabled);
-
-                        item.GenItem.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-                        item.GenItem.SetPartColor(Parts.Widget.TextPressed, _defaultActiveTextColor);
+                        SetGenItemPartColor(item.GenItem);
                     }
                 }
             }
         }
 
-        void UpdateItems()
+        void AddItem(MItem item, int index)
         {
-            Clear();
+            var style = item.Style;
+            var itemStyle = style == MListStyle.OneLine ? Styles.GenListItem.SingleLine : (style == MListStyle.DoubleLine ? Styles.GenListItem.DoubleLine : Styles.GenListItem.TripleLine);
 
-            if (_items.Count > 0)
+            var defaultClass = CreateGenItemClass(itemStyle);
+
+            var pivotItem = GetItemByIndex(index);
+
+            if (pivotItem != null)
             {
-                foreach (var item in _items)
+                item.GenItem = InsertBefore(defaultClass, item, pivotItem);
+            }
+            else
+            {
+                item.GenItem = Append(defaultClass, item);
+            }
+            SetGenItemPartColor(item.GenItem);
+        }
+
+        GenItemClass CreateGenItemClass(string itemStyle)
+        {
+            var defaultClass = new GenItemClass(itemStyle)
+            {
+                GetTextHandler = (obj, part) =>
                 {
-                    var style = item.Style;
-                    var itemStyle = style == MListStyle.OneLine ? Styles.GenListItem.SingleLine : (style == MListStyle.DoubleLine ? Styles.GenListItem.DoubleLine : Styles.GenListItem.TripleLine);
-
-                    var defaultClass = new GenItemClass(itemStyle)
+                    if (itemStyle != Styles.GenListItem.SingleLine)
                     {
-                        GetTextHandler = (obj, part) =>
+                        if (part == Parts.List.SubText)
                         {
-                            if (itemStyle != Styles.GenListItem.SingleLine)
-                            {
-                                if (part == "elm.text.sub")
-                                {
-                                    return ((MItem)obj).SubText;
-                                }
-                                else if (part == "elm.text.meta")
-                                {
-                                    return ((MItem)obj).MetaText;
-                                }
-                            }
-
-                            return ((MItem)obj).Title;
-                        },
-                        GetContentHandler = (obj, part) =>
-                        {
-                            if (part == "elm.swallow.icon")
-                            {
-                                if (((MItem)obj).Icon != null)
-                                {
-                                    var image = new Image(this)
-                                    {
-                                        MinimumWidth = IconSize,
-                                        MinimumHeight = IconSize
-                                    };
-                                    var result = image.Load(Path.Combine(Applications.Application.Current.DirectoryInfo.Resource, ((MItem)obj).Icon));
-                                    return image;
-                                }
-
-                                return null;
-                            }
-
-                            return ((MItem)obj).Control;
+                            return ((MItem)obj).SubText;
                         }
-                    };
+                        else if (part == Parts.List.MetaText)
+                        {
+                            return ((MItem)obj).MetaText;
+                        }
+                    }
 
-                    var genItem = Append(defaultClass, item);
-                    item.GenItem = genItem;
+                    return ((MItem)obj).Title;
+                },
+                GetContentHandler = (obj, part) =>
+                {
+                    if (part == Parts.List.Icon)
+                    {
+                        if (!string.IsNullOrEmpty(((MItem)obj).Icon))
+                        {
+                            var image = new Image(this)
+                            {
+                                MinimumWidth = Parts.List.IconSize,
+                                MinimumHeight = Parts.List.IconSize
+                            };
+                            image.Load(Path.Combine(Applications.Application.Current.DirectoryInfo.Resource, ((MItem)obj).Icon));
+                            return image;
+                        }
 
-                    item.GenItem.SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
-                    item.GenItem.SetPartColor(Parts.Widget.BackgroundPressed, _defaultActiveBackgroundColor);
-                    item.GenItem.SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColorForDisabled);
+                        return null;
+                    }
 
-                    item.GenItem.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-                    item.GenItem.SetPartColor(Parts.Widget.TextPressed, _defaultActiveTextColor);
+                    return ((MItem)obj).Control;
                 }
+            };
+
+            return defaultClass;
+        }
+
+        void SetGenItemPartColor(GenItem item)
+        {
+            item.SetPartColor(Parts.Widget.Background, _defaultBackgroundColor);
+            item.SetPartColor(Parts.Widget.BackgroundPressed, _defaultActiveBackgroundColor);
+            item.SetPartColor(Parts.Widget.BackgroundDisabled, _defaultBackgroundColorForDisabled);
+            item.SetPartColor(Parts.Widget.Text, _defaultTextColor);
+            item.SetPartColor(Parts.Widget.TextPressed, _defaultActiveTextColor);
+        }
+
+        void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    AddItem(e.NewItems[0] as MItem, e.NewStartingIndex);
+                    break;
+
+                case NotifyCollectionChangedAction.Move:
+                    var moveItem = e.OldItems[0] as MItem;
+                    moveItem.GenItem.Delete();
+                    AddItem(moveItem, e.NewStartingIndex);
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    var removeitem = e.OldItems[0] as MItem;
+                    removeitem.GenItem.Delete();
+                    break;
+
+                case NotifyCollectionChangedAction.Replace:
+                    var oldItem = e.OldItems[0] as MItem;
+                    var newItem = e.NewItems[0] as MItem;
+                    AddItem(newItem, e.OldStartingIndex);
+                    oldItem.GenItem.Delete();
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    Clear();
+                    break;
             }
         }
     }
@@ -153,34 +180,5 @@ namespace Tizen.NET.MaterialComponents
         OneLine,
         DoubleLine,
         TripleLine
-    }
-
-    public class MItem
-    {
-        public MListStyle Style { get; set; }
-        public string Icon { get; set; }
-
-        public string Title { get; set; }
-
-        public string SubText { get; set; }
-
-        public string MetaText { get; set; }
-
-        public EvasObject Control { get; set; }
-
-        public MItem(string title, MListStyle style = MListStyle.OneLine)
-        {
-            Title = title;
-            Style = style;
-        }
-
-        public MItem(string title, string icon, MListStyle style = MListStyle.OneLine)
-        {
-            Title = title;
-            Icon = icon;
-            Style = style;
-        }
-
-        internal GenItem GenItem { get; set; }
     }
 }

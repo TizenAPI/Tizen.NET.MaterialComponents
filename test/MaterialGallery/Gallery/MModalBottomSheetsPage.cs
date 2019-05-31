@@ -28,6 +28,7 @@ namespace MaterialGallery
             box.Show();
 
             #region ModalSheets
+
             MModalSheets modalSheets = new MModalSheets(_conformant, MModalSheetsDirection.Bottom);
             modalSheets.Show();
 
@@ -63,15 +64,17 @@ namespace MaterialGallery
                 }
             };
 
-            genlist.Append(defaultClass, new MItem("Share", "share.png"));
-            genlist.Append(defaultClass, new MItem("Get link", "insert-link.png"));
-            genlist.Append(defaultClass, new MItem("Edit name", "edit.png"));
-            genlist.Append(defaultClass, new MItem("Delete collection", "delete.png"));
+            genlist.Append(defaultClass, new MItem() { Title = "Share", Icon = "share.png" });
+            genlist.Append(defaultClass, new MItem() { Title = "Get link", Icon = "insert-link.png" });
+            genlist.Append(defaultClass, new MItem() { Title = "Edit name", Icon = "edit.png" });
+            genlist.Append(defaultClass, new MItem() { Title = "Delete collection", Icon = "delete.png" });
 
             modalSheets.SetContent(genlist);
-            #endregion
+
+            #endregion ModalSheets
 
             #region Buttons
+
             Box btbox = new Box(parent)
             {
                 WeightX = 1,
@@ -96,7 +99,8 @@ namespace MaterialGallery
             };
 
             btbox.PackEnd(button1);
-            #endregion
+
+            #endregion Buttons
 
             return box;
         }

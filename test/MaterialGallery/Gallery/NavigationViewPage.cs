@@ -23,7 +23,7 @@ namespace MaterialGallery
                 WeightY = 1,
             };
 
-            var btn1 = new Button(parent)
+            var btn1 = new MButton(parent)
             {
                 Text = "Chage Header",
                 AlignmentX = -1,
@@ -34,7 +34,7 @@ namespace MaterialGallery
             };
             btn1.Show();
 
-            var btn2 = new Button(parent)
+            var btn2 = new MButton(parent)
             {
                 Text = "Chage Header",
                 AlignmentX = -1,
@@ -45,7 +45,7 @@ namespace MaterialGallery
             };
             btn2.Show();
 
-            var btn3 = new Button(parent)
+            var btn3 = new MButton(parent)
             {
                 Text = "Button",
                 AlignmentX = -1,
@@ -81,22 +81,22 @@ namespace MaterialGallery
             };
 
             var items = new List<MItem>();
-            items.Add(new MItem("My Files", "icon.png"));
-            items.Add(new MItem("Shared with me", "icon.png"));
-            items.Add(new MItem("Starred", "icon.png"));
-            items.Add(new MItem("Recent", "icon.png"));
-            items.Add(new MItem("Offline", "icon.png"));
-            items.Add(new MItem("Uploads", "icon.png"));
-            items.Add(new MItem("Backup", "icon.png"));
-            items.Add(new MItem("Movie", "icon.png"));
-            items.Add(new MItem("Music", "icon.png"));
-            items.Add(new MItem("Play", "icon.png"));
+            items.Add(new MItem() { Title = "My Files", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Shared with me", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Starred", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Recent", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Offline", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Uploads", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Backup", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Movie", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Music", Icon = "icon.png" });
+            items.Add(new MItem() { Title = "Play", Icon = "icon.png" });
 
             var items1 = new List<MItem>();
 
             for (int i = 0; i < 20; i++)
             {
-                items1.Add(new MItem("Change Item", "icon.png"));
+                items1.Add(new MItem() { Title = "Change Item", Icon = "icon.png" });
             }
 
             nv.Menu = items;

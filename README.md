@@ -34,6 +34,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MFullScreenDialog**
   A full-screen dialogs group a series of tasks.([guideline](https://material.io/design/components/dialogs.html#full-screen-dialog))
 
+- **MLists**
+  A material Lists are continuous, vertical indexes of text or images. ([guideline](https://material.io/design/components/lists.html#))
+
 - **MMenus**
   A material menus display a list of choices on temporary surfaces. ([guideline](https://material.io/design/components/menus.html))
 
