@@ -17,11 +17,12 @@ namespace Tizen.NET.MaterialComponents
         {
             get
             {
-                return GetPartColor(Parts.Check.Background);
+                return GetPartColor(Parts.Check.BackgroundOn);
             }
             set
             {
-                SetPartColor(Parts.Check.Background, value);
+                SetPartColor(Parts.Check.BackgroundOn, value);
+                SetPartColor(Parts.Check.Stroke, value);
             }
         }
 
@@ -36,7 +37,8 @@ namespace Tizen.NET.MaterialComponents
             {
                 this.Color = _defaultBackground;
             }
-            SetPartColor(Parts.Check.BackgroundDisabled, _defaultBackgroundForDisable);
+            SetPartColor(Parts.Check.BackgroundOnDisabled, _defaultBackgroundForDisable);
+            SetPartColor(Parts.Check.StrokeDisabled, _defaultBackgroundForDisable);
         }
     }
 }

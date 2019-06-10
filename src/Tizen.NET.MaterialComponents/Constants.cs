@@ -75,8 +75,10 @@ namespace Tizen.NET.MaterialComponents
 
         public class Check
         {
-            public static readonly string Background = "bg_on";
-            public static readonly string BackgroundDisabled = "bg_on_disabled";
+            public static readonly string BackgroundOn = "bg_on";
+            public static readonly string BackgroundOnDisabled = "bg_on_disabled";
+            public static readonly string Stroke = "stroke";
+            public static readonly string StrokeDisabled = "stroke_disabled";
         }
 
         public class Entry
