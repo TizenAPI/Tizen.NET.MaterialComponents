@@ -10,6 +10,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MConformant**
   A material conformant allows the user to use a floating action button.
 
+- **MBottonNavigation**
+  A Navigation bar display three to five destinations at the bottom of a screen. ([guideline](https://material.io/design/components/bottom-navigation.html))
+
 - **MButton**
   A material buttons, including contained button, text button, outlined button and toggle button. ([guideline](https://material.io/design/components/buttons.html)) 
 
