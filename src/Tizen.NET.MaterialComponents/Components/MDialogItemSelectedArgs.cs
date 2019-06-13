@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MDialogItemSelectedArgs
+    public class MConfirmationDialogItemSelectedArgs
     {
-        public MDialogItemSelectedArgs(IEnumerable<MConfirmationDialogItem> items)
+        public MConfirmationDialogItemSelectedArgs(IEnumerable<MConfirmationDialogItem> items)
         {
             Items = items;
         }

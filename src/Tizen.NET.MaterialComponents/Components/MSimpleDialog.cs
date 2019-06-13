@@ -6,14 +6,13 @@ namespace Tizen.NET.MaterialComponents
 {
     public class MSimpleDialog : MDialog
     {
-        readonly int MaximumHeight = 500;
-        readonly int ItemHeight = 180;
-        readonly int IconSize = 100;
-
         IList<MSimpleDialogItem> _itemList = new List<MSimpleDialogItem>();
         Box _layout;
         GenList _genList;
         GenItemClass _itemClass;
+        int _itemHeight = 180;
+        int _iconSize = 100;
+        int _maximumHeight = 500;
 
         public MSimpleDialog(EvasObject parent) : base(parent)
         {
@@ -71,13 +70,26 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public int MaximumContentHeight
+        {
+            get
+            {
+                return _maximumHeight;
+            }
+            set
+            {
+                _maximumHeight = value;
+                _layout.MinimumHeight = Math.Min(_maximumHeight, (_layout.MinimumHeight + (_itemList.Count * _itemHeight)));
+            }
+        }
+
         public MSimpleDialogItem AppendItem(string label, string iconPath = "")
         {
             var mItem = new MSimpleDialogItem(label, iconPath);
             var item = _genList.Append(_itemClass, mItem);
 
             _itemList.Add(mItem);
-            _layout.MinimumHeight = Math.Min(MaximumHeight, _layout.MinimumHeight + ItemHeight);
+            _layout.MinimumHeight = Math.Min(_maximumHeight, _layout.MinimumHeight + _itemHeight);
 
             return mItem;
         }
@@ -96,8 +108,8 @@ namespace Tizen.NET.MaterialComponents
                     AlignmentY = -1,
                     WeightX = 1,
                     WeightY = 1,
-                    MinimumHeight = IconSize,
-                    MinimumWidth = IconSize
+                    MinimumHeight = _iconSize,
+                    MinimumWidth = _iconSize
                 };
                 img.Load(path);
 

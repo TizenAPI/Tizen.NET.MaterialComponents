@@ -7,9 +7,6 @@ namespace Tizen.NET.MaterialComponents
 {
     public class MConfirmationDialog : MDialog, IColorSchemeComponent
     {
-        readonly int MaximumHeight = 500;
-        readonly int ItemHeight = 120;
-
         IDictionary<int, MConfirmationDialogItem> _itemList = new Dictionary<int, MConfirmationDialogItem>();
         Button _confirmButton;
         Button _cancelButton;
@@ -17,6 +14,8 @@ namespace Tizen.NET.MaterialComponents
         GenList _genList;
         GenItemClass _itemClass;
         int _itemIndex = 0;
+        int _maximumHeight = 500;
+        int _itemHeight = 120;
         Color _defaultTextColor;
         Color _defaultTextColorForDisable;
 
@@ -81,7 +80,7 @@ namespace Tizen.NET.MaterialComponents
             {
                 Dismiss();
                 var selected = _itemList.Where(kv => kv.Value.IsSelected).Select(kv => kv.Value);
-                ItemSelected?.Invoke(this, new MDialogItemSelectedArgs(selected));
+                ItemSelected?.Invoke(this, new MConfirmationDialogItemSelectedArgs(selected));
             };
 
             _cancelButton = new Button(this)
@@ -102,7 +101,7 @@ namespace Tizen.NET.MaterialComponents
             MColors.AddColorSchemeComponent(this);
         }
 
-        public event EventHandler<MDialogItemSelectedArgs> ItemSelected;
+        public event EventHandler<MConfirmationDialogItemSelectedArgs> ItemSelected;
 
         public string Title
         {
@@ -140,6 +139,18 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public int MaximumContentHeight {
+            get
+            {
+                return _maximumHeight;
+            }
+            set
+            {
+                _maximumHeight = value;
+                _layout.MinimumHeight = Math.Min(_maximumHeight, (_layout.MinimumHeight + (_itemList.Count * _itemHeight)));
+            }
+        }
+
         public bool IsMultiSelection { get; set; }
 
         public MConfirmationDialogItem AppendItem(string label)
@@ -148,7 +159,7 @@ namespace Tizen.NET.MaterialComponents
             var item = _genList.Append(_itemClass, mItem);
             _itemList[mItem.Id] = mItem;
 
-            _layout.MinimumHeight = Math.Min(MaximumHeight, _layout.MinimumHeight + ItemHeight);
+            _layout.MinimumHeight = Math.Min(_maximumHeight, _layout.MinimumHeight + _itemHeight);
 
             return mItem;
         }
@@ -168,7 +179,7 @@ namespace Tizen.NET.MaterialComponents
                 {
                     var check = new MCheckBox(_genList)
                     {
-                        PropagateEvents = false
+                        PropagateEvents = false,
                     };
 
                     check.StateChanged += (s, e) =>
@@ -185,7 +196,7 @@ namespace Tizen.NET.MaterialComponents
                     {
                         StateValue = item.Id,
                         GroupValue = -1,
-                        PropagateEvents = false
+                        PropagateEvents = false,
                     };
                     item.CheckBox = radio;
 
