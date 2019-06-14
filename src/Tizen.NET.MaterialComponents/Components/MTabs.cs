@@ -134,7 +134,7 @@ namespace Tizen.NET.MaterialComponents
             return item;
         }
 
-        void UpdateItemColor(ToolbarItem item, Color oldDefaultBackgroundColor, bool fromConstructor)
+        protected virtual void UpdateItemColor(ToolbarItem item, Color oldDefaultBackgroundColor, bool fromConstructor)
         {
             bool isDefaultBackgroundColor = fromConstructor || oldDefaultBackgroundColor == item.GetPartColor(Parts.ToolbarItem.Background);
 
