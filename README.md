@@ -19,6 +19,18 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MCheckBox**
   A material checkbox allow the user to select one or more items from a set. ([guideline](https://material.io/design/components/selection-controls.html#checkboxes))
 
+- **MAlertDialog**
+  A alert dialogs interrupt users with urgent information, details, or actions.([guideline](https://material.io/design/components/dialogs.html#alert-dialog))
+
+- **MSimpleDialog**
+  A simple dialogs display items that are immediately actionable when selected.([guideline](https://material.io/design/components/dialogs.html#simple-dialog))
+
+- **MConfirmationDialog**
+  A confirmation dialogs give users the ability to provide final confirmation of a choice before committing to it.([guideline](https://material.io/design/components/dialogs.html#confirmation-dialog))
+
+- **MFullScreenDialog**
+  A full-screen dialogs group a series of tasks.([guideline](https://material.io/design/components/dialogs.html#full-screen-dialog))
+
 - **MMenus**
   A material menus display a list of choices on temporary surfaces. ([guideline](https://material.io/design/components/menus.html))
 

@@ -71,11 +71,8 @@ namespace Tizen.NET.MaterialComponents
             set
             {
                 base.BackgroundColor = value;
-
-                var pressedColor = value.WithAlpha(0.32);
                 var disabledColor = value.WithAlpha(0.12);
 
-                SetPartColor(Parts.Widget.BackgroundPressed, pressedColor);
                 SetPartColor(Parts.Widget.BackgroundDisabled, disabledColor);
             }
         }
