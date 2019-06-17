@@ -5,6 +5,7 @@ namespace Tizen.NET.MaterialComponents
     public static class Styles
     {
         public static readonly string Material = "material";
+        public static readonly string Default = "default";
 
         public class CheckBox
         {
@@ -114,6 +115,14 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string BackgroundActivated = "active_bg";
             public static readonly string Icon = "elm.swallow.icon";
+        }
+
+        public class NaviItem
+        {
+            public static readonly string NavigationItem = "navigation_icon";
+            public static readonly string PrimaryItem = "action_item_1";
+            public static readonly string SecondaryItem = "action_item_2";
+            public static readonly string OverflowItem = "overflow_menu";
         }
 
         public class ProgressBar

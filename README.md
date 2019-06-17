@@ -7,6 +7,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MActivityIndicator**
   A circular progress indicator that supports determinate and indeterminate circular progress indicators. ([guideline](https://material.io/design/components/progress-indicators.html#circular-progress-indicators))
 
+- **MAppbar(Top)**
+  A top app bar displays information and actions relating to the current screen.  ([guideline](https://material.io/design/components/app-bars-top.html))
+
 - **MConformant**
   A material conformant allows the user to use a floating action button.
 
