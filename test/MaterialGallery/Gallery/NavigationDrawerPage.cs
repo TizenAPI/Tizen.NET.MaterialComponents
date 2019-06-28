@@ -8,42 +8,37 @@ namespace MaterialGallery
     {
         public override string Name => "NavigationDrawerPage Gallery";
 
-        public override void Run(Window window)
-        {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new Box(window)
-            {
-                BackgroundColor = Color.White,
-            };
+        public override ProfileType SupportProfile => ProfileType.Mobile;
 
-            conformant.SetContent(box);
+        public override EvasObject CreateContent(EvasObject parent)
+        {
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            MNavigationView nv = new MNavigationView(window);
+            MNavigationView nv = new MNavigationView(parent);
 
-            var paddingbox = new Box(window)
+            var paddingbox = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
                 MinimumWidth = 32,
             };
             paddingbox.Show();
-            var paddingbox1 = new Box(window)
+            var paddingbox1 = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
                 MinimumWidth = 32,
             };
             paddingbox1.Show();
-            var paddingbox2 = new Box(window)
+            var paddingbox2 = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
                 MinimumHeight = 30,
             };
             paddingbox2.Show();
-            var paddingbox3 = new Box(window)
+            var paddingbox3 = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -51,7 +46,7 @@ namespace MaterialGallery
             };
             paddingbox3.Show();
 
-            var name = new Label(window)
+            var name = new Label(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -62,7 +57,7 @@ namespace MaterialGallery
             };
             name.Show();
 
-            var namebox = new Box(window)
+            var namebox = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -74,7 +69,7 @@ namespace MaterialGallery
             namebox.PackEnd(paddingbox);
             namebox.PackEnd(name);
 
-            var email = new Label(window)
+            var email = new Label(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -84,7 +79,7 @@ namespace MaterialGallery
             };
             email.Show();
 
-            var emailbox = new Box(window)
+            var emailbox = new Box(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -96,7 +91,7 @@ namespace MaterialGallery
             emailbox.PackEnd(paddingbox1);
             emailbox.PackEnd(email);
 
-            var header = new Box(window)
+            var header = new Box(parent)
             {
                 MinimumHeight = 200,
                 BackgroundColor = Color.White
@@ -124,7 +119,7 @@ namespace MaterialGallery
 
             nv.Menu = items;
 
-            var main1 = new MButton(window)
+            var main1 = new MButton(parent)
             {
                 Text = "Open NavigationView",
                 AlignmentX = 0,
@@ -134,7 +129,7 @@ namespace MaterialGallery
             };
             main1.Show();
 
-            var nd = new MNavigationDrawer(window)
+            var nd = new MNavigationDrawer(parent)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
@@ -153,6 +148,8 @@ namespace MaterialGallery
             nd.Show();
 
             box.PackEnd(nd);
+
+            return box;
         }
 
         public override void TearDown()

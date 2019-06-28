@@ -7,67 +7,21 @@ namespace MaterialGallery
     {
         public override string Name => "SnackBars Gallery";
 
-        public override void Run(Window window)
+        public override ProfileType SupportProfile => ProfileType.Mobile;
+
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.1,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
             #region SnackBars
-            MSnackBars snackBars = new MSnackBars(window)
+            MSnackBars snackBars = new MSnackBars(parent)
             {
                 Text = "It's my favorite"
             };
             snackBars.OutsideClicked += (s, e) => { snackBars.Hide(); };
 
-            MSnackBars snackBars2 = new MSnackBars(window)
+            MSnackBars snackBars2 = new MSnackBars(parent)
             {
                 Text = "It's my favorite",
                 ActionText = "Action"
@@ -75,13 +29,13 @@ namespace MaterialGallery
             snackBars2.OutsideClicked += (s, e) => { snackBars2.Hide(); };
             snackBars2.ActionClicked += (s, e) => { snackBars2.Hide(); };
 
-            MSnackBars snackBars3 = new MSnackBars(window)
+            MSnackBars snackBars3 = new MSnackBars(parent)
             {
                 Text = "I'm very happy because summer is my favorite season."
             };
             snackBars3.OutsideClicked += (s, e) => { snackBars3.Hide(); };
 
-            MSnackBars snackBars4 = new MSnackBars(window)
+            MSnackBars snackBars4 = new MSnackBars(parent)
             {
                 Text = "I'm very happy because summer is my favorite season.",
                 ActionText = "OK"
@@ -91,7 +45,7 @@ namespace MaterialGallery
             #endregion
 
             #region Buttons
-            Box btbox = new Box(window)
+            Box btbox = new Box(parent)
             {
                 WeightX = 1,
                 WeightY = 0.3,
@@ -101,7 +55,7 @@ namespace MaterialGallery
             btbox.Show();
             box.PackEnd(btbox);
 
-            MButton button1 = new MButton(window)
+            MButton button1 = new MButton(parent)
             {
                 Text = "SnackBars",
                 MinimumWidth = 600,
@@ -114,7 +68,7 @@ namespace MaterialGallery
                 snackBars.Show();
             };
 
-            MButton button2 = new MButton(window)
+            MButton button2 = new MButton(parent)
             {
                 Text = "SnackBars with Action",
                 MinimumWidth = 600,
@@ -127,7 +81,7 @@ namespace MaterialGallery
                 snackBars2.Show();
             };
 
-            MButton button3 = new MButton(window)
+            MButton button3 = new MButton(parent)
             {
                 Text = "SnackBars with long text",
                 MinimumWidth = 600,
@@ -140,7 +94,7 @@ namespace MaterialGallery
                 snackBars3.Show();
             };
 
-            MButton button4 = new MButton(window)
+            MButton button4 = new MButton(parent)
             {
                 Text = "SnackBars (long text and action)",
                 MinimumWidth = 600,
@@ -158,6 +112,8 @@ namespace MaterialGallery
             btbox.PackEnd(button3);
             btbox.PackEnd(button4);
             #endregion
+
+            return box;
         }
     }
 }

@@ -183,6 +183,7 @@ namespace Tizen.NET.MaterialComponents
             if (isDefaultTextColor)
             {
                 SetPartColor(Parts.Entry.TextEdit, _defaultTextColor);
+                SetPartColor(Parts.Entry.TextEditFocused, _defaultTextColor);
                 SetPartColor(Parts.Entry.Cursor, _defaultTextColor);
             }
             if (isDefaultLabelColor)

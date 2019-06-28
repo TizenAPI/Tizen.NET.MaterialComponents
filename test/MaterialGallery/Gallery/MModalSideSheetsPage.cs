@@ -7,103 +7,66 @@ namespace MaterialGallery
     {
         public override string Name => "MModalSideSheets Gallery";
 
-        public override void Run(Window window)
+        public override ProfileType SupportProfile => ProfileType.Mobile;
+
+        MConformant _conformant;
+
+        public override Conformant CreateComformant(Window window)
         {
-            MConformant conformant = new MConformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            _conformant = new MConformant(window);
+            _conformant.Show();
+            return _conformant;
+        }
+
+        public override EvasObject CreateContent(EvasObject parent)
+        {
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.1,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
             #region ModalSheets
-            MModalSheets modalSheets = new MModalSheets(conformant, MModalSheetsDirection.Side);
+            MModalSheets modalSheets = new MModalSheets(_conformant, MModalSheetsDirection.Side);
             modalSheets.Show();
 
-            Label label1 = new Label(window)
+            Label label1 = new Label(parent)
             {
                 Text = "<span font_size=35 color=#a8a8a8>Labels</span>",
                 AlignmentX = 0,
             };
             label1.Show();
-            var check1 = new MCheckBox(window)
+            var check1 = new MCheckBox(parent)
             {
                 Text = "Events",
                 MinimumWidth = 400,
             };
             check1.Show();
-            var check2 = new MCheckBox(window)
+            var check2 = new MCheckBox(parent)
             {
                 Text = "Personal",
                 IsChecked = true,
                 MinimumWidth = 400,
             };
             check2.Show();
-            var check3 = new MCheckBox(window)
+            var check3 = new MCheckBox(parent)
             {
                 Text = "Project",
                 IsChecked = true,
                 MinimumWidth = 400,
             };
             check3.Show();
-            var check4 = new MCheckBox(window)
+            var check4 = new MCheckBox(parent)
             {
                 Text = "Reminders",
                 MinimumWidth = 400,
             };
             check4.Show();
-            var check5 = new MCheckBox(window)
+            var check5 = new MCheckBox(parent)
             {
                 Text = "Work",
                 MinimumWidth = 400,
             };
             check5.Show();
 
-            var contents = new Box(conformant)
+            var contents = new Box(_conformant)
             {
                 IsHorizontal = true,
                 AlignmentX = -1,
@@ -115,7 +78,7 @@ namespace MaterialGallery
             contents.Show();
             contents.SetPadding(45, 45);
 
-            var contents1 = new Box(conformant)
+            var contents1 = new Box(_conformant)
             {
                 IsHorizontal = true,
             };
@@ -123,7 +86,7 @@ namespace MaterialGallery
             contents1.SetPadding(45, 45);
             contents.PackEnd(contents1);
 
-            var contents2 = new Box(conformant)
+            var contents2 = new Box(_conformant)
             {
                 IsHorizontal = false,
                 AlignmentX = 0,
@@ -135,7 +98,7 @@ namespace MaterialGallery
             contents2.SetPadding(45, 45);
             contents.PackEnd(contents2);
 
-            var contents3 = new Box(conformant)
+            var contents3 = new Box(_conformant)
             {
                 IsHorizontal = false,
             };
@@ -154,7 +117,7 @@ namespace MaterialGallery
             #endregion
 
             #region Buttons
-            Box btbox = new Box(window)
+            Box btbox = new Box(parent)
             {
                 WeightX = 1,
                 WeightY = 0.3,
@@ -164,7 +127,7 @@ namespace MaterialGallery
             btbox.Show();
             box.PackEnd(btbox);
 
-            MButton button1 = new MButton(window)
+            MButton button1 = new MButton(parent)
             {
                 Text = "Open MModalSideSheets",
                 MinimumWidth = 600,
@@ -179,6 +142,8 @@ namespace MaterialGallery
 
             btbox.PackEnd(button1);
             #endregion
+
+            return box;
         }
     }
 }

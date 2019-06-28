@@ -94,7 +94,7 @@ namespace MaterialGallery
         {
             Window window = CreatePageWindow(page);
             page.Run(window);
-        }
+        }        
 
         IEnumerable<BaseGalleryPage> GetGalleryPage()
         {
@@ -134,7 +134,18 @@ namespace MaterialGallery
         {
             Elementary.Initialize();
             Elementary.ThemeOverlay();
-            MaterialGallery app = new MaterialGallery();
+
+            CoreUIApplication app;
+
+            if (Elementary.GetProfile() == "wearable")
+            {
+                app = new MaterialWatchGallery();
+            }
+            else
+            {
+                app = new MaterialGallery();
+            }
+
             app.Run(args);
         }
     }

@@ -8,62 +8,16 @@ namespace MaterialGallery
     {
         public override string Name => "BottomNavigation Gallery";
 
+        public override ProfileType SupportProfile => ProfileType.Mobile;
+
         public Color backgroudColor = new Color(200, 200, 100);
 
-        public override void Run(Window window)
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.2,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
-            MBottomNavigation bn = new MBottomNavigation(window);
+            MBottomNavigation bn = new MBottomNavigation(parent);
             bn.Show();
             box.PackEnd(bn);
             var IconPath = Path.Combine(ThemeLoader.AppResourcePath, "icon.png");
@@ -72,6 +26,8 @@ namespace MaterialGallery
             {
                 var item2 = bn.Append(string.Format("{0} Item", i), IconPath);
             }
+
+            return box;
         }
     }
 }

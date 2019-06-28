@@ -7,15 +7,24 @@ namespace MaterialGallery
     {
         public override string Name => "Tooltip Gallery";
 
-        public override void Run(Window window)
+        public override ProfileType SupportProfile => ProfileType.Mobile;
+
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            var button = new MButton(window)
+            var rect = new Rectangle(parent)
+            {
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = -1,
+                AlignmentY = -1
+            };
+
+            box.PackEnd(rect);
+
+            var button = new MButton(parent)
             {
                 Text = "Button",
             };
@@ -23,7 +32,7 @@ namespace MaterialGallery
             button.Move(180, 300);
             button.Show();
 
-            var button2 = new MButton(window)
+            var button2 = new MButton(parent)
             {
                 Text = "Button2",
             };
@@ -31,7 +40,7 @@ namespace MaterialGallery
             button2.Move(180, 600);
             button2.Show();
 
-            var button3 = new MButton(window)
+            var button3 = new MButton(parent)
             {
                 IsEnabled = true,
                 Text = "Chage Tooltip Button2",
@@ -55,6 +64,8 @@ namespace MaterialGallery
             {
                 button2.SetTooltipText("Chage Tooltip");
             };
+
+            return box;
         }
     }
 }
