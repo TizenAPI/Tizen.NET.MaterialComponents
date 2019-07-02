@@ -5,15 +5,17 @@ namespace MaterialGallery
 {
     public enum ProfileType
     {
-        Mobile = 0,
-        Wearable = 1,
-        TV = 2
+        None = 0,
+        Mobile = 1,
+        Wearable = 2,
+        TV = 4
     }
 
     public abstract class BaseGalleryPage
     {
         public abstract string Name { get; }
-        public abstract ProfileType SupportProfile { get; }
+
+        public virtual ProfileType ExceptProfile => ProfileType.None;
 
         public virtual void Run(Window window)
         {

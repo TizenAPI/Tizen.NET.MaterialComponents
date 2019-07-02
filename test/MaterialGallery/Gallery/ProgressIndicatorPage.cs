@@ -9,8 +9,6 @@ namespace MaterialGallery
 
         public override string Name => "ProgressIndicator Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile | ProfileType.Wearable;
-
         public override EvasObject CreateContent(EvasObject parent)
         {
             Box box = new ColoredBox(parent);

@@ -7,7 +7,7 @@ namespace MaterialGallery
     {
         public override string Name => "Tabs Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile;
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
 
         public Color backgroudColor = new Color(200, 200, 100);
 

@@ -8,8 +8,6 @@ namespace MaterialGallery
     {
         public override string Name => "Slider Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile | ProfileType.Wearable;
-
         public override EvasObject CreateContent(EvasObject window)
         {
             Box box = new ColoredBox(window);

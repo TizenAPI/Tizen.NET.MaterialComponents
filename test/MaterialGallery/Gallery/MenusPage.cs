@@ -1,4 +1,5 @@
 using ElmSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Tizen.NET.MaterialComponents;
@@ -9,7 +10,7 @@ namespace MaterialGallery
     {
         public override string Name => "Menus Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile;
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
 
         public override EvasObject CreateContent(EvasObject parent)
         {
@@ -46,44 +47,39 @@ namespace MaterialGallery
             #endregion
 
             #region Buttons
-            Box btbox = new Box(parent)
-            {
-                WeightX = 1,
-                WeightY = 0.3,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            btbox.Show();
-            box.PackEnd(btbox);
 
             MButton button1 = new MButton(parent)
             {
-                Text = "Text list",
-                MinimumWidth = 600,
+                Text = "Text list 222",
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,
             };
             button1.Show();
             button1.Clicked += (s, e) =>
             {
+                var g = button1.Geometry;
+                menu1.Move(g.X + (g.Width / 2), g.Y);
                 menu1.Show();
             };
 
             MButton button2 = new MButton(parent)
             {
                 Text = "Text and icon list",
-                MinimumWidth = 600,
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,
             };
             button2.Show();
             button2.Clicked += (s, e) =>
             {
+                var g = button2.Geometry;
+                menu2.Move(g.X + (g.Width / 2), g.Y);
                 menu2.Show();
             };
 
-            btbox.PackEnd(button1);
-            btbox.PackEnd(button2);
+            box.PackEnd(button1);
+            box.PackEnd(button2);
             #endregion
 
             return box;

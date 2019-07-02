@@ -8,7 +8,7 @@ namespace MaterialGallery
     {
         public override string Name => "NavigationView Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile;
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
 
         public override EvasObject CreateContent(EvasObject parent)
         {

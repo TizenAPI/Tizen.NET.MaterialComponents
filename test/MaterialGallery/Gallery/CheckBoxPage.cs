@@ -7,8 +7,6 @@ namespace MaterialGallery
     {
         public override string Name => "Checkbox Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile | ProfileType.Wearable;
-
         public override EvasObject CreateContent(EvasObject parent)
         {
             var box = new ColoredBox(parent);

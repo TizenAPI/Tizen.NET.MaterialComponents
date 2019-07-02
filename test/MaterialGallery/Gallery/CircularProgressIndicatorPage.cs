@@ -7,8 +7,6 @@ namespace MaterialGallery
     {
         EcoreTimelineAnimator _animator;
 
-        public override ProfileType SupportProfile => ProfileType.Mobile | ProfileType.Wearable;
-
         public override string Name => "Circular ProgressIndicator Gallery";
 
         public override EvasObject CreateContent(EvasObject parent)

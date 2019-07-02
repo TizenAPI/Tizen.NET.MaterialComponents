@@ -9,7 +9,7 @@ namespace MaterialGallery
     {
         public override string Name => "FloatingActionButton Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile;
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
 
         MConformant _conformant;
 

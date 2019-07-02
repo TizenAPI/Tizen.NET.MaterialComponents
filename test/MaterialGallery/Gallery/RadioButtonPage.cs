@@ -7,8 +7,6 @@ namespace MaterialGallery
     {
         public override string Name => "Radio Button Gallery";
 
-        public override ProfileType SupportProfile => ProfileType.Mobile | ProfileType.Wearable;
-
         public override EvasObject CreateContent(EvasObject parent)
         {
             Box box = new ColoredBox(parent);

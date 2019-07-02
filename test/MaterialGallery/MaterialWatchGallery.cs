@@ -92,7 +92,7 @@ namespace MaterialGallery
 
             foreach (var tc in GetGalleryPage())
             {
-                if(tc.SupportProfile == ProfileType.Wearable)
+                if(tc.ExceptProfile != ProfileType.Wearable)
                 {
                     var view = tc.CreateContent(box);
                     box.PackEnd(view);
