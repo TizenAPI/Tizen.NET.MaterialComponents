@@ -26,6 +26,7 @@ namespace MaterialGallery
         void Initialize()
         {
             ResourceDir = DirectoryInfo.Resource;
+            MaterialGallery.ResourceDir = DirectoryInfo.Resource;
             ThemeLoader.Initialize(ResourceDir);
 
             _window = new Window("WatchMaterialGallery")
@@ -95,11 +96,56 @@ namespace MaterialGallery
                 if(tc.ExceptProfile != ProfileType.Wearable)
                 {
                     var view = tc.CreateContent(box);
-                    box.PackEnd(view);
+                    if (view != null)
+                    {
+                        box.PackEnd(view);
+                    }
+                    else
+                    {
+                        box.PackEnd(CreateNewWindow(box, tc));
+                    }
                 }
             }
-
             circleScroller.SetContent(box);
+        }
+
+        EvasObject CreateNewWindow(EvasObject parent, BaseGalleryPage page)
+        {
+            var box = new ColoredBox(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = -1,
+                WeightX = 1,
+                WeightY = 1,
+            };
+            box.Show();
+
+            var button = new MButton(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = 0.5,
+                WeightX = 1,
+                WeightY = 1,
+                Text = "click:" + page.Name
+            };
+            button.Show();
+
+            button.Clicked += (s, e) =>
+            {
+                Window window = new Window(page.Name);
+                window.Show();
+                window.BackButtonPressed += (sender, args) =>
+                {
+                    page.TearDown();
+                    window.Hide();
+                    window.Unrealize();
+                };
+                page.Run(window);
+            };
+
+            box.PackEnd(button);
+
+            return box;
         }
 
         EvasObject CreateFirstPage(EvasObject parent)

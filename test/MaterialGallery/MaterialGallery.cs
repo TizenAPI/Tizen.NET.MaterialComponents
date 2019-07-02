@@ -13,7 +13,7 @@ namespace MaterialGallery
     {
         Window _mainWindow;
 
-        public static string ResourceDir { get; private set; }
+        public static string ResourceDir { get; internal set; }
 
         protected override void OnCreate()
         {
@@ -72,6 +72,10 @@ namespace MaterialGallery
 
             foreach (var page in GetGalleryPage())
             {
+                if(Elementary.GetProfile() == "tv" && page.ExceptProfile == ProfileType.TV)
+                {
+                    continue;
+                }
                 list.Append(defaultClass, page);
             }
 

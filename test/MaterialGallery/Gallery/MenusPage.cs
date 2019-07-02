@@ -50,7 +50,7 @@ namespace MaterialGallery
 
             MButton button1 = new MButton(parent)
             {
-                Text = "Text list 222",
+                Text = "Text list",
                 MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,

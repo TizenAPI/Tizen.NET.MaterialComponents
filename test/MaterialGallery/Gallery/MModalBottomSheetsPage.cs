@@ -21,6 +21,9 @@ namespace MaterialGallery
 
         public override EvasObject CreateContent(EvasObject parent)
         {
+            if (_conformant == null)
+                return null;
+
             Box box = new ColoredBox(parent);
             box.Show();
 

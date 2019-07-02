@@ -9,8 +9,6 @@ namespace MaterialGallery
     {
         public override string Name => "FloatingActionButton Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
-
         MConformant _conformant;
 
         public override Conformant CreateComformant(Window window)
@@ -22,6 +20,9 @@ namespace MaterialGallery
 
         public override EvasObject CreateContent(EvasObject parent)
         {
+            if (_conformant == null)
+                return null;
+
             Box box = new ColoredBox(parent);
             box.Show();
 
@@ -69,6 +70,19 @@ namespace MaterialGallery
             img3.Show();
             fab3.Icon = img3;
             #endregion
+
+            if(Elementary.GetProfile() == "wearable")
+            {
+                fab.Move(80, 20);
+                fab2.Move(80, 200);
+                fab3.Move(80, 400);
+            }
+            else if (Elementary.GetProfile() == "tv")
+            {
+                fab.Move(1340, 870);
+                fab2.Move(1340, 740);
+                fab3.Move(1340, 610);
+            }
 
             return box;
         }

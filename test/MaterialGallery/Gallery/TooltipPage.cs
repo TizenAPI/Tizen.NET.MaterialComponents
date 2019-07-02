@@ -27,8 +27,9 @@ namespace MaterialGallery
                 Text = "Button",
                 WeightX = 1,
                 WeightY = 1,
-                AlignmentX = -1,
+                AlignmentX = 0.5,
                 AlignmentY = 0.5,
+                MinimumWidth = 300
             };
             button.Show();
 
