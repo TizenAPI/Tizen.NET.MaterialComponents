@@ -13,7 +13,7 @@ namespace MaterialGallery
     {
         Window _mainWindow;
 
-        public static string ResourceDir { get; private set; }
+        public static string ResourceDir { get; internal set; }
 
         protected override void OnCreate()
         {
@@ -72,6 +72,10 @@ namespace MaterialGallery
 
             foreach (var page in GetGalleryPage())
             {
+                if(Elementary.GetProfile() == "tv" && page.ExceptProfile == ProfileType.TV)
+                {
+                    continue;
+                }
                 list.Append(defaultClass, page);
             }
 
@@ -94,7 +98,7 @@ namespace MaterialGallery
         {
             Window window = CreatePageWindow(page);
             page.Run(window);
-        }
+        }        
 
         IEnumerable<BaseGalleryPage> GetGalleryPage()
         {
@@ -134,7 +138,18 @@ namespace MaterialGallery
         {
             Elementary.Initialize();
             Elementary.ThemeOverlay();
-            MaterialGallery app = new MaterialGallery();
+
+            CoreUIApplication app;
+
+            if (Elementary.GetProfile() == "wearable")
+            {
+                app = new MaterialWatchGallery();
+            }
+            else
+            {
+                app = new MaterialGallery();
+            }
+
             app.Run(args);
         }
     }

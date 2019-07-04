@@ -9,93 +9,87 @@ namespace MaterialGallery
     {
         public override string Name => "FloatingActionButton Gallery";
 
-        public override void Run(Window window)
+        MConformant _conformant;
+
+        public override Conformant CreateComformant(Window window)
         {
-            MConformant conformant = new MConformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            _conformant = new MConformant(window);
+            _conformant.Show();
+            return _conformant;
+        }
+
+        public override EvasObject CreateContent(EvasObject parent)
+        {
+            if (_conformant == null)
+                return null;
+
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
+            var rect = new Rectangle(parent)
             {
-                IsHorizontal = true,
                 WeightX = 1,
-                WeightY = 0.2,
+                WeightY = 1,
                 AlignmentX = -1,
                 AlignmentY = -1,
             };
-            hbox.Show();
-            box.PackEnd(hbox);
 
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
+            box.PackEnd(rect);
 
             #region FABs
-            MFloatingActionButton fab = new MFloatingActionButton(conformant);
+            MFloatingActionButton fab = new MFloatingActionButton(_conformant);
             fab.Show();
             fab.Resize(180, 176);
             fab.Move(540, 1070);
 
-            Image img = new Image(window);
+            Image img = new Image(parent);
             //The source of icon resources is https://materialdesignicons.com/
             img.Load(Path.Combine(MaterialGallery.ResourceDir, "alarm.png"));
             img.Show();
             fab.Icon = img;
 
-            MFloatingActionButton fab2 = new MFloatingActionButton(conformant);
+            MFloatingActionButton fab2 = new MFloatingActionButton(_conformant);
             fab2.Show();
             fab2.Resize(180, 176);
             fab2.Move(540, 940);
 
-            Image img2 = new Image(window);
+            Image img2 = new Image(parent);
             //The source of icon resources is https://materialdesignicons.com/
             img2.Load(Path.Combine(MaterialGallery.ResourceDir, "airplane.png"));
             img2.Show();
             fab2.Icon = img2;
 
-            MFloatingActionButton fab3 = new MFloatingActionButton(conformant);
+            MFloatingActionButton fab3 = new MFloatingActionButton(_conformant);
             fab3.Show();
             fab3.Resize(180, 176);
             fab3.Move(540, 810);
 
-            Image img3 = new Image(window);
+            Image img3 = new Image(parent);
             //The source of icon resources is https://materialdesignicons.com/
             img3.Load(Path.Combine(MaterialGallery.ResourceDir, "bluetooth.png"));
             img3.Show();
             fab3.Icon = img3;
             #endregion
+
+            if(Elementary.GetProfile() == "wearable")
+            {
+                fab.Move(90, 20);
+                fab2.Move(90, 200);
+                fab3.Move(90, 400);
+
+                fab.Clicked += (s, e) =>
+                {
+                    parent.Unrealize();
+                };
+            }
+            else if (Elementary.GetProfile() == "tv")
+            {
+                fab.Move(1340, 870);
+                fab2.Move(1340, 740);
+                fab3.Move(1340, 610);
+            }
+
+            return box;
         }
     }
 }

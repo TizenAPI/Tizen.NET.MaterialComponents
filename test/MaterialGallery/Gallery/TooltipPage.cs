@@ -7,38 +7,51 @@ namespace MaterialGallery
     {
         public override string Name => "Tooltip Gallery";
 
-        public override void Run(Window window)
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            var button = new MButton(window)
+            //var rect = new Rectangle(parent)
+            //{
+            //    WeightX = 1,
+            //    WeightY = 1,
+            //    AlignmentX = -1,
+            //    AlignmentY = -1
+            //};
+
+            //box.PackEnd(rect);
+
+            var button = new MButton(parent)
             {
                 Text = "Button",
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = 0.5,
+                AlignmentY = 0.5,
             };
-            button.Resize(400, 80);
-            button.Move(180, 300);
             button.Show();
 
-            var button2 = new MButton(window)
+            var button2 = new MButton(parent)
             {
-                Text = "Button2",
+                Text = "Click",
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = -1,
+                AlignmentY = 0.5
             };
-            button2.Resize(400, 80);
-            button2.Move(180, 600);
             button2.Show();
 
-            var button3 = new MButton(window)
+            var button3 = new MButton(parent)
             {
                 IsEnabled = true,
                 Text = "Chage Tooltip Button2",
+                WeightX = 1,
+                WeightY = 1,
+                AlignmentX = -1,
+                AlignmentY = 0.5,
                 BackgroundColor = Color.FromHex("#03A9F4"),
             };
-            button3.Resize(600, 80);
-            button3.Move(80, 900);
             button3.Show();
 
             button.UseMTooltip();
@@ -55,6 +68,12 @@ namespace MaterialGallery
             {
                 button2.SetTooltipText("Chage Tooltip");
             };
+
+            //box.PackEnd(button);
+            box.PackEnd(button2);
+            //box.PackEnd(button3);
+
+            return box;
         }
     }
 }

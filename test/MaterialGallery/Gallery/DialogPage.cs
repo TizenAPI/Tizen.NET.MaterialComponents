@@ -22,61 +22,15 @@ namespace MaterialGallery
     {
         public override string Name => "Dialog Gallery";
 
-        public override void Run(Window window)
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
+
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.2,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
             //AlertDialog
-            var button = new MButton(window)
+            var button = new MButton(parent)
             {
                 Text= "AlertDialog",
                 MinimumWidth = 400,
@@ -86,7 +40,7 @@ namespace MaterialGallery
             box.PackEnd(button);
             button.Show();
 
-            var dialog = CreateAlertDialog(window);
+            var dialog = CreateAlertDialog(parent);
 
             button.Clicked += (s, e) =>
             {
@@ -94,7 +48,7 @@ namespace MaterialGallery
             };
 
             //SimpleDialog
-            var button2 = new MButton(window)
+            var button2 = new MButton(parent)
             {
                 Text = "SimpleDialog",
                 MinimumWidth = 400,
@@ -104,7 +58,7 @@ namespace MaterialGallery
             box.PackEnd(button2);
             button2.Show();
 
-            var dialog2 = CreateSimpleDialog(window);
+            var dialog2 = CreateSimpleDialog(parent);
 
             button2.Clicked += (s, e) =>
             {
@@ -112,7 +66,7 @@ namespace MaterialGallery
             };
 
             //ConfirmationDialog
-            var button3 = new MButton(window)
+            var button3 = new MButton(parent)
             {
                 Text = "Confirmation(multi)",
                 MinimumWidth = 400,
@@ -122,7 +76,7 @@ namespace MaterialGallery
             box.PackEnd(button3);
             button3.Show();
 
-            var dialog3 = CreateConfirmationDialog(window);
+            var dialog3 = CreateConfirmationDialog(parent);
 
             button3.Clicked += (s, e) =>
             {
@@ -130,7 +84,7 @@ namespace MaterialGallery
             };
 
             //ConfirmationDialog2
-            var button5 = new MButton(window)
+            var button5 = new MButton(parent)
             {
                 Text = "Confirmation(single)",
                 MinimumWidth = 400,
@@ -140,7 +94,7 @@ namespace MaterialGallery
             box.PackEnd(button5);
             button5.Show();
 
-            var dialog5 = CreateConfirmationDialog2(window);
+            var dialog5 = CreateConfirmationDialog2(parent);
 
             button5.Clicked += (s, e) =>
             {
@@ -148,7 +102,7 @@ namespace MaterialGallery
             };
 
             //FullScreenDialog
-            var button4 = new MButton(window)
+            var button4 = new MButton(parent)
             {
                 Text = "FullScreenDialog",
                 MinimumWidth = 400,
@@ -158,12 +112,14 @@ namespace MaterialGallery
             box.PackEnd(button4);
             button4.Show();
 
-            var dialog4 = CreateFullScreenDialog(window);
+            var dialog4 = CreateFullScreenDialog(parent);
 
             button4.Clicked += (s, e) =>
             {
                 dialog4.Show();
             };
+
+            return box;
         }
 
         EvasObject CreateFullScreenDialog(EvasObject parent)

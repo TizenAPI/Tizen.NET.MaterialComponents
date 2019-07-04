@@ -7,62 +7,16 @@ namespace MaterialGallery
     {
         public override string Name => "Tabs Gallery";
 
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
+
         public Color backgroudColor = new Color(200, 200, 100);
 
-        public override void Run(Window window)
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.1,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
-            MTabs tabs = new MTabs(window)
+            MTabs tabs = new MTabs(parent)
             {
                 Type = MTabsType.Scrollable,
                 AlignmentX = -1,
@@ -72,7 +26,7 @@ namespace MaterialGallery
             };
             tabs.Show();
 
-            Label label1 = new Label(window)
+            Label label1 = new Label(parent)
             {
                 Text = " Scrollable Tabs",
                 AlignmentX = -1,
@@ -82,7 +36,7 @@ namespace MaterialGallery
             };
             label1.Show();
 
-            MTabs tabs2 = new MTabs(window)
+            MTabs tabs2 = new MTabs(parent)
             {
                 Type = MTabsType.Fixed,
                 AlignmentX = -1,
@@ -92,7 +46,7 @@ namespace MaterialGallery
             };
             tabs2.Show();
 
-            Label label2 = new Label(window)
+            Label label2 = new Label(parent)
             {
                 Text = " Fixed Tabs",
                 AlignmentX = -1,
@@ -117,6 +71,8 @@ namespace MaterialGallery
             box.PackEnd(label1);
             box.PackEnd(tabs2);
             box.PackEnd(label2);
+
+            return box;
         }
     }
 }

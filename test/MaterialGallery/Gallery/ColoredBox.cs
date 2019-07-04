@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ElmSharp;
+using ElmSharp.Wearable;
 using Tizen.NET.MaterialComponents;
 
 namespace MaterialGallery
@@ -9,6 +10,11 @@ namespace MaterialGallery
     {
         public ColoredBox(EvasObject parent) : base(parent)
         {
+            AlignmentX = -1;
+            AlignmentY = -1;
+            WeightX = 1;
+            WeightY = 1;
+            
             OnColorSchemeChanged(true);
             MColors.AddColorSchemeComponent(this);
         }

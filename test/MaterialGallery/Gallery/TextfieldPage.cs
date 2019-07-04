@@ -7,105 +7,25 @@ namespace MaterialGallery
     {
         public override string Name => "TextFieldPage";
 
-        public override void Run(Window window)
+        public override EvasObject CreateContent(EvasObject parent)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
-            box.SetPadding(0, 100);
+            Box box = new ColoredBox(parent);
             box.Show();
 
-            var innerbox = new Box(window)
+            var textfield = new MTextField(parent)
             {
-                MinimumWidth = 500,
+                Label = "Label",
+                Text = "Input text",
                 AlignmentX = 0.5,
                 AlignmentY = 0.5,
                 WeightX = 1,
                 WeightY = 1,
-                IsHorizontal = false
-            };
-            innerbox.Show();
-            box.PackEnd(innerbox);
-
-            #region ThemeButton
-            Box hbox = new Box(window)
-            {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 1,
-                AlignmentX = -1,
-                AlignmentY = -1,
-            };
-            hbox.Show();
-            box.PackEnd(hbox);
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.9
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.9
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.9
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-            #endregion
-
-
-            var textfield = new MTextField(window)
-            {
-                Label = "Label",
-                AlignmentX = -1,
-                AlignmentY = 0,
-                WeightX = 1,
-                WeightY = 1
+                MinimumWidth = 200
             };
             textfield.Show();
-            innerbox.PackEnd(textfield);
+            box.PackEnd(textfield);
 
-            var emptyLabel = new Label(window)
-            {
-                MinimumWidth = 500,
-                MinimumHeight = 100,
-                WeightX = 1,
-                AlignmentX = -1,
-            };
-            emptyLabel.Show();
-            innerbox.PackEnd(emptyLabel);
-
-            var textfield2 = new MTextField(window)
-            {
-                Label = "Label",
-                Text = "Input text",
-                AlignmentX = -1,
-                AlignmentY = 0,
-                WeightX = 1,
-                WeightY = 1,
-            };
-            textfield2.Show();
-            innerbox.PackEnd(textfield2);
+            return box;
         }
     }
 
