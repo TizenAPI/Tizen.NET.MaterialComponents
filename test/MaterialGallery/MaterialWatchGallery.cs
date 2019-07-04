@@ -126,7 +126,7 @@ namespace MaterialGallery
                 AlignmentY = 0.5,
                 WeightX = 1,
                 WeightY = 1,
-                Text = "click:" + page.Name
+                Text = "click"
             };
             button.Show();
 

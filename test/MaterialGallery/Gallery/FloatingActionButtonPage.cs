@@ -73,9 +73,14 @@ namespace MaterialGallery
 
             if(Elementary.GetProfile() == "wearable")
             {
-                fab.Move(80, 20);
-                fab2.Move(80, 200);
-                fab3.Move(80, 400);
+                fab.Move(90, 20);
+                fab2.Move(90, 200);
+                fab3.Move(90, 400);
+
+                fab.Clicked += (s, e) =>
+                {
+                    parent.Unrealize();
+                };
             }
             else if (Elementary.GetProfile() == "tv")
             {

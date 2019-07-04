@@ -12,15 +12,15 @@ namespace MaterialGallery
             Box box = new ColoredBox(parent);
             box.Show();
 
-            var rect = new Rectangle(parent)
-            {
-                WeightX = 1,
-                WeightY = 1,
-                AlignmentX = -1,
-                AlignmentY = -1
-            };
+            //var rect = new Rectangle(parent)
+            //{
+            //    WeightX = 1,
+            //    WeightY = 1,
+            //    AlignmentX = -1,
+            //    AlignmentY = -1
+            //};
 
-            box.PackEnd(rect);
+            //box.PackEnd(rect);
 
             var button = new MButton(parent)
             {
@@ -29,13 +29,12 @@ namespace MaterialGallery
                 WeightY = 1,
                 AlignmentX = 0.5,
                 AlignmentY = 0.5,
-                MinimumWidth = 300
             };
             button.Show();
 
             var button2 = new MButton(parent)
             {
-                Text = "Button2",
+                Text = "Click",
                 WeightX = 1,
                 WeightY = 1,
                 AlignmentX = -1,
@@ -70,9 +69,9 @@ namespace MaterialGallery
                 button2.SetTooltipText("Chage Tooltip");
             };
 
-            box.PackEnd(button);
+            //box.PackEnd(button);
             box.PackEnd(button2);
-            box.PackEnd(button3);
+            //box.PackEnd(button3);
 
             return box;
         }
