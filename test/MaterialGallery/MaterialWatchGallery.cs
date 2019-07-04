@@ -161,7 +161,7 @@ namespace MaterialGallery
 
             var label = new Label(parent)
             {
-                Text = "<span align='center'>MaterialGallery for Watch<br>▷▷▷</span>",
+                Text = "<span align='center'>MaterialGallery<br>for Watch<br>▷▷▷</span>",
                 AlignmentX = 0.5,
                 AlignmentY = 0.5,
                 WeightX = 1,
