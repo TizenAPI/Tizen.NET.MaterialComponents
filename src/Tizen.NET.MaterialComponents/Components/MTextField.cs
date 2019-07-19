@@ -194,25 +194,6 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
-        void OnFocused(object sender, EventArgs args)
-        {
-            Activate();
-            _layout.SignalEmit(States.Focused, "");
-        }
-
-        void OnUnfocused(object sender, EventArgs args)
-        {
-            if (string.IsNullOrEmpty(Text))
-            {
-                Deactivate();
-            }
-            else
-            {
-                Activate();
-            }
-            _layout.SignalEmit(States.Unfocused, "");
-        }
-
         protected override IntPtr CreateHandle(EvasObject parent)
         {
             var handle = base.CreateHandle(parent);
@@ -226,17 +207,8 @@ namespace Tizen.NET.MaterialComponents
             _layout.SetTheme("layout", Styles.Material, "textfields");
             _layout.SetPartContent(Parts.Layout.Content, this);
 
-            _layout.Focused += (s, e) =>
-            {
-                AllowFocus(true);
-                SetFocus(true);
-            };
-
-            _layout.Unfocused += (s, e) =>
-            {
-                SetFocus(false);
-                AllowFocus(false);
-            };
+            _layout.Focused += OnLayoutFocused;
+            _layout.Unfocused += OnLayoutUnFocused;
 
             AllowFocus(false);
 
@@ -246,6 +218,36 @@ namespace Tizen.NET.MaterialComponents
             return _layout;
         }
 
+        protected virtual void OnFocused(object sender, EventArgs args)
+        {
+            Activate();
+            _layout.SignalEmit(States.Focused, "");
+        }
+
+        protected virtual void OnUnfocused(object sender, EventArgs args)
+        {
+            if (string.IsNullOrEmpty(Text))
+            {
+                Deactivate();
+            }
+            else
+            {
+                Activate();
+            }
+            _layout.SignalEmit(States.Unfocused, "");
+        }
+
+        protected virtual void OnLayoutFocused(object sender, EventArgs args)
+        {
+            AllowFocus(true);
+            SetFocus(true);
+        }
+
+        protected virtual void OnLayoutUnFocused(object sender, EventArgs args)
+        {
+            SetFocus(false);
+            AllowFocus(false);
+        }
 
         void Activate()
         {
