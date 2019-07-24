@@ -5,7 +5,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MConfirmationDialog : MDialog, IColorSchemeComponent
+    public class MConfirmationDialog : MDialog
     {
         IDictionary<int, MConfirmationDialogItem> _itemList = new Dictionary<int, MConfirmationDialogItem>();
         Button _confirmButton;
@@ -16,8 +16,6 @@ namespace Tizen.NET.MaterialComponents
         int _itemIndex = 0;
         int _maximumHeight = 500;
         int _itemHeight = 120;
-        Color _defaultTextColor;
-        Color _defaultTextColorForDisable;
 
         public MConfirmationDialog(EvasObject parent) : base(parent)
         {
@@ -70,11 +68,8 @@ namespace Tizen.NET.MaterialComponents
             _genList.Show();
             _layout.PackEnd(_genList);
 
-            _confirmButton = new Button(this)
-            {
-                Style = Styles.Popup.PopupButton,
-                IsEnabled = false
-            };
+            _confirmButton = new MPopupButton(this);
+            _confirmButton.IsEnabled = false;
 
             _confirmButton.Clicked += (s, e) =>
             {
@@ -83,10 +78,7 @@ namespace Tizen.NET.MaterialComponents
                 ItemSelected?.Invoke(this, new MConfirmationDialogItemSelectedArgs(selected));
             };
 
-            _cancelButton = new Button(this)
-            {
-                Style = Styles.Popup.PopupButton
-            };
+            _cancelButton = new MPopupButton(this);
 
             _cancelButton.Clicked += (s, e) =>
             {
@@ -97,8 +89,6 @@ namespace Tizen.NET.MaterialComponents
             SetPartContent(Parts.Popup.Button1, _cancelButton);
 
             SetContent(_layout);
-
-            MColors.AddColorSchemeComponent(this);
         }
 
         public event EventHandler<MConfirmationDialogItemSelectedArgs> ItemSelected;
@@ -223,22 +213,6 @@ namespace Tizen.NET.MaterialComponents
         string GetText(object data, string part)
         {
             return (data as MConfirmationDialogItem)?.Label;
-        }
-
-        void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
-        {
-            // It comes from here
-            // https://github.com/material-components/material-components-android/blob/3637c23078afc909e42833fd1c5fd47bb3271b5f/lib/java/com/google/android/material/button/res/color/mtrl_btn_bg_color_selector.xml
-            _defaultTextColor = MColors.Current.PrimaryColor;
-            _defaultTextColorForDisable = MColors.Current.PrimaryColor.WithAlpha(0.38);
-
-            _confirmButton.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-            _confirmButton.SetPartColor(Parts.Widget.TextPressed, _defaultTextColor);
-            _confirmButton.SetPartColor(Parts.Widget.TextDisabled, _defaultTextColorForDisable);
-
-            _cancelButton.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-            _cancelButton.SetPartColor(Parts.Widget.TextPressed, _defaultTextColor);
-            _cancelButton.SetPartColor(Parts.Widget.TextDisabled, _defaultTextColorForDisable);
         }
     }
 }

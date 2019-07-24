@@ -3,10 +3,8 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MAlertDialog : MDialog, IColorSchemeComponent
+    public class MAlertDialog : MDialog
     {
-        Color _defaultTextColor;
-        Color _defaultTextColorForDisable;
         Button _confirmButton;
         Button _cancelButton;
 
@@ -14,10 +12,7 @@ namespace Tizen.NET.MaterialComponents
         {
             Style = Styles.Popup.Alert;
 
-            _confirmButton = new Button(parent)
-            {
-                Style = Styles.Popup.PopupButton
-            };
+            _confirmButton = new MPopupButton(parent);
 
             _confirmButton.Clicked += (s, e) =>
             {
@@ -25,10 +20,7 @@ namespace Tizen.NET.MaterialComponents
                 Confirmed?.Invoke(this, EventArgs.Empty);
             };
 
-            _cancelButton = new Button(this)
-            {
-                Style = Styles.Popup.PopupButton
-            };
+            _cancelButton = new MPopupButton(this);
 
             _cancelButton.Clicked += (s, e) =>
             {
@@ -37,8 +29,6 @@ namespace Tizen.NET.MaterialComponents
 
             SetPartContent(Parts.Popup.Button2, _confirmButton);
             SetPartContent(Parts.Popup.Button1, _cancelButton);
-
-            MColors.AddColorSchemeComponent(this);
         }
 
         public event EventHandler Confirmed;
@@ -79,20 +69,5 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
-        void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
-        {
-            // It comes from here
-            // https://github.com/material-components/material-components-android/blob/3637c23078afc909e42833fd1c5fd47bb3271b5f/lib/java/com/google/android/material/button/res/color/mtrl_btn_bg_color_selector.xml
-            _defaultTextColor = MColors.Current.PrimaryColor;
-            _defaultTextColorForDisable = MColors.Current.PrimaryColor.WithAlpha(0.38);
-
-            _confirmButton.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-            _confirmButton.SetPartColor(Parts.Widget.TextPressed, _defaultTextColor);
-            _confirmButton.SetPartColor(Parts.Widget.TextDisabled, _defaultTextColorForDisable);
-
-            _cancelButton.SetPartColor(Parts.Widget.Text, _defaultTextColor);
-            _cancelButton.SetPartColor(Parts.Widget.TextPressed, _defaultTextColor);
-            _cancelButton.SetPartColor(Parts.Widget.TextDisabled, _defaultTextColorForDisable);
-        }
     }
 }

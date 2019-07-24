@@ -11,7 +11,7 @@ namespace Tizen.NET.MaterialComponents
         GenList _genList;
         GenItemClass _itemClass;
         int _itemHeight = 180;
-        int _iconSize = 100;
+        int _iconSize = 80;
         int _maximumHeight = 500;
 
         public MSimpleDialog(EvasObject parent) : base(parent)
