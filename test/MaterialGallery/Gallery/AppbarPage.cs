@@ -1,5 +1,6 @@
-﻿using ElmSharp;
-using System;
+using ElmSharp;
+using System.Collections.Generic;
+using System.IO;
 using Tizen.NET.MaterialComponents;
 
 namespace MaterialGallery
@@ -8,91 +9,165 @@ namespace MaterialGallery
     {
         public override string Name => "Appbar Gallery";
 
-        public override void Run(Window window)
+        MConformant _conformant;
+
+        public override Conformant CreateComformant(Window window)
         {
-            Conformant conformant = new Conformant(window);
-            conformant.Show();
-            Box box = new ColoredBox(window);
-            conformant.SetContent(box);
+            _conformant = new MConformant(window);
+            _conformant.Show();
+            return _conformant;
+        }
+
+        public override EvasObject CreateContent(EvasObject parent)
+        {
+            Box box = new ColoredBox(parent)
+            {
+                IsHomogeneous = false
+            };
+
             box.Show();
 
-            #region ThemeButton
+            var topAppbar = new MTopAppbar(parent);
+            topAppbar.Title = "Appbar";
 
-            Box hbox = new Box(window)
+            var topNavigationIcon = new Image(parent);
+            topNavigationIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "menu.png"));
+
+            var topNavigationItem = new MButton(parent)
             {
-                IsHorizontal = true,
-                WeightX = 1,
-                WeightY = 0.2,
+                Icon = topNavigationIcon
+            };
+
+            topNavigationItem.Clicked += (s, e) =>
+            {
+                if (topAppbar.Prominent)
+                {
+                    topAppbar.Prominent = false;
+                    topAppbar.Title = "Appbar";
+                }
+                else
+                {
+                    topAppbar.Prominent = true;
+                    topAppbar.Title = "Appbar<br>Prominent Mode";
+                }
+            };
+
+            var topOverflowIcon = new Image(parent);
+            topOverflowIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "dots.png"));
+
+            var topOverflowItem = new MButton(parent)
+            {
+                Icon = topOverflowIcon
+            };
+
+            var topItemIcon = new Image(parent);
+            topItemIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "heart.png"));
+
+            var topItem = new MButton(parent)
+            {
+                Icon = topItemIcon
+            };
+
+            var topItemIcon2 = new Image(parent);
+            topItemIcon2.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "magnify.png"));
+
+            var topItem2 = new MButton(parent)
+            {
+                Icon = topItemIcon2
+            };
+
+            var topItems = new List<MButton>();
+            topItems.Add(topItem);
+            topItems.Add(topItem2);
+
+            topAppbar.NavigationItem = topNavigationItem;
+            topAppbar.OverflowItem = topOverflowItem;
+            topAppbar.ActionItems = topItems;
+
+            var bottomAppBar = new MBottomAppbar(parent);
+
+            var bottomNavigationIcon = new Image(parent);
+            bottomNavigationIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "airplane.png"));
+
+            var bottomNavigationItem = new MButton(parent)
+            {
+                Icon = bottomNavigationIcon
+            };
+
+            var bottomOverflowIcon = new Image(parent);
+            bottomOverflowIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "alarm.png"));
+
+            var bottomOverflowItem = new MButton(parent)
+            {
+                Icon = bottomOverflowIcon
+            };
+
+            bottomAppBar.NavigationItem = bottomNavigationItem;
+            bottomAppBar.OverflowItem = bottomOverflowItem;
+
+            var bottomItemIcon = new Image(parent);
+            bottomItemIcon.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "heart.png"));
+
+            var bottomItem = new MButton(parent)
+            {
+                Icon = bottomItemIcon
+            };
+
+            var bottomItemIcon2 = new Image(parent);
+            bottomItemIcon2.Load(Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "magnify.png"));
+
+            var bottomItem2 = new MButton(parent)
+            {
+                Icon = bottomItemIcon2
+            };
+
+            var items = new List<MButton>();
+            items.Add(bottomItem);
+            items.Add(bottomItem2);
+            bottomAppBar.ActionItems = items;
+
+            var floatingAcitonButton = new MFloatingActionButton(_conformant);
+            floatingAcitonButton.BackgroundColor = Color.Black;
+            Image image = new Image(parent);
+            image.Load(Path.Combine(MaterialGallery.ResourceDir, "plus.png"));
+            image.Show();
+            floatingAcitonButton.Icon = image;
+            floatingAcitonButton.Show();
+            floatingAcitonButton.Clicked += (s, e) =>
+            {
+                if (bottomAppBar.FloatingActionButtonPosition == MFloatingActionButtonPosition.Left)
+                {
+                    bottomAppBar.FloatingActionButtonPosition = MFloatingActionButtonPosition.Center;
+                }
+                else if (bottomAppBar.FloatingActionButtonPosition == MFloatingActionButtonPosition.Center)
+                {
+                    bottomAppBar.FloatingActionButtonPosition = MFloatingActionButtonPosition.Right;
+                }
+                else
+                {
+                    bottomAppBar.FloatingActionButtonPosition = MFloatingActionButtonPosition.Left;
+                }
+            };
+
+            bottomAppBar.FloatingActionButton = floatingAcitonButton;
+
+            var appbar = new MAppbar(parent);
+            appbar.Show();
+            appbar.TopAppbar = topAppbar;
+            appbar.BottomAppbar = bottomAppBar;
+            var main = new Box(parent)
+            {
                 AlignmentX = -1,
                 AlignmentY = -1,
-            };
-            hbox.Show();
-
-            var defaultColor = new MButton(window)
-            {
-                Text = "default",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var light = new MButton(window)
-            {
-                Text = "light",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            var dark = new MButton(window)
-            {
-                Text = "Dark",
-                MinimumWidth = 200,
-                WeightY = 1,
-                AlignmentY = 0.5
-            };
-            defaultColor.Show();
-            light.Show();
-            dark.Show();
-            hbox.PackEnd(defaultColor);
-            hbox.PackEnd(light);
-            hbox.PackEnd(dark);
-
-            defaultColor.Clicked += (s, e) => MColors.Current = MColors.Default;
-            light.Clicked += (s, e) => MColors.Current = MColors.Light;
-            dark.Clicked += (s, e) => MColors.Current = MColors.Dark;
-
-            #endregion ThemeButton
-
-            var appBar = new MAppbar(window)
-            {
-                AlignmentX = -1,
-                AlignmentY = -1,
                 WeightX = 1,
-                WeightY = 1
+                WeightY = 1,
+                BackgroundColor = Color.White
             };
-            appBar.Show();
-            appBar.Title = "AppBar";
-            appBar.NavigationItem = "menu.png";
-            appBar.NavigationItemClicked += (s, e) =>
-            {
-                Console.WriteLine("NavigationItemClicked");
-            };
-            appBar.OverflowItem = "dots.png";
-            appBar.OverflowItemClicked += (s, e) =>
-            {
-                Console.WriteLine("OverflowItemClicked");
-            };
-            appBar.PrimaryItem = "heart.png";
-            appBar.PrimaryItemClicked += (s, e) =>
-            {
-                Console.WriteLine("PrimaryItemClicked");
-            };
-            appBar.SecondaryItem = "magnify.png";
-            appBar.SecondaryItemClicked += (s, e) =>
-            {
-                Console.WriteLine("SecondaryItemClicked");
-            };
-            appBar.Main = hbox;
-            box.PackEnd(appBar);
+            main.Show();
+            appbar.Main = main;
+            box.PackEnd(appbar);
+
+            return box;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using ElmSharp;
+using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
@@ -18,5 +18,9 @@ namespace Tizen.NET.MaterialComponents
             return new Color(color.R, color.G, color.B, (int)(255 * alpha));
         }
 
+        public static string ToHex(this Color color)
+        {
+            return color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        }
     }
 }

@@ -5,7 +5,6 @@ namespace Tizen.NET.MaterialComponents
     public static class Styles
     {
         public static readonly string Material = "material";
-        public static readonly string Default = "default";
 
         public class CheckBox
         {
@@ -75,6 +74,19 @@ namespace Tizen.NET.MaterialComponents
 
             public static readonly string Icon = "icon";
             public static readonly string IconPressed = "icon_pressed";
+        }
+
+        public class AppBar
+        {
+            public static readonly int DefaultPadding = 32;
+            public static readonly int TitlePadding = 64;
+            public static readonly int ProminentPaddingWidht = 144;
+            public static readonly int ProminentPaddingHeight = 56;
+            public static readonly int ItemPadding = 48;
+            public static readonly int ItemSize = 48;
+            public static readonly int DefaultHeight = 112;
+            public static readonly int ProminentHeight = 256;
+            public static readonly string fontSize = "font_size=40";
         }
 
         public class Button

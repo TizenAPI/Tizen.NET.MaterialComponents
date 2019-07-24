@@ -1,50 +1,108 @@
 using ElmSharp;
-using System;
-using System.IO;
 
 namespace Tizen.NET.MaterialComponents
 {
     public class MAppbar : Box, IColorSchemeComponent
     {
-        EvasObject _parent;
-        Naviframe _naviFrame;
-        NaviItem _naviItem;
+        MTopAppbar _topAppbar;
+        MBottomAppbar _bottomAppbar;
         Box _mainContainer;
         EvasObject _main;
-
-        string _title;
-        string _navigationItem;
-        string _primaryItem;
-        string _secondaryItem;
-        string _overflowItem;
-
-        MButton _navigationButton;
-        MButton _primaryButton;
-        MButton _secondaryButton;
-        MButton _overflowButton;
-
-        Image _navigationImage;
-        Image _primaryImage;
-        Image _secondaryImage;
-        Image _overflowImage;
+        MAppbarMode _placement;
+        bool _isTopAppbarPacked;
+        bool _isBottomAppbarPacked;
 
         public MAppbar(EvasObject parent) : base(parent)
         {
-            _parent = parent;
-            _naviFrame = new Naviframe(parent)
-            {
-                AlignmentY = -1,
-                AlignmentX = -1,
-                WeightY = 1,
-                WeightX = 1
-            };
-            _naviFrame.Show();
-            _mainContainer = new Box(parent);
-            _naviItem = _naviFrame.Push(_mainContainer, _title, Styles.Material);
+            AlignmentX = -1;
+            AlignmentY = -1;
+            WeightX = 1;
+            WeightY = 1;
 
-            PackEnd(_naviFrame);
+            _mainContainer = new Box(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = -1,
+                WeightX = 1,
+                WeightY = 1
+            };
+            _mainContainer.Show();
+            PackEnd(_mainContainer);
 
             MColors.AddColorSchemeComponent(this);
+        }
+
+        public MAppbarMode Placement
+        {
+            get
+            {
+                return _placement;
+            }
+            set
+            {
+                _placement = value;
+                UpdateContent();
+            }
+        }
+
+        public MTopAppbar TopAppbar
+        {
+            get
+            {
+                return _topAppbar;
+            }
+            set
+            {
+                if (_topAppbar != null)
+                {
+                    _topAppbar.Hide();
+                    _topAppbar.Geometry = new Rect(0, 0, 0, 0);
+                    if (_isTopAppbarPacked)
+                    {
+                        UnPack(_topAppbar);
+                        _isTopAppbarPacked = false;
+                    }
+                }
+
+                _topAppbar = value;
+
+                if (_topAppbar != null)
+                {
+                    _topAppbar.AlignmentY = 0;
+                    _topAppbar.WeightY = 0;
+                    UpdateContent();
+                }
+            }
+        }
+
+        public MBottomAppbar BottomAppbar
+        {
+            get
+            {
+                return _bottomAppbar;
+            }
+            set
+            {
+                if (_bottomAppbar != null)
+                {
+                    _bottomAppbar.Hide();
+                    _bottomAppbar.Geometry = new Rect(0, 0, 0, 0);
+                    if (_isBottomAppbarPacked)
+                    {
+                        UnPack(_bottomAppbar);
+                        _isBottomAppbarPacked = false;
+                    }
+                }
+
+                _bottomAppbar = value;
+
+                if (_bottomAppbar != null)
+                {
+                    _bottomAppbar.AlignmentY = 1;
+                    _bottomAppbar.WeightY = 0;
+                    UpdateContent();
+                }
+            }
         }
 
         public EvasObject Main
@@ -55,207 +113,124 @@ namespace Tizen.NET.MaterialComponents
             }
             set
             {
+                if (_main != null)
+                {
+                    _mainContainer.UnPack(_main);
+                    _main.Hide();
+                }
+
                 _main = value;
-                UpdateMain();
-            }
-        }
 
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-                UpdateTitle();
-            }
-        }
-
-        public string NavigationItem
-        {
-            get
-            {
-                return _navigationItem;
-            }
-            set
-            {
-                _navigationItem = value;
-                UpdateItem(Parts.NaviItem.NavigationItem, _navigationItem, ref _navigationButton, ref _navigationImage);
-            }
-        }
-
-        public string PrimaryItem
-        {
-            get
-            {
-                return _primaryItem;
-            }
-            set
-            {
-                _primaryItem = value;
-                UpdateItem(Parts.NaviItem.PrimaryItem, _primaryItem, ref _primaryButton, ref _primaryImage);
-            }
-        }
-
-        public string SecondaryItem
-        {
-            get
-            {
-                return _secondaryItem;
-            }
-            set
-            {
-                _secondaryItem = value;
-                UpdateItem(Parts.NaviItem.SecondaryItem, _secondaryItem, ref _secondaryButton, ref _secondaryImage);
-            }
-        }
-
-        public string OverflowItem
-        {
-            get
-            {
-                return _overflowItem;
-            }
-            set
-            {
-                _overflowItem = value;
-                UpdateItem(Parts.NaviItem.OverflowItem, _overflowItem, ref _overflowButton, ref _overflowImage);
-            }
-        }
-
-        public event EventHandler NavigationItemClicked
-        {
-            add
-            {
-                if (_navigationButton != null)
+                if (_main != null)
                 {
-                    _navigationButton.Clicked += value;
-                }
-            }
-            remove
-            {
-                if (_navigationButton != null)
-                {
-                    _navigationButton.Clicked -= value;
+                    if (!_main.IsVisible)
+                    {
+                        _main.Show();
+                    }
+                    _mainContainer.PackEnd(_main);
                 }
             }
         }
 
-        public event EventHandler PrimaryItemClicked
+        void UpdateContent()
         {
-            add
+            switch (_placement)
             {
-                if (_primaryButton != null)
-                {
-                    _primaryButton.Clicked += value;
-                }
-            }
-            remove
-            {
-                if (_primaryButton != null)
-                {
-                    _primaryButton.Clicked -= value;
-                }
-            }
-        }
+                case MAppbarMode.Top:
+                    if (_topAppbar != null)
+                    {
+                        if (!_topAppbar.IsVisible)
+                        {
+                            _topAppbar.Show();
+                        }
+                        if (!_isTopAppbarPacked)
+                        {
+                            PackStart(_topAppbar);
+                            _isTopAppbarPacked = true;
+                        }
+                    }
+                    if (_bottomAppbar != null)
+                    {
+                        if (_bottomAppbar.IsVisible)
+                        {
+                            _bottomAppbar.Hide();
+                            _bottomAppbar.Geometry = new Rect(0, 0, 0, 0);
+                        }
+                        if (_isBottomAppbarPacked)
+                        {
+                            UnPack(_bottomAppbar);
+                            _isBottomAppbarPacked = false;
+                        }
+                    }
+                    break;
 
-        public event EventHandler SecondaryItemClicked
-        {
-            add
-            {
-                if (_secondaryButton != null)
-                {
-                    _secondaryButton.Clicked += value;
-                }
-            }
-            remove
-            {
-                if (_secondaryButton != null)
-                {
-                    _secondaryButton.Clicked -= value;
-                }
-            }
-        }
+                case MAppbarMode.Bottom:
+                    if (_topAppbar != null)
+                    {
+                        if (_topAppbar.IsVisible)
+                        {
+                            _topAppbar.Hide();
+                            _topAppbar.Geometry = new Rect(0, 0, 0, 0);
+                        }
+                        if (_isTopAppbarPacked)
+                        {
+                            UnPack(_topAppbar);
+                            _isTopAppbarPacked = false;
+                        }
+                    }
+                    if (_bottomAppbar != null)
+                    {
+                        if (!_bottomAppbar.IsVisible)
+                        {
+                            _bottomAppbar.Show();
+                        }
+                        if (!_isBottomAppbarPacked)
+                        {
+                            PackEnd(_bottomAppbar);
+                            _isBottomAppbarPacked = true;
+                        }
+                    }
+                    break;
 
-        public event EventHandler OverflowItemClicked
-        {
-            add
-            {
-                if (_overflowButton != null)
-                {
-                    _overflowButton.Clicked += value;
-                }
-            }
-            remove
-            {
-                if (_overflowButton != null)
-                {
-                    _overflowButton.Clicked -= value;
-                }
-            }
-        }
-
-        void UpdateMain()
-        {
-            _mainContainer.Clear();
-            if (_main != null)
-            {
-                _mainContainer.PackEnd(_main);
-            }
-        }
-
-        void UpdateTitle()
-        {
-            if (_title != null)
-            {
-                _naviItem.SetPartText(Styles.Default, _title);
-            }
-            else
-            {
-                _naviItem.SetPartText(Styles.Default, string.Empty);
-            }
-        }
-
-        void UpdateItem(string position, string item, ref MButton button, ref Image image)
-        {
-            if (!string.IsNullOrEmpty(item))
-            {
-                if (button == null)
-                {
-                    button = new MButton(_parent);
-                }
-
-                if (image == null)
-                {
-                    image = new Image(_parent);
-                }
-                image.Load(Path.Combine(Applications.Application.Current.DirectoryInfo.Resource, item));
-
-                button.SetPartContent(Parts.Widget.Icon, image);
-                _naviItem.SetPartContent(position, button);
-            }
-            else
-            {
-                _naviItem.SetPartContent(position, null);
-                if (button != null)
-                {
-                    button = null;
-                }
-                if (image != null)
-                {
-                    image = null;
-                }
+                default:
+                    if (_topAppbar != null)
+                    {
+                        if (!_topAppbar.IsVisible)
+                        {
+                            _topAppbar.Show();
+                        }
+                        if (!_isTopAppbarPacked)
+                        {
+                            PackStart(_topAppbar);
+                            _isTopAppbarPacked = true;
+                        }
+                    }
+                    if (_bottomAppbar != null)
+                    {
+                        if (_bottomAppbar.IsVisible)
+                        {
+                            _bottomAppbar.Show();
+                        }
+                        if (!_isBottomAppbarPacked)
+                        {
+                            PackEnd(_bottomAppbar);
+                            _isBottomAppbarPacked = true;
+                        }
+                    }
+                    break;
             }
         }
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
-            if (_naviItem != null)
-            {
-                _naviItem.TitleBarBackgroundColor = MColors.Current.PrimaryColor;
-            }
+            BackgroundColor = MColors.Current.PrimaryColor;
         }
+    }
+
+    public enum MAppbarMode
+    {
+        Pair,
+        Top,
+        Bottom
     }
 }

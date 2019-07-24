@@ -43,9 +43,26 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public Color BackgroundColor
+        {
+            get
+            {
+                return _button.BackgroundColor;
+            }
+            set
+            {
+                _button.BackgroundColor = value;
+            }
+        }
+
         public void Show()
         {
             _button.Show();
+        }
+
+        public void Hide()
+        {
+            _button.Hide();
         }
 
         public void Move(int x, int y)
