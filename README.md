@@ -16,6 +16,9 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MButton**
   A material buttons, including contained button, text button, outlined button and toggle button. ([guideline](https://material.io/design/components/buttons.html)) 
 
+- **MBanner**
+  A banner displays a prominent message and related optional actions. ([guideline](https://material.io/design/components/banners.html#))
+
 - **MCard**
   A cards contain content about a single subject. ([guideline](https://material.io/design/components/cards.html))
 

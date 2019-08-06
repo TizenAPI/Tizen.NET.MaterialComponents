@@ -56,6 +56,13 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string FloatingButton = "floatingbutton/material";
         }
+
+        public class Banner
+        {
+            public static readonly string SingleLine = "banner_1line";
+            public static readonly string DoubleLine = "banner_2line";
+
+        }
     }
 
     public static class Parts
@@ -160,10 +167,13 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string Button1 = "button1";
             public static readonly string Button2 = "button2";
+            public static readonly string Text = "elm.text";
             public static readonly string TextLabel = "elm.text.label";
             public static readonly string Title = "title,text";
             public static readonly string ElmTitle = "elm.text.title";
             public static readonly string ActionButton = "elm.swallow.action_button";
+            public static readonly string ActionButton2 = "elm.swallow.action_button2";
+            public static readonly string Icon = "elm.swallow.icon";
         }
 
         public class Menus
