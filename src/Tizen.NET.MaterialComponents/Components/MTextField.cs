@@ -33,7 +33,7 @@ namespace Tizen.NET.MaterialComponents
             set
             {
                 _layout.SetPartText(Parts.Entry.TextLabel, value);
-                _layout.SetPartText(Parts.Entry.Guide, value);
+                SetPartText(Parts.Entry.Guide, value);
             }
         }
 
