@@ -37,6 +37,9 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string MaterialNavigation = "material_navigation";
             public static readonly string MaterialNavigationSubtitle = "material_navigation_subtitle";
             public static readonly string MaterialNavigationDivider = "material_navigation_divider";
+            public static readonly string MaterialSingleLine = "material_1line";
+            public static readonly string MaterialDoubleLine = "material_2line";
+            public static readonly string MaterialTripleLine = "material_3line";
         }
 
         public class Popup
@@ -121,6 +124,9 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string BackgroundActivated = "active_bg";
             public static readonly string Icon = "elm.swallow.icon";
+            public static readonly string Text = "elm.text";
+            public static readonly string SubText = "elm.text.sub";
+            public static readonly string MetaControl = "elm.swallow.end";
         }
 
         public class ProgressBar
