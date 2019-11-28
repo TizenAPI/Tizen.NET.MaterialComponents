@@ -86,6 +86,11 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string IconPressed = "icon_pressed";
         }
 
+        public class Label
+        {
+            public static readonly string Text = "text";
+        }
+
         public class Button
         {
             public static readonly string Effect = "effect";
@@ -210,5 +215,23 @@ namespace Tizen.NET.MaterialComponents
     public static class Signal
     {
         public static readonly string ActionClick = "elm,action,click";
+    }
+
+    public static class DefaultValues
+    {
+        public class AppBar
+        {
+            // It comes from here, and the values are adjested for Tize mobile screen size.
+            // https://material.io/components/app-bars-top/#specs
+            public static readonly int Height = 56 * 2;
+            public static readonly int ItemSize = 24 * 2;
+            public static readonly int ItemPadding = 24 * 2;
+            public static readonly int ProminentHeight = 128 * 2;
+            public static readonly int FontSize = 40;
+            public static readonly int Padding = 16 * 2;
+            public static readonly int TitleSpacing = 32 * 2;
+
+            public static readonly string MoreIconPath = "Tizen.NET.MaterialComponents.Resources.dots_vertical.png";
+        }
     }
 }
