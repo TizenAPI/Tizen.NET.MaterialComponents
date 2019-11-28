@@ -30,6 +30,19 @@ namespace Tizen.NET.MaterialComponents
 
         public event EventHandler Clicked;
 
+        public Color BackgroundColor
+        {
+            get
+            {
+                return _button.BackgroundColor;
+            }
+            set
+            {
+                _button.BackgroundColor = value;
+            }
+        }
+
+
         public Image Icon
         {
             get

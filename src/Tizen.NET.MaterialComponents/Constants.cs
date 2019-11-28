@@ -219,6 +219,12 @@ namespace Tizen.NET.MaterialComponents
 
     public static class DefaultValues
     {
+        public class FloatingActionButton
+        {
+            public static readonly int Width = 56 * 2;
+            public static readonly int Height = 56 * 2;
+        }
+
         public class AppBar
         {
             // It comes from here, and the values are adjested for Tize mobile screen size.
