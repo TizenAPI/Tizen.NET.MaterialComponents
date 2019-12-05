@@ -237,7 +237,7 @@ namespace Tizen.NET.MaterialComponents
             public static readonly int FontSize = 40;
             public static readonly int Padding = 16 * 2;
             public static readonly int TitleSpacing = 32 * 2;
-            public static readonly int MaximumItemCount = 5;
+            public static readonly int MaximumItemCount = 4;
 
             public static readonly string DefaultTextStyle = $"DEFAULT = 'font_size={DefaultValues.AppBar.FontSize} ellipsis=1.0' ";
             public static readonly string MoreIconPath = "Tizen.NET.MaterialComponents.Resources.dots_vertical.png";

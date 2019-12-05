@@ -20,7 +20,8 @@ namespace Tizen.NET.MaterialComponents
             OnColorSchemeChanged(true);
         }
 
-        public string Title {
+        public string Title
+        {
             get
             {
                 return _titleLabel.Text;
