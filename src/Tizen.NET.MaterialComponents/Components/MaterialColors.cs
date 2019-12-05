@@ -99,7 +99,7 @@ namespace Tizen.NET.MaterialComponents
 
         public override Color BackgroundColor { get; } = Color.FromHex("#141414");
         public override Color OnBackgroundColor { get; } = Color.FromHex("#FFFFFF");
-        public override Color SurfaceColor { get; } = Color.FromHex("#282828");
+        public override Color SurfaceColor { get; } = Color.FromHex("#484848");
         public override Color OnSurfaceColor { get; } = Color.FromHex("#FFFFFF");
         public override Color ErrorColor { get; } = Color.FromHex("#C26C7A");
         public override Color OnErrorColor { get; } = Color.FromHex("#FFFFFF");
