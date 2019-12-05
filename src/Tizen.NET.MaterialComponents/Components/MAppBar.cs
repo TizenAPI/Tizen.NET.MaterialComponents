@@ -43,19 +43,11 @@ namespace Tizen.NET.MaterialComponents
             MColors.AddColorSchemeComponent(this);
         }
 
-
         protected bool OverflowPopupToDown { get; set; }
 
         protected int VisibleItemCount { get; set; }
 
-
-        public IList<MActionItem> ActionItems
-        {
-            get
-            {
-                return _items;
-            }
-        }
+        public IList<MActionItem> ActionItems => _items;
 
         public MActionItem NavigationItem
         {

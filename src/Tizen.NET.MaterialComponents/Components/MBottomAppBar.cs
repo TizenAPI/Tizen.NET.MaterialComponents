@@ -5,11 +5,11 @@ namespace Tizen.NET.MaterialComponents
     public class MBottomAppBar : MAppBar
     {
         MFloatingActionButton _floatingActionButton;
-        FloatingActionButtonPosition _fabPosistion;
+        BottomAppBarLayoutOption _layoutOption;
 
         public MBottomAppBar(EvasObject parent) : base(parent)
         {
-            _fabPosistion = FloatingActionButtonPosition.Center;
+            _layoutOption = BottomAppBarLayoutOption.CenteredFAB;
 
             VisibleItemCount = 1;
             OverflowPopupToDown = false;
@@ -17,17 +17,17 @@ namespace Tizen.NET.MaterialComponents
             OnColorSchemeChanged(true);
         }
 
-        public FloatingActionButtonPosition FloatingActionButtonPosition
+        public BottomAppBarLayoutOption LayoutOption
         {
             get
             {
-                return _fabPosistion;
+                return _layoutOption;
             }
             set
             {
-                if(_fabPosistion != value)
+                if(_layoutOption != value)
                 {
-                    _fabPosistion = value;
+                    _layoutOption = value;
                     UpdateChildrenGeometry();
                 }
             }
@@ -61,27 +61,32 @@ namespace Tizen.NET.MaterialComponents
             var moveX = g.X + (g.Width / 2) - buttonWidth / 2;
             var moveY = g.Y - buttonHeight / 2;
 
-            if (_floatingActionButton != null)
+            if (_layoutOption == BottomAppBarLayoutOption.CenteredFAB )
             {
-                if(_fabPosistion == FloatingActionButtonPosition.Center)
-                {
-                    VisibleItemCount = 1;
-                    base.UpdateChildrenGeometry();
-                }
-                else
-                {
-                    moveX = g.X + g.Width - padding - buttonWidth;
-                    VisibleItemCount = 4;
-                    UpdateItemsGeometry(false);
-                }
-
-                _floatingActionButton.Resize(buttonWidth, buttonHeight);
-                _floatingActionButton.Move(moveX, moveY);
+                VisibleItemCount = 1;
+                base.UpdateChildrenGeometry();
+            }
+            else if (_layoutOption == BottomAppBarLayoutOption.EndFAB)
+            {
+                moveX = g.X + g.Width - padding - buttonWidth;
+                VisibleItemCount = 4;
+                UpdateItemsGeometry(false);
             }
             else
             {
-                VisibleItemCount = 4;
-                UpdateItemsGeometry(true);
+                VisibleItemCount = DefaultValues.AppBar.MaximumItemCount;
+                base.UpdateChildrenGeometry();
+            }
+
+            if (_layoutOption != BottomAppBarLayoutOption.NoFAB)
+            {
+                _floatingActionButton?.Resize(buttonWidth, buttonHeight);
+                _floatingActionButton?.Move(moveX, moveY);
+                _floatingActionButton?.Show();
+            }
+            else
+            {
+                _floatingActionButton?.Hide();
             }
 
             UpdateNaviActionButton();
@@ -89,7 +94,7 @@ namespace Tizen.NET.MaterialComponents
 
         void UpdateNaviActionButton()
         {
-            if(_fabPosistion == FloatingActionButtonPosition.Right)
+            if(_layoutOption == BottomAppBarLayoutOption.EndFAB)
             {
                 if (NavigationItem != null)
                 {
@@ -131,9 +136,10 @@ namespace Tizen.NET.MaterialComponents
         }
     }
 
-    public enum FloatingActionButtonPosition
+    public enum BottomAppBarLayoutOption
     {
-        Center,
-        Right
+        CenteredFAB,
+        EndFAB,
+        NoFAB
     }
 }

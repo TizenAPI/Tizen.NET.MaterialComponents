@@ -65,8 +65,7 @@ namespace MaterialGallery
                 {
                     appbar.NavigationItem = null;
                 }
-            };
-            box.PackEnd(nButton);
+            };            
             nButton.Show();
 
             var addButton = new MButton(parent)
@@ -77,13 +76,12 @@ namespace MaterialGallery
                 AlignmentY = 0.5,
             };
 
+            int itemNum = 1;
             addButton.Clicked += (s, e) =>
             {
-                var iconPath = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "image.png");
-                appbar.ActionItems.Add(new MActionItem("new item", iconPath, () => { Console.WriteLine($"new item"); }));
-            };
-
-            box.PackEnd(addButton);
+                var iconPath = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "alarm.png");
+                appbar.ActionItems.Add(new MActionItem("new item" + itemNum++, iconPath, () => { Console.WriteLine($"new item{itemNum} clicked!!"); })); ;
+            };           
             addButton.Show();
 
             var removeButton = new MButton(parent)
@@ -101,27 +99,37 @@ namespace MaterialGallery
                     appbar.ActionItems.RemoveAt(appbar.ActionItems.Count - 1);
                 }
             };
-
-            box.PackEnd(removeButton);
             removeButton.Show();
 
-            var fButton = new MButton(parent)
+            var lbutton = new MButton(parent)
             {
-                Text = "move FAB",
+                Text = "layout",
                 MinimumWidth = 400,
                 WeightY = 1,
                 AlignmentY = 0.5,
             };
 
-            bool isCenter = true;
-            fButton.Clicked += (s, e) =>
+            int layout = 0;
+            lbutton.Clicked += (s, e) =>
             {
-                isCenter = !isCenter;
-                appbar.FloatingActionButtonPosition = (isCenter) ? FloatingActionButtonPosition.Center : FloatingActionButtonPosition.Right;
-            };
+                layout++;
 
-            box.PackEnd(fButton);
-            fButton.Show();
+                if(layout % 3 == 2)
+                {
+                    appbar.LayoutOption = BottomAppBarLayoutOption.NoFAB;
+                }
+                else if (layout % 3 == 1)
+                {
+                    appbar.LayoutOption = BottomAppBarLayoutOption.EndFAB;
+                }
+                else
+                {
+                    appbar.LayoutOption = BottomAppBarLayoutOption.CenteredFAB;
+                }
+                lbutton.Text = "layout: " + appbar.LayoutOption.ToString();
+                lbutton.MinimumWidth = 400;
+            };
+            lbutton.Show();
 
             MFloatingActionButton fab = new MFloatingActionButton(_conformant);
             Image img2 = new Image(parent);
@@ -129,6 +137,11 @@ namespace MaterialGallery
             fab.Icon = img2;
 
             appbar.FloatingActionButton = fab;
+
+            box.PackEnd(nButton);
+            box.PackEnd(lbutton);
+            box.PackEnd(addButton);
+            box.PackEnd(removeButton);
 
             box.PackEnd(appbar);
 

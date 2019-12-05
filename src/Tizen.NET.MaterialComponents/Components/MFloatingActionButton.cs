@@ -71,6 +71,11 @@ namespace Tizen.NET.MaterialComponents
             _button.Resize(x, y);
         }
 
+        public void Hide()
+        {
+            _button.Hide();
+        }
+
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)
         {
             bool isDefaultBackground = fromConstructor || _button.GetPartColor(Parts.Widget.Background) == _defaultBackground;
