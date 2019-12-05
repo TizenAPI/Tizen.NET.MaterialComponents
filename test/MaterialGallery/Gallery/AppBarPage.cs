@@ -9,6 +9,20 @@ namespace MaterialGallery
     {
         public override string Name => "Appbar(Top) Gallery";
 
+        public override void Run(Window window)
+        {
+            Conformant comformant = CreateComformant(window);
+            var content = CreateContent(window);
+
+            if (Elementary.GetProfile() != "wearable" && content is Box box)
+            {
+                box.PackEnd(CreateThemeButtons(window));
+                box.Recalculate();
+            }
+
+            comformant.SetContent(content);
+        }
+
         public override EvasObject CreateContent(EvasObject parent)
         {
             Box box = new ColoredBox(parent);
@@ -35,6 +49,33 @@ namespace MaterialGallery
             appbar.ActionItems.Add(new MActionItem("alarm", alarmIconPath, () => { Console.WriteLine($"alarm"); }));
             appbar.ActionItems.Add(new MActionItem("bluetooth", bluetoothIconPath, () => { Console.WriteLine($"bluetooth"); }));
 
+
+            var bButton = new MButton(parent)
+            {
+                Text = "set/unset bg",
+                MinimumWidth = 400,
+                WeightY = 1,
+                AlignmentY = 0.5,
+            };
+
+            var bFlag = true;
+            bButton.Clicked += (s, e) =>
+            {
+                if(bFlag)
+                {
+                    appbar.BackgroundOption = BackgroundOptions.Center;
+                    appbar.BackgroundImageFile = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "photo.jpg");
+                }
+                else
+                {
+                    appbar.BackgroundImageFile = "";
+                }
+                bFlag = !bFlag;
+
+
+            };            
+            bButton.Show();
+
             var nButton = new MButton(parent)
             {
                 Text = "add/remove naviitem",
@@ -58,10 +99,33 @@ namespace MaterialGallery
                 {
                     appbar.NavigationItem = null;
                 }
-            };
-            box.PackEnd(nButton);
+            };            
             nButton.Show();
 
+            var ltButton = new MButton(parent)
+            {
+                Text = "change title",
+                MinimumWidth = 400,
+                WeightY = 1,
+                AlignmentY = 0.5,
+            };
+
+            bool ltFlag = true;
+            ltButton.Clicked += (s, e) =>
+            {
+                if (ltFlag)
+                {
+                    appbar.Title = "Page title";
+                }
+                else
+                {
+                    appbar.Title = "Page title looooooooooooooooooooong";
+                }
+                ltFlag = !ltFlag;
+
+            };            
+            ltButton.Show();
+            
             var tButton = new MButton(parent)
             {
                 Text = "change title color",
@@ -84,7 +148,6 @@ namespace MaterialGallery
                 tFlag = !tFlag;
 
             };
-            box.PackEnd(tButton);
             tButton.Show();
 
             var pButton = new MButton(parent)
@@ -94,7 +157,7 @@ namespace MaterialGallery
                 WeightY = 1,
                 AlignmentY = 0.5,
             };
-            box.PackEnd(pButton);
+            
             pButton.Show();
 
             pButton.Clicked += (s, e) =>
@@ -116,7 +179,7 @@ namespace MaterialGallery
                 appbar.ActionItems.Add(new MActionItem("new item", iconPath, () => { Console.WriteLine($"new item"); }));
             };
 
-            box.PackEnd(addButton);
+            
             addButton.Show();
 
 
@@ -135,10 +198,16 @@ namespace MaterialGallery
                     appbar.ActionItems.RemoveAt(appbar.ActionItems.Count - 1);
                 }
             };
-
-            box.PackEnd(removeButton);
             removeButton.Show();
 
+            box.PackEnd(bButton);
+            box.PackEnd(pButton);
+            box.PackEnd(nButton);
+            box.PackEnd(ltButton);
+            box.PackEnd(tButton);
+            box.PackEnd(addButton);
+            box.PackEnd(removeButton);
+            
             return box;
         }
     }

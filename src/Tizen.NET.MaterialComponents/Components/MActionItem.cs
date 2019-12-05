@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MActionItem
+    public class MActionItem : IMActionItemController
     {
         public MActionItem(Action action = null)
         {
@@ -27,5 +28,16 @@ namespace Tizen.NET.MaterialComponents
         public string IconPath { get; set; }
 
         public Action Action { get; set; }
+
+        public event EventHandler Clicked;
+
+        protected virtual void OnClicked() => Clicked?.Invoke(this, EventArgs.Empty);
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        void IMActionItemController.Activate()
+        {
+            Action?.Invoke();
+            OnClicked();
+        }
     }
 }

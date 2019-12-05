@@ -12,11 +12,7 @@ namespace Tizen.NET.MaterialComponents
 
         public MTopAppBar(EvasObject parent) : base(parent)
         {
-            _titleLabel = new Label(this)
-            {
-                LineWrapType = WrapType.Mixed,
-                TextStyle = $"DEFAULT = 'font_size={DefaultValues.AppBar.FontSize}'"
-            };
+            _titleLabel = new Label(this);
 
             VisibleItemCount = 2;
             OverflowPopupToDown = true;
@@ -89,7 +85,7 @@ namespace Tizen.NET.MaterialComponents
         {
             base.UpdateChildrenGeometry();
 
-            var g = Geometry;
+            var g = _box.Geometry;
             var padding = DefaultValues.AppBar.Padding;
             var titleSpacing = DefaultValues.AppBar.TitleSpacing;
             var itemWidth = DefaultValues.AppBar.ItemSize;
@@ -100,17 +96,26 @@ namespace Tizen.NET.MaterialComponents
             var calculatedtitleWidth = g.Width - padding - itemWidth - titleSpacing - actionButtonsWidth - padding;
             var titleX = g.X + padding + itemWidth + titleSpacing;
 
-            _titleLabel.Geometry = new Rect(titleX, startY, calculatedtitleWidth, itemHeight);
-            _titleLabel.Show();
-
             if (_prominent)
             {
                 var barHeight = DefaultValues.AppBar.ProminentHeight;
-                var titleY = g.Y + barHeight - padding - itemHeight;
+                var textBlockHeight = _titleLabel.EdjeObject[Parts.Label.TextEdje].TextBlockFormattedSize.Height;
+                textBlockHeight = (textBlockHeight > (itemHeight * 2)) ? itemHeight * 2 : textBlockHeight;
+                var titleY = g.Y + barHeight - padding - textBlockHeight;
 
-                Geometry = new Rect(g.X, g.Y, g.Width, barHeight);
-                _titleLabel.Geometry = new Rect(titleX, titleY, calculatedtitleWidth, itemHeight);
+                _titleLabel.Geometry = new Rect(titleX, titleY, calculatedtitleWidth, textBlockHeight);
+                _titleLabel.TextStyle = DefaultValues.AppBar.DefaultTextStyle.Replace("ellipsis=1.0", "wrap=word");
+                _titleLabel.LineWrapType = WrapType.Word;
+                _titleLabel.IsEllipsis = false;
             }
+            else
+            {
+                _titleLabel.Geometry = new Rect(titleX, startY, calculatedtitleWidth, itemHeight);
+                _titleLabel.TextStyle = DefaultValues.AppBar.DefaultTextStyle;
+                _titleLabel.IsEllipsis = true;
+                _titleLabel.LineWrapType = WrapType.None;
+            }
+            _titleLabel.Show();
         }
     }
 }

@@ -6,34 +6,48 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public abstract class MAppBar : Box, IColorSchemeComponent
+    public abstract class MAppBar : Background, IColorSchemeComponent
     {
         Color _defaultBackground;
+        Color _oldBackground;
 
         MActionItem _naviItem;
         MMenus _moreitemsMenus;
         MButton _naviButton;
+        string _bg;
+        protected Box _box;
 
         ObservableCollection<MActionItem> _items = new ObservableCollection<MActionItem>();
         IList<MButton> _actionButtons = new List<MButton>();
 
-        protected bool OverflowPopupToDown { get; set; }
-
-        protected int VisibleItemCount { get; set; }
-
-        public MAppBar(EvasObject parent) : base(parent)
+        public MAppBar (EvasObject parent) : base(parent)
         {
             AlignmentX = -1;
             WeightX = 1;
             MinimumHeight = DefaultValues.AppBar.Height;
 
-            _naviButton = new MButton(this);
+            _box = new Box(this)
+            {
+                AlignmentX = -1,
+                AlignmentY = -1,
+                WeightX = 1,
+                WeightY = 1
+            };
+            SetContent(_box);
+
+            _naviButton = new MButton(_box);
 
             _items.CollectionChanged += OnItemsCollectionChanged;
-            SetLayoutCallback(() => { UpdateChildrenGeometry(); });
+            _box.SetLayoutCallback(() => { UpdateChildrenGeometry(); });
 
             MColors.AddColorSchemeComponent(this);
         }
+
+
+        protected bool OverflowPopupToDown { get; set; }
+
+        protected int VisibleItemCount { get; set; }
+
 
         public IList<MActionItem> ActionItems
         {
@@ -61,14 +75,14 @@ namespace Tizen.NET.MaterialComponents
                 {
                     if (!string.IsNullOrEmpty(_naviItem.IconPath))
                     {
-                        var icon = new Image(this);
+                        var icon = new Image(_box);
                         icon.Load(_naviItem.IconPath);
                         _naviButton.Icon = icon;
                     }
 
                     _naviButton.Clicked += (s, e) =>
                     {
-                        _naviItem.Action?.Invoke();
+                        (_naviItem as IMActionItemController)?.Activate();
                     };
 
                     _naviButton.Show();
@@ -92,15 +106,37 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public string BackgroundImageFile
+        {
+            get
+            {
+                return _bg;
+            }
+            set
+            {
+                _bg = value;
+                if(!string.IsNullOrEmpty(_bg))
+                {
+                    _oldBackground = _box.GetPartColor(Parts.Widget.Background);
+                    _box.SetPartColor(Parts.Widget.Background, Color.Transparent);
+                    File = _bg;
+                }
+                else
+                {
+                    _box.SetPartColor(Parts.Widget.Background, _oldBackground);
+                }
+            }
+        }
+
         public virtual void OnColorSchemeChanged(bool fromConstructor = false)
         {
-            bool isDefaultBackground = fromConstructor || GetPartColor(Parts.Widget.Background) == _defaultBackground;
+            bool isDefaultBackground = fromConstructor || _box.GetPartColor(Parts.Widget.Background) == _defaultBackground;
 
             _defaultBackground = MColors.Current.PrimaryColor;
 
             if (isDefaultBackground)
             {
-                SetPartColor(Parts.Widget.Background, _defaultBackground);
+                _box.SetPartColor(Parts.Widget.Background, _defaultBackground);
             }
         }
 
@@ -111,7 +147,7 @@ namespace Tizen.NET.MaterialComponents
 
         protected virtual void UpdateChildrenGeometry()
         {
-            var g = Geometry;
+            var g = _box.Geometry;
             var padding = DefaultValues.AppBar.Padding;
             var itemWidth = DefaultValues.AppBar.ItemSize;
             var itemHeight = DefaultValues.AppBar.Height - (padding * 2);
@@ -121,6 +157,7 @@ namespace Tizen.NET.MaterialComponents
 
             UpdateActionButtons();
 
+            _naviButton.SetPartColor(Parts.Widget.Background, Color.Transparent);
             _naviButton.Geometry = new Rect(startX, startY, itemWidth, itemHeight);
 
             int beforeItemX = endX;
@@ -129,6 +166,7 @@ namespace Tizen.NET.MaterialComponents
                 var calculatedWidth = (ActionButtons.Count > VisibleItemCount && i == VisibleItemCount) ? itemWidth / 2 : itemWidth;
                 var itemX = (beforeItemX == endX) ? endX - calculatedWidth : (beforeItemX - itemWidth * 2);
 
+                ActionButtons[i].SetPartColor(Parts.Widget.Background, Color.Transparent);
                 ActionButtons[i].Geometry = new Rect(itemX, startY, calculatedWidth, itemHeight);
                 ActionButtons[i].Show();
 
@@ -142,28 +180,28 @@ namespace Tizen.NET.MaterialComponents
 
             for (int i = 0; i < ActionItems.Count; i++)
             {
-                var button = new MButton(this);
+                var button = new MButton(_box);
                 var item = ActionItems[i];
 
                 if (i < VisibleItemCount)
                 {
                     if (!string.IsNullOrEmpty(item.IconPath))
                     {
-                        var icon = new Image(this);
+                        var icon = new Image(_box);
                         icon.Load(item.IconPath);
                         button.Icon = icon;
                     }
 
                     button.Clicked += (s, e) =>
                     {
-                        item.Action?.Invoke();
+                        (item as IMActionItemController)?.Activate();
                     };
 
                     _actionButtons.Add(button);
                 }
                 else if (i == VisibleItemCount)
                 {
-                    var moreIcon = new Image(this);
+                    var moreIcon = new Image(_box);
                     var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(DefaultValues.AppBar.MoreIconPath);
                     moreIcon.Load(stream);
                     button.Icon = moreIcon;
@@ -176,7 +214,7 @@ namespace Tizen.NET.MaterialComponents
                     var popupItem = _moreitemsMenus.Append(item.Text);
                     popupItem.Selected += (sender, args) =>
                     {
-                        item.Action?.Invoke();
+                        (item as IMActionItemController)?.Activate();
                         _moreitemsMenus.Hide();
                     };
 
@@ -202,7 +240,7 @@ namespace Tizen.NET.MaterialComponents
                     var popupItem = _moreitemsMenus.Append(item.Text);
                     popupItem.Selected += (sender, args) =>
                     {
-                        item.Action?.Invoke();
+                        (item as IMActionItemController)?.Activate();
                         _moreitemsMenus.Hide();
                     };
                 }
