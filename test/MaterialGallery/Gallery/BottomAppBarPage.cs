@@ -131,6 +131,25 @@ namespace MaterialGallery
             };
             lbutton.Show();
 
+            var entry = new MTextField(parent)
+            {
+                AlignmentX = -1,
+                WeightY = 1,
+                Label = "textfield",
+                Text = "click here to show virtual keypad"
+            };
+            entry.Show();
+
+            _conformant.KeyPadOn += (s, e) =>
+            {
+                box.UnPack(appbar);
+            };
+
+            _conformant.KeyPadOff += (s, e) =>
+            {
+                box.PackEnd(appbar);
+            };
+
             MFloatingActionButton fab = new MFloatingActionButton(_conformant);
             Image img2 = new Image(parent);
             img2.Load(Path.Combine(MaterialGallery.ResourceDir, "airplane.png"));
@@ -142,6 +161,7 @@ namespace MaterialGallery
             box.PackEnd(lbutton);
             box.PackEnd(addButton);
             box.PackEnd(removeButton);
+            box.PackEnd(entry);
 
             box.PackEnd(appbar);
 

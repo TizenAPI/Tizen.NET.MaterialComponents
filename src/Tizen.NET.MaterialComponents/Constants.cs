@@ -211,6 +211,8 @@ namespace Tizen.NET.MaterialComponents
     public static class Events
     {
         public static readonly string Changed = "changed";
+        public static readonly string VirtualKeypadOn = "virtualkeypad,state,on";
+        public static readonly string VirtualKeypadOff = "virtualkeypad,state,off";
     }
 
     public static class Signal
