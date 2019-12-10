@@ -9,6 +9,8 @@ namespace MaterialGallery
     {
         public override string Name => "Appbar(Top) Gallery";
 
+        public override ProfileType ExceptProfile => ProfileType.Wearable;
+
         public override void Run(Window window)
         {
             Conformant comformant = CreateComformant(window);
