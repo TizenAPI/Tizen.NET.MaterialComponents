@@ -5,10 +5,12 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationView : Box, IColorSchemeComponent
+    public class MNavigationView : Background, IColorSchemeComponent
     {
+        Box _box;
         EvasObject _header;
         GenList _menu;
+        Image _bg;
         Color _backgroundColor = Color.Default;
         Color _defaultBackgroundColor;
         Color _defaultBackgroundColorForDisabled;
@@ -23,7 +25,7 @@ namespace Tizen.NET.MaterialComponents
         public MNavigationView(EvasObject parent) : base(parent)
         {
             Initialize(parent);
-            SetLayoutCallback(() =>
+            _box.SetLayoutCallback(() =>
             {
                 UpdateChildGeometry();
             });
@@ -43,6 +45,26 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public Image BackgroundImage
+        {
+            get => _bg;
+            set
+            {
+                _bg = value;
+                if (_bg != null)
+                {
+                    _menu.BackgroundColor = Color.Transparent;
+                    SetPartContent(Parts.Background.Bg, _bg);
+                }
+                else
+                {
+                    Color effectiveColor = _backgroundColor.IsDefault ? _defaultBackgroundColor : _backgroundColor;
+                    _menu.BackgroundColor = effectiveColor;
+                    SetPartContent(Parts.Background.Bg, null);
+                }
+            }
+        }
+
         public EvasObject Header
         {
             get
@@ -53,14 +75,14 @@ namespace Tizen.NET.MaterialComponents
             {
                 if (_header != null)
                 {
-                    UnPack(_header);
+                    _box.UnPack(_header);
                     _header.Hide();
                 }
                 _header = value;
 
                 if (_header != null)
                 {
-                    PackStart(_header);
+                    _box.PackStart(_header);
                     if (!_header.IsVisible)
                     {
                         _header.Show();
@@ -130,6 +152,15 @@ namespace Tizen.NET.MaterialComponents
 
         void Initialize(EvasObject parent)
         {
+            _box = new Box(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = -1,
+                WeightX = 1,
+                WeightY = 1
+            };
+            SetContent(_box);
+
             _menu = new GenList(parent)
             {
                 BackgroundColor = Color.Transparent
@@ -141,7 +172,7 @@ namespace Tizen.NET.MaterialComponents
             };
 
             _menu.Show();
-            PackEnd(_menu);
+            _box.PackEnd(_menu);
 
             _defaultClass = new GenItemClass(Styles.GenListItem.MaterialNavigation)
             {

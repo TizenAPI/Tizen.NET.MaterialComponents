@@ -1,5 +1,6 @@
-using ElmSharp;
 using System.Collections.Generic;
+using System.IO;
+using ElmSharp;
 using Tizen.NET.MaterialComponents;
 
 namespace MaterialGallery
@@ -25,7 +26,7 @@ namespace MaterialGallery
 
             var btn1 = new Button(parent)
             {
-                Text = "Chage Header",
+                Text = "Chage Header / Background",
                 AlignmentX = -1,
                 AlignmentY = -1,
                 WeightX = 1,
@@ -36,7 +37,7 @@ namespace MaterialGallery
 
             var btn2 = new Button(parent)
             {
-                Text = "Chage Header",
+                Text = "Chage Header / Background",
                 AlignmentX = -1,
                 AlignmentY = -1,
                 WeightX = 1,
@@ -73,11 +74,18 @@ namespace MaterialGallery
             btn1.Clicked += (s, e) =>
             {
                 nv.Header = header;
+                var img = new Image(parent);
+                var path = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "photo.jpg");
+                img.LoadAsync(path);
+                img.IsFixedAspect = false;
+                img.CanFillOutside = true;
+                nv.BackgroundImage = img;
             };
 
             btn2.Clicked += (s, e) =>
             {
                 nv.Header = btn1;
+                nv.BackgroundImage = null;
             };
 
             var items = new List<MItem>();
