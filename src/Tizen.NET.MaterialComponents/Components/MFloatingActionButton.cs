@@ -30,6 +30,19 @@ namespace Tizen.NET.MaterialComponents
 
         public event EventHandler Clicked;
 
+        public Color BackgroundColor
+        {
+            get
+            {
+                return _button.BackgroundColor;
+            }
+            set
+            {
+                _button.BackgroundColor = value;
+            }
+        }
+
+
         public Image Icon
         {
             get
@@ -56,6 +69,11 @@ namespace Tizen.NET.MaterialComponents
         public void Resize(int x, int y)
         {
             _button.Resize(x, y);
+        }
+
+        public void Hide()
+        {
+            _button.Hide();
         }
 
         void IColorSchemeComponent.OnColorSchemeChanged(bool fromConstructor)

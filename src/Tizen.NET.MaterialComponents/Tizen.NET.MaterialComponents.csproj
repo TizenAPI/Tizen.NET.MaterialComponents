@@ -27,6 +27,7 @@
     <Content Include="Theme\elmsharp-theme-material.edj">
       <Pack>true</Pack>
     </Content>
+    <EmbeddedResource Include="Resources\dots_vertical.png" />
     <None Include="Tizen.NET.MaterialComponents.targets">
       <Pack>true</Pack>
       <PackagePath>build/$(TargetFramework)</PackagePath>

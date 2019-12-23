@@ -86,6 +86,12 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string IconPressed = "icon_pressed";
         }
 
+        public class Label
+        {
+            public static readonly string Text = "text";
+            public static readonly string TextEdje = "elm.text";
+        }
+
         public class Button
         {
             public static readonly string Effect = "effect";
@@ -205,10 +211,38 @@ namespace Tizen.NET.MaterialComponents
     public static class Events
     {
         public static readonly string Changed = "changed";
+        public static readonly string VirtualKeypadOn = "virtualkeypad,state,on";
+        public static readonly string VirtualKeypadOff = "virtualkeypad,state,off";
     }
 
     public static class Signal
     {
         public static readonly string ActionClick = "elm,action,click";
+    }
+
+    public static class DefaultValues
+    {
+        public class FloatingActionButton
+        {
+            public static readonly int Width = 56 * 2;
+            public static readonly int Height = 56 * 2;
+        }
+
+        public class AppBar
+        {
+            // It comes from here, and the values are adjested for Tize mobile screen size.
+            // https://material.io/components/app-bars-top/#specs
+            public static readonly int Height = 56 * 2;
+            public static readonly int ItemSize = 24 * 2;
+            public static readonly int ItemPadding = 24 * 2;
+            public static readonly int ProminentHeight = 128 * 2;
+            public static readonly int FontSize = 40;
+            public static readonly int Padding = 16 * 2;
+            public static readonly int TitleSpacing = 32 * 2;
+            public static readonly int MaximumItemCount = 4;
+
+            public static readonly string DefaultTextStyle = $"DEFAULT = 'font_size={DefaultValues.AppBar.FontSize} ellipsis=1.0' ";
+            public static readonly string MoreIconPath = "Tizen.NET.MaterialComponents.Resources.dots_vertical.png";
+        }
     }
 }
