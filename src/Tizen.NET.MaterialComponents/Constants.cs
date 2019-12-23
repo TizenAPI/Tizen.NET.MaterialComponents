@@ -192,6 +192,11 @@ namespace Tizen.NET.MaterialComponents
         {
             public static readonly string Divider = "divider";
         }
+
+        public class Background
+        {
+            public static readonly string Bg = "elm.swallow.background";
+        }
     }
 
     public static class Actions
