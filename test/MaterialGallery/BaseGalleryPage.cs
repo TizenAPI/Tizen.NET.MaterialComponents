@@ -17,6 +17,8 @@ namespace MaterialGallery
 
         public virtual ProfileType ExceptProfile => ProfileType.None;
 
+        public virtual bool RunningOnNewWindow => false;
+
         public virtual void Run(Window window)
         {
             Conformant comformant = CreateComformant(window);

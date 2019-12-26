@@ -12,37 +12,17 @@ namespace MaterialGallery
             Box box = new ColoredBox(parent);
             box.Show();
 
-            //var rect = new Rectangle(parent)
-            //{
-            //    WeightX = 1,
-            //    WeightY = 1,
-            //    AlignmentX = -1,
-            //    AlignmentY = -1
-            //};
-
-            //box.PackEnd(rect);
-
             var button = new MButton(parent)
             {
-                Text = "Button",
-                WeightX = 1,
-                WeightY = 1,
-                AlignmentX = 0.5,
-                AlignmentY = 0.5,
-            };
-            button.Show();
-
-            var button2 = new MButton(parent)
-            {
-                Text = "Click",
+                Text = "show tooltip",
                 WeightX = 1,
                 WeightY = 1,
                 AlignmentX = -1,
                 AlignmentY = 0.5
             };
-            button2.Show();
+            button.Show();
 
-            var button3 = new MButton(parent)
+            var button2 = new MButton(parent)
             {
                 IsEnabled = true,
                 Text = "Chage Tooltip Button2",
@@ -52,26 +32,21 @@ namespace MaterialGallery
                 AlignmentY = 0.5,
                 BackgroundColor = Color.FromHex("#03A9F4"),
             };
-            button3.Show();
+            button2.Show();
 
             button.UseMTooltip();
             button2.UseMTooltip();
-            button3.UseMTooltip();
 
-            button.SetTooltipText("Button");
+            button.SetTooltipText("Tooltip Test");
+            button2.SetTooltipText("#03A9F4");
 
-            button2.SetTooltipText("Tooltip Test");
-
-            button3.SetTooltipText("#03A9F4");
-
-            button3.Clicked += (s, e) =>
+            button2.Clicked += (s, e) =>
             {
-                button2.SetTooltipText("Chage Tooltip");
+                button.SetTooltipText("Chage Tooltip");
             };
 
-            //box.PackEnd(button);
+            box.PackEnd(button);
             box.PackEnd(button2);
-            //box.PackEnd(button3);
 
             return box;
         }

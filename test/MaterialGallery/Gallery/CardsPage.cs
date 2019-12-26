@@ -1,4 +1,5 @@
 ﻿using ElmSharp;
+using ElmSharp.Wearable;
 using System.IO;
 using Tizen;
 using Tizen.NET.MaterialComponents;
@@ -19,11 +20,18 @@ namespace MaterialGallery
     {
         public override string Name => "Cards Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         public override EvasObject CreateContent(EvasObject parent)
         {
-            Box box = new ColoredBox(parent);
+            Box box = new ColoredBox(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = -1,
+                WeightX = 1,
+                WeightY = 1,
+                BackgroundColor = Color.Pink
+            };
             box.Show();
 
             var card1 = CreateCard1(parent);

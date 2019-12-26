@@ -17,8 +17,8 @@ namespace MaterialGallery
 
             var button1 = new MButton(parent)
             {
-                Text = "Show Banner: Single",
-                MinimumWidth = 400,
+                Text = "Single",
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -33,8 +33,8 @@ namespace MaterialGallery
 
             var button2 = new MButton(parent)
             {
-                Text = "Show Banner: Single Long",
-                MinimumWidth = 400,
+                Text = "Single Long",
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -50,8 +50,8 @@ namespace MaterialGallery
 
             var button3 = new MButton(parent)
             {
-                Text = "Show Banner: Double",
-                MinimumWidth = 400,
+                Text = "Double",
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -66,8 +66,8 @@ namespace MaterialGallery
 
             var button4 = new MButton(parent)
             {
-                Text = "Show Banner: Double with Icon",
-                MinimumWidth = 400,
+                Text = "Double with Icon",
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };

@@ -9,6 +9,8 @@ namespace MaterialGallery
 
         public override ProfileType ExceptProfile => ProfileType.Wearable;
 
+        public override bool RunningOnNewWindow => true;
+
         public Color backgroudColor = new Color(200, 200, 100);
 
         public override EvasObject CreateContent(EvasObject parent)
