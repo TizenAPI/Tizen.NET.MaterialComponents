@@ -9,7 +9,7 @@ namespace MaterialGallery
     {
         public override string Name => "Appbar(Top) Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         public override void Run(Window window)
         {
@@ -209,7 +209,7 @@ namespace MaterialGallery
             box.PackEnd(tButton);
             box.PackEnd(addButton);
             box.PackEnd(removeButton);
-            
+
             return box;
         }
     }

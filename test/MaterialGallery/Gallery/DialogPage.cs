@@ -22,8 +22,6 @@ namespace MaterialGallery
     {
         public override string Name => "Dialog Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
-
         public override EvasObject CreateContent(EvasObject parent)
         {
             Box box = new ColoredBox(parent);
@@ -33,7 +31,7 @@ namespace MaterialGallery
             var button = new MButton(parent)
             {
                 Text= "AlertDialog",
-                MinimumWidth = 400,
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -51,7 +49,7 @@ namespace MaterialGallery
             var button2 = new MButton(parent)
             {
                 Text = "SimpleDialog",
-                MinimumWidth = 400,
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -69,7 +67,7 @@ namespace MaterialGallery
             var button3 = new MButton(parent)
             {
                 Text = "Confirmation(multi)",
-                MinimumWidth = 400,
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -87,7 +85,7 @@ namespace MaterialGallery
             var button5 = new MButton(parent)
             {
                 Text = "Confirmation(single)",
-                MinimumWidth = 400,
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };
@@ -105,7 +103,7 @@ namespace MaterialGallery
             var button4 = new MButton(parent)
             {
                 Text = "FullScreenDialog",
-                MinimumWidth = 400,
+                MinimumWidth = 300,
                 WeightY = 1,
                 AlignmentY = 0.5
             };

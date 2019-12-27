@@ -7,7 +7,7 @@ namespace MaterialGallery
     {
         public override string Name => "SnackBars Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         public override EvasObject CreateContent(EvasObject parent)
         {
@@ -58,7 +58,7 @@ namespace MaterialGallery
             MButton button1 = new MButton(parent)
             {
                 Text = "SnackBars",
-                MinimumWidth = 600,
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,
             };
@@ -71,7 +71,7 @@ namespace MaterialGallery
             MButton button2 = new MButton(parent)
             {
                 Text = "SnackBars with Action",
-                MinimumWidth = 600,
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,
             };
@@ -84,7 +84,7 @@ namespace MaterialGallery
             MButton button3 = new MButton(parent)
             {
                 Text = "SnackBars with long text",
-                MinimumWidth = 600,
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 0.3,
             };
@@ -97,7 +97,7 @@ namespace MaterialGallery
             MButton button4 = new MButton(parent)
             {
                 Text = "SnackBars (long text and action)",
-                MinimumWidth = 600,
+                MinimumWidth = 300,
                 AlignmentY = 0,
                 WeightY = 1,
             };

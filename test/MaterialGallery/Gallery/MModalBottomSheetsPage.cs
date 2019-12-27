@@ -8,7 +8,7 @@ namespace MaterialGallery
     {
         public override string Name => "MModalBottomSheets Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         MConformant _conformant;
 

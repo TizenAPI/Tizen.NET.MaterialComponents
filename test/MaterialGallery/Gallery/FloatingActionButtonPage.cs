@@ -9,6 +9,8 @@ namespace MaterialGallery
     {
         public override string Name => "FloatingActionButton Gallery";
 
+        public override bool RunningOnNewWindow => true;
+
         MConformant _conformant;
 
         public override Conformant CreateComformant(Window window)

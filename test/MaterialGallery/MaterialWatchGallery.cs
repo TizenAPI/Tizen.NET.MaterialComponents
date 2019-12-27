@@ -95,14 +95,17 @@ namespace MaterialGallery
             {
                 if(tc.ExceptProfile != ProfileType.Wearable)
                 {
-                    var view = tc.CreateContent(box);
-                    if (view != null)
+                    if(tc.RunningOnNewWindow)
                     {
-                        box.PackEnd(view);
+                        box.PackEnd(CreateNewWindow(box, tc));
                     }
                     else
                     {
-                        box.PackEnd(CreateNewWindow(box, tc));
+                        var view = tc.CreateContent(box);
+                        if (view != null)
+                        {
+                            box.PackEnd(view);
+                        }
                     }
                 }
             }
@@ -120,13 +123,25 @@ namespace MaterialGallery
             };
             box.Show();
 
+            var titleLabel = new Label(parent)
+            {
+                AlignmentX = -1,
+                AlignmentY = 1,
+                WeightX = 1,
+                WeightY = 1,
+                LineWrapType = WrapType.Word,
+                LineWrapWidth = 300,
+                Text = $"<span align=center color=#000000>{page.Name}</ span > "
+            };
+            titleLabel.Show();
+
             var button = new MButton(parent)
             {
                 AlignmentX = -1,
-                AlignmentY = 0.5,
+                AlignmentY = 0,
                 WeightX = 1,
                 WeightY = 1,
-                Text = "click"
+                Text = "run"
             };
             button.Show();
 
@@ -143,6 +158,7 @@ namespace MaterialGallery
                 page.Run(window);
             };
 
+            box.PackEnd(titleLabel);
             box.PackEnd(button);
 
             return box;
