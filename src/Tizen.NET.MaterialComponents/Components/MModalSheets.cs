@@ -2,7 +2,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MModalSheets : Panel
+    public class MModalSheets : Panel, IOptionalComponent
     {
         Box _scrim;
         double _bottomSheetDefaultRatio = 0.5;
@@ -13,6 +13,8 @@ namespace Tizen.NET.MaterialComponents
 
         public MModalSheets(MConformant conformant, MModalSheetsDirection direction) : base(conformant)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             _scrim = new Box(conformant)
             {
                 BackgroundColor = Color.Transparent,
@@ -33,6 +35,8 @@ namespace Tizen.NET.MaterialComponents
             _scrim.PackEnd(this);
             conformant.SetPartContent(Parts.Layout.Sheets, _scrim);
         }
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         void UpdateDirection(MModalSheetsDirection direction)
         {

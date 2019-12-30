@@ -32,15 +32,16 @@ namespace Tizen.NET.MaterialComponents
             private set;
         }
 
-        public static bool IsInitialized
+        public static bool IsThemeLoaded
         {
             get;
             private set;
         }
 
+
         public static void Initialize(string resourcePath)
         {
-            if (!IsInitialized)
+            if (!IsThemeLoaded)
             {
                 string fileName = "elmsharp-theme-material.edj";
                 switch (Profile)
@@ -56,7 +57,7 @@ namespace Tizen.NET.MaterialComponents
                 }
                 Elementary.AddThemeOverlay(Path.Combine(resourcePath, fileName));
                 AppResourcePath = resourcePath;
-                IsInitialized = true;
+                IsThemeLoaded = true;
             }
         }
     }

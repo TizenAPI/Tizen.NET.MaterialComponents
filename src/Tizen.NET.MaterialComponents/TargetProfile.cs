@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Tizen.NET.MaterialComponents
 {
     public enum TargetProfile
     {
-        Unsupported,
-        Mobile,
-        TV,
-        Wearable
+        Unsupported = 1,
+        Mobile = 2,
+        TV = 4,
+        Wearable = 8
     }
 }

@@ -5,7 +5,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationView : Background, IColorSchemeComponent
+    public class MNavigationView : Background, IColorSchemeComponent, IOptionalComponent
     {
         Box _box;
         EvasObject _header;
@@ -24,6 +24,8 @@ namespace Tizen.NET.MaterialComponents
 
         public MNavigationView(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             Initialize(parent);
             _box.SetLayoutCallback(() =>
             {
@@ -33,6 +35,8 @@ namespace Tizen.NET.MaterialComponents
         }
 
         public event EventHandler<GenListItemEventArgs> MenuItemSelected;
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         public override Color BackgroundColor
         {

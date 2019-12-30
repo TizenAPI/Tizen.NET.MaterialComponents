@@ -5,13 +5,20 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MCard : Box
+    public class MCard : Box, IOptionalComponent
     {
         Layout _layout;
         bool _hasShadow;
         Color _borderColor;
 
+        public MCard(EvasObject parent) : base(parent)
+        {
+            MaterialComponents.VerifyComponentEnabled(this);
+        }
+
         public new IEnumerable<EvasObject> Children => base.Children.ToList<EvasObject>();
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         public bool HasShadow
         {
@@ -51,10 +58,6 @@ namespace Tizen.NET.MaterialComponents
                     _layout.SetPartColor(Parts.Layout.Border, _borderColor);
                 }
             }
-        }
-
-        public MCard(EvasObject parent) : base(parent)
-        {
         }
 
         protected override IntPtr CreateHandle(EvasObject parent)

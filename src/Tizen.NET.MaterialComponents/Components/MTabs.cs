@@ -4,7 +4,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MTabs : Widget, IColorSchemeComponent
+    public class MTabs : Widget, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackgroundColor;
         Color _defaultTextColor;
@@ -17,8 +17,11 @@ namespace Tizen.NET.MaterialComponents
 
         public MTabs(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             Style = Styles.Material;
             _toolbar.SelectionMode = ToolbarSelectionMode.Always;
+
             MColors.AddColorSchemeComponent(this);
         }
 
@@ -39,6 +42,8 @@ namespace Tizen.NET.MaterialComponents
                 _type = value;
             }
         }
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         public ToolbarItem SelectedItem => _toolbar.SelectedItem;
 
