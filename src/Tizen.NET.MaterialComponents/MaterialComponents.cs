@@ -1,17 +1,32 @@
-﻿using System;
+﻿using ElmSharp;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public enum ComponentsOptions
-    {
-        All,
-        Supported
-    }
-
     public static class MaterialComponents
     {
+        static Lazy<TargetProfile> s_profile = new Lazy<TargetProfile>(() =>
+        {
+            var profile = Elementary.GetProfile();
+            if (profile == "mobile")
+            {
+                return TargetProfile.Mobile;
+            }
+            else if (profile == "tv")
+            {
+                return TargetProfile.TV;
+            }
+            else if (profile == "wearable")
+            {
+                return TargetProfile.Wearable;
+            }
+            return TargetProfile.Unsupported;
+        });
+
+        public static TargetProfile Profile => s_profile.Value;
 
         public static bool IsInitialized
         {
@@ -19,30 +34,50 @@ namespace Tizen.NET.MaterialComponents
             private set;
         }
 
-        public static ComponentsOptions ComponentOption
+        public static string AppResourcePath
         {
             get;
             private set;
         }
 
-        public static void Init(string resourcePath, ComponentsOptions option = ComponentsOptions.All)
+        public static InitializationOptions InitOptions
+        {
+            get;
+            private set;
+        }
+
+        public static void Init(string resourcePath, InitializationOptions option = null)
         {
             if (!IsInitialized)
             {
-                ThemeLoader.Initialize(resourcePath);
-                ComponentOption = option;
+                string fileName = "elmsharp-theme-material.edj";
+                switch (Profile)
+                {
+                    case TargetProfile.TV:
+                        fileName = "elmsharp-theme-material-tv.edj";
+                        Elementary.AddThemeOverlay("elmsharp-theme-material-tv.edj");
+                        break;
+                    case TargetProfile.Wearable:
+                        fileName = "elmsharp-theme-material-wearable.edj";
+                        Elementary.AddThemeOverlay("elmsharp-theme-material-wearable.edj");
+                        break;
+                }
+                Elementary.AddThemeOverlay(Path.Combine(resourcePath, fileName));
+
+                AppResourcePath = resourcePath;
+                InitOptions = option;
                 IsInitialized = true;
-            }           
+            }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void VerifyComponentEnabled(IOptionalComponent component)
         {
-            if (ComponentOption == ComponentsOptions.Supported)
+            if (InitOptions != null && InitOptions.ThrowOnValidateComponentErrors)
             {
-                if (!component.SupportedProfiles.HasFlag(ThemeLoader.Profile))
+                if (!component.SupportedProfiles.HasFlag(MaterialComponents.Profile))
                 {
-                    var errorMessage = $"{component} is not supported on {ThemeLoader.Profile} profile. "
+                    var errorMessage = $"{component} is not supported on {MaterialComponents.Profile} profile. "
                         + $"if you want to check how it works without throwing an exception, please set ComponentsOptions.All when you call MaterialComponents.Init(). ";
 
                     throw new NotSupportedException(errorMessage);
@@ -53,11 +88,11 @@ namespace Tizen.NET.MaterialComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void VerifyServiceEnabled(TargetProfile supportedProfiles, [CallerMemberName]string caller = "")
         {
-            if (ComponentOption == ComponentsOptions.Supported)
+            if (InitOptions != null && InitOptions.ThrowOnValidateComponentErrors)
             {
-                if (!supportedProfiles.HasFlag(ThemeLoader.Profile))
+                if (!supportedProfiles.HasFlag(MaterialComponents.Profile))
                 {
-                    var errorMessage = $"{caller} method is not supported on {ThemeLoader.Profile} profile. "
+                    var errorMessage = $"{caller} method is not supported on {MaterialComponents.Profile} profile. "
                         + $"if you want to check how it works without throwing an exception, please set ComponentsOptions.All when you call MaterialComponents.Init(). ";
 
                     throw new NotSupportedException(errorMessage);

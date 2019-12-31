@@ -1,6 +1,9 @@
 ﻿
+using System;
+
 namespace Tizen.NET.MaterialComponents
 {
+    [Flags]
     public enum TargetProfile
     {
         Unsupported = 1,

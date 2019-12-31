@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Obsolete("ThemeLoader is obsolete. Please use MaterialComponents.Init instead of ThemeLoader.Initialize.")]
     public static class ThemeLoader
     {
         static Lazy<TargetProfile> s_profile = new Lazy<TargetProfile>(() =>
@@ -32,16 +35,15 @@ namespace Tizen.NET.MaterialComponents
             private set;
         }
 
-        public static bool IsThemeLoaded
+        public static bool IsInitialized
         {
             get;
             private set;
         }
 
-
         public static void Initialize(string resourcePath)
         {
-            if (!IsThemeLoaded)
+            if (!IsInitialized)
             {
                 string fileName = "elmsharp-theme-material.edj";
                 switch (Profile)
@@ -57,7 +59,7 @@ namespace Tizen.NET.MaterialComponents
                 }
                 Elementary.AddThemeOverlay(Path.Combine(resourcePath, fileName));
                 AppResourcePath = resourcePath;
-                IsThemeLoaded = true;
+                IsInitialized = true;
             }
         }
     }
