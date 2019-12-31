@@ -85,15 +85,15 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 ### Install package 
 #### nuget.exe
 ```
-nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.7-preview
+nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.9-pre1
 ```
 #### .csproj
 ```xml
-<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.7-preview" />
+<PackageReference Include="Tizen.NET.MaterialComponents" Version="0.9.9-pre1" />
 ```
  
 ### How to use Tizen.NET Material Components
- In order to use Tizen.NET Material Components in your application, you MUST call `Tizen.NET.MaterialComponents.ThemeLoader.Init()` prior to using it.
+ In order to use Tizen.NET Material Components in your application, you MUST call `MaterialComponents.Init()` prior to using it.
   
  ```cs
  using Tizen.NET.MaterialComponents;
@@ -105,7 +105,7 @@ nuget.exe install Tizen.NET.MaterialComponents -Version 0.9.7-preview
      ResourceDir = DirectoryInfo.Resource;
      
      // Initialze ThemeLoader
-     ThemeLoader.Initialize(ResourceDir);
+     MaterialComponents.Init(ResourceDir);
  }
  ```
 
