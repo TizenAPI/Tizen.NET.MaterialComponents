@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 using Tizen.Applications;
-using ElmSharp;
 using Tizen.NET.MaterialComponents;
-using ElmSharp.Wearable;
+using ElmSharp;
 
 namespace MaterialGallery
 {
@@ -27,7 +26,10 @@ namespace MaterialGallery
         {
             ResourceDir = DirectoryInfo.Resource;
             MaterialGallery.ResourceDir = DirectoryInfo.Resource;
-            ThemeLoader.Initialize(ResourceDir);
+            MaterialComponents.Init(ResourceDir, new InitializationOptions
+            {
+                ThrowOnValidateComponentErrors = false
+            });
 
             _window = new Window("WatchMaterialGallery")
             {
@@ -62,21 +64,18 @@ namespace MaterialGallery
             var conformant = new Conformant(window);
             conformant.Show();
 
-            var surface = new CircleSurface(conformant);
-            var circleScroller = new CircleScroller(conformant, surface)
+            var circleScroller = new Scroller(window)
             {
                 AlignmentX = -1,
                 AlignmentY = -1,
                 WeightX = 1,
                 WeightY = 1,
                 VerticalScrollBarVisiblePolicy = ScrollBarVisiblePolicy.Invisible,
-                HorizontalScrollBarVisiblePolicy = ScrollBarVisiblePolicy.Auto,
+                HorizontalScrollBarVisiblePolicy = ScrollBarVisiblePolicy.Visible,
                 ScrollBlock = ScrollBlock.Vertical,
                 HorizontalPageScrollLimit = 1,
             };
-            ((IRotaryActionWidget)circleScroller).Activate();
             circleScroller.SetPageSize(1.0, 1.0);
-            conformant.SetContent(circleScroller);
             circleScroller.Show();
 
             var box = new Box(window)
@@ -91,25 +90,28 @@ namespace MaterialGallery
             box.Show();
             box.PackEnd(CreateFirstPage(box));
 
-            foreach (var tc in GetGalleryPage())
+            var pages = GetGalleryPage();
+            foreach (var tc in pages)
             {
-                if(tc.ExceptProfile != ProfileType.Wearable)
+                if (tc.RunningOnNewWindow)
                 {
-                    if(tc.RunningOnNewWindow)
+                    var view = CreateNewWindow(box, tc);
+                    view.Show();
+                    box.PackEnd(view);
+                }
+                else
+                {
+                    var view = tc.CreateContent(box);
+                    if (view != null)
                     {
-                        box.PackEnd(CreateNewWindow(box, tc));
-                    }
-                    else
-                    {
-                        var view = tc.CreateContent(box);
-                        if (view != null)
-                        {
-                            box.PackEnd(view);
-                        }
+                        view.Show();
+                        box.PackEnd(view);
                     }
                 }
             }
+
             circleScroller.SetContent(box);
+            conformant.SetContent(circleScroller);
         }
 
         EvasObject CreateNewWindow(EvasObject parent, BaseGalleryPage page)
@@ -131,7 +133,7 @@ namespace MaterialGallery
                 WeightY = 1,
                 LineWrapType = WrapType.Word,
                 LineWrapWidth = 300,
-                Text = $"<span align=center color=#000000>{page.Name}</ span > "
+                Text = $"<span align=center color=#000000>{page.Name}</span > "
             };
             titleLabel.Show();
 
@@ -177,11 +179,13 @@ namespace MaterialGallery
 
             var label = new Label(parent)
             {
-                Text = "<span align='center'>MaterialGallery<br>for Watch<br>▷▷▷</span>",
+                Text = "<span align='center'>MaterialGallery<br>for Watch <br>▷▷▷</span>",
                 AlignmentX = 0.5,
                 AlignmentY = 0.5,
                 WeightX = 1,
                 WeightY = 1,
+                LineWrapType = WrapType.Word,
+                LineWrapWidth = _screenWidth,
                 MinimumWidth = _screenWidth,
             };
             label.Show();

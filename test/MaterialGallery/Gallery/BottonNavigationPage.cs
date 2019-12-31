@@ -8,7 +8,7 @@ namespace MaterialGallery
     {
         public override string Name => "BottomNavigation Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         public Color backgroudColor = new Color(200, 200, 100);
 
@@ -20,7 +20,7 @@ namespace MaterialGallery
             MBottomNavigation bn = new MBottomNavigation(parent);
             bn.Show();
             box.PackEnd(bn);
-            var IconPath = Path.Combine(ThemeLoader.AppResourcePath, "icon.png");
+            var IconPath = Path.Combine(MaterialComponents.AppResourcePath, "icon.png");
 
             for (int i = 0; i < 4; i++)
             {

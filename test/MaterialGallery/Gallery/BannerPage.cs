@@ -158,7 +158,7 @@ namespace MaterialGallery
             {
                 Action = "action",
                 Cancel = "dismiss",
-                Icon = Path.Combine(ThemeLoader.AppResourcePath, "image.png"),
+                Icon = Path.Combine(MaterialComponents.AppResourcePath, "image.png"),
                 Text = "Two line text string with two actions. One to two lines is perferable on mobile and tablet."
             };
 
@@ -170,7 +170,7 @@ namespace MaterialGallery
             banner.ActionClicked += (s, e) =>
             {
                 Console.WriteLine($"MBanner.ActionButton is clicked: [Action] Change Icon");
-                banner.Icon = Path.Combine(ThemeLoader.AppResourcePath, "copy.png");
+                banner.Icon = Path.Combine(MaterialComponents.AppResourcePath, "copy.png");
             };
 
             banner.Show();

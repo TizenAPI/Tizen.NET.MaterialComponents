@@ -1,4 +1,5 @@
 ﻿using ElmSharp;
+using System;
 using Tizen.NET.MaterialComponents;
 
 namespace MaterialGallery
@@ -15,13 +16,11 @@ namespace MaterialGallery
     {
         public abstract string Name { get; }
 
-        public virtual ProfileType ExceptProfile => ProfileType.None;
-
         public virtual bool RunningOnNewWindow => false;
 
         public virtual void Run(Window window)
         {
-            Conformant comformant = CreateComformant(window);
+            var comformant = CreateComformant(window);
             var content = CreateContent(window);
 
             if (Elementary.GetProfile() != "wearable" && content is Box box)
