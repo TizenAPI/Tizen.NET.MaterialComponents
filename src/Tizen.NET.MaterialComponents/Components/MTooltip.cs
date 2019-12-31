@@ -7,6 +7,8 @@ namespace Tizen.NET.MaterialComponents
     {
         public static void UseMTooltip(this EvasObject control)
         {
+            MaterialComponents.VerifyServiceEnabled((TargetProfile.Mobile | TargetProfile.Wearable));
+
             if(control == null)
             {
                 throw new ArgumentNullException(nameof(control));
@@ -18,6 +20,8 @@ namespace Tizen.NET.MaterialComponents
 
         public static bool IsUsingMTooltip(this EvasObject control)
         {
+            MaterialComponents.VerifyServiceEnabled((TargetProfile.Mobile | TargetProfile.Wearable));
+
             if (control == null)
             {
                 throw new ArgumentNullException(nameof(control));

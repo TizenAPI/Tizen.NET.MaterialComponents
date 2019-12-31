@@ -3,7 +3,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MFloatingActionButton : IColorSchemeComponent
+    public class MFloatingActionButton : IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackground;
         Color _defaultBackgroundForDisable;
@@ -14,6 +14,8 @@ namespace Tizen.NET.MaterialComponents
 
         public MFloatingActionButton(MConformant conformant)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             _button = new Button(conformant.FloatingLayout)
             {
                 Style = Styles.Button.FloatingButton,
@@ -29,6 +31,8 @@ namespace Tizen.NET.MaterialComponents
         }
 
         public event EventHandler Clicked;
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.Wearable;
 
         public Color BackgroundColor
         {

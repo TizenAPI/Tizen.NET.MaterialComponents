@@ -4,7 +4,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MSnackBars : MPopup, IColorSchemeComponent
+    public class MSnackBars : MPopup, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackgroundColor;
         Color _defaultTextColor;
@@ -12,12 +12,16 @@ namespace Tizen.NET.MaterialComponents
 
         public MSnackBars(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             Style = Styles.Popup.SnackBars;
             Orientation = PopupOrientation.Bottom;
             MColors.AddColorSchemeComponent(this);
         }
 
         public event EventHandler ActionClicked;
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         public override string Text
         {

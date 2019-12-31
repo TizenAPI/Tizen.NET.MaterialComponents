@@ -2,16 +2,19 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MCheckBox : Check, IColorSchemeComponent
+    public class MCheckBox : Check, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackground;
         Color _defaultBackgroundForDisable;
 
         public MCheckBox(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
             Style = Styles.CheckBox.Style;
             MColors.AddColorSchemeComponent(this);
         }
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.Wearable;
 
         public override Color Color
         {

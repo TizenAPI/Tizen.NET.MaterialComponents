@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Obsolete("ThemeLoader is obsolete. Please use MaterialComponents.Init instead of ThemeLoader.Initialize.")]
     public static class ThemeLoader
     {
         static Lazy<TargetProfile> s_profile = new Lazy<TargetProfile>(() =>

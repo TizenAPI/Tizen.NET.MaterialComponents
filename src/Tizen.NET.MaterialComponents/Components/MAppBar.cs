@@ -6,7 +6,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public abstract class MAppBar : Background, IColorSchemeComponent
+    public abstract class MAppBar : Background, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackground;
         Color _oldBackground;
@@ -22,6 +22,8 @@ namespace Tizen.NET.MaterialComponents
 
         public MAppBar (EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             AlignmentX = -1;
             WeightX = 1;
             MinimumHeight = DefaultValues.AppBar.Height;
@@ -42,6 +44,8 @@ namespace Tizen.NET.MaterialComponents
 
             MColors.AddColorSchemeComponent(this);
         }
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile;
 
         protected bool OverflowPopupToDown { get; set; }
 

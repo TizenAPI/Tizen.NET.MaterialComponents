@@ -2,16 +2,20 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MRadioButton : Radio, IColorSchemeComponent
+    public class MRadioButton : Radio, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultIcon;
         Color _defaultIconForDisable;
 
         public MRadioButton(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             Style = Styles.RadioButton.Style;
             MColors.AddColorSchemeComponent(this);
         }
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.Wearable;
 
         public override Color Color
         {

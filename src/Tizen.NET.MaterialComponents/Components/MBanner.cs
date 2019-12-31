@@ -4,7 +4,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MBanner : Layout
+    public class MBanner : Layout, IOptionalComponent
     {
         Button _actionButton;
         Button _cancelButton;
@@ -17,6 +17,8 @@ namespace Tizen.NET.MaterialComponents
 
         public MBanner(EvasObject parent) : base(parent)
         {
+            MaterialComponents.VerifyComponentEnabled(this);
+
             AlignmentX = -1;
             AlignmentY = 0;
             WeightX = 1;
@@ -36,6 +38,8 @@ namespace Tizen.NET.MaterialComponents
         public event EventHandler<EventArgs> ActionClicked;
 
         public event EventHandler<EventArgs> Dismissed;
+
+        public TargetProfile SupportedProfiles => TargetProfile.Mobile | TargetProfile.TV;
 
         public override string Text
         {

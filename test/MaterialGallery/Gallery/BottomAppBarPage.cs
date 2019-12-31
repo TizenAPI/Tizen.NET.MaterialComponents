@@ -9,7 +9,7 @@ namespace MaterialGallery
     {
         public override string Name => "Appbar(Bottom) Gallery";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         MConformant _conformant;
 

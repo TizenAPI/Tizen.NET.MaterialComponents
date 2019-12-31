@@ -24,7 +24,10 @@ namespace MaterialGallery
         void Initialize()
         {
             ResourceDir = DirectoryInfo.Resource;
-            ThemeLoader.Initialize(ResourceDir);
+            MaterialComponents.Init(ResourceDir, new InitializationOptions
+            {
+                ThrowOnValidateComponentErrors = false
+            });
 
             _mainWindow = new Window("MaterialGallery");
             _mainWindow.Show();
@@ -72,14 +75,10 @@ namespace MaterialGallery
 
             foreach (var page in GetGalleryPage())
             {
-                if(Elementary.GetProfile() == "tv" && page.ExceptProfile == ProfileType.TV)
-                {
-                    continue;
-                }
                 list.Append(defaultClass, page);
             }
 
-            if (ThemeLoader.Profile == TargetProfile.Wearable)
+            if (MaterialComponents.Profile == TargetProfile.Wearable)
             {
                 list.Prepend(defaultClass, null);
                 list.Append(defaultClass, null);

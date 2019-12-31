@@ -8,7 +8,7 @@ namespace MaterialGallery
     {
         public override string Name => "NavigationDrawerPage GalleryGroup";
 
-        public override ProfileType ExceptProfile => ProfileType.Wearable;
+        public override bool RunningOnNewWindow => true;
 
         public override EvasObject CreateContent(EvasObject parent)
         {

@@ -11,7 +11,7 @@ namespace MaterialGallery
         public AccountData(string mail, string iconPath = null)
         {
             Label = mail;
-            IconPath = Path.Combine(ThemeLoader.AppResourcePath, iconPath);
+            IconPath = Path.Combine(MaterialComponents.AppResourcePath, iconPath);
         }
 
         public string Label;
