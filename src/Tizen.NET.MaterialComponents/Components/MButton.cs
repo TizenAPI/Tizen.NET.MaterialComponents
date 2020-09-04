@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
@@ -36,11 +36,14 @@ namespace Tizen.NET.MaterialComponents
             set
             {
                 _text = value;
-                var str = value.ToUpper();
-                if (str.Contains("<") && str.Contains(">"))
+                var str = value?.ToUpper();
+                if (!string.IsNullOrEmpty(str))
                 {
-                    var tagPattern = @"\<[^<&^>]+\>";
-                    str = Regex.Replace(str, tagPattern, m => m.ToString().ToLower());
+                    if (str.Contains("<") && str.Contains(">"))
+                    {
+                        var tagPattern = @"\<[^<&^>]+\>";
+                        str = Regex.Replace(str, tagPattern, m => m.ToString().ToLower());
+                    }
                 }
                 base.Text = str;
             }
