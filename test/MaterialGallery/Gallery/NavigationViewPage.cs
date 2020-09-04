@@ -74,18 +74,15 @@ namespace MaterialGallery
             btn1.Clicked += (s, e) =>
             {
                 nv.Header = header;
-                var img = new Image(parent);
-                var path = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "photo.jpg");
-                img.LoadAsync(path);
-                img.IsFixedAspect = false;
-                img.CanFillOutside = true;
-                nv.BackgroundImage = img;
+                var imgPath = Path.Combine(Tizen.Applications.Application.Current.DirectoryInfo.Resource, "photo.jpg");
+                nv.BackgroundImageFile = imgPath;
+                nv.BackgroundOption = BackgroundOptions.Tile;
             };
 
             btn2.Clicked += (s, e) =>
             {
                 nv.Header = btn1;
-                nv.BackgroundImage = null;
+                nv.BackgroundImageFile = null;
             };
 
             var items = new List<MItem>();

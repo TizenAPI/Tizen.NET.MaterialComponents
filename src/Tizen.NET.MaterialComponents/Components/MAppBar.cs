@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -6,7 +6,7 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public abstract class MAppBar : Background, IColorSchemeComponent, IOptionalComponent
+    public abstract class MAppBar : Layout, IColorSchemeComponent, IOptionalComponent
     {
         Color _defaultBackground;
         Color _oldBackground;
@@ -14,7 +14,9 @@ namespace Tizen.NET.MaterialComponents
         MActionItem _naviItem;
         MMenus _moreitemsMenus;
         MButton _naviButton;
-        string _bg;
+        string _bgFile;
+        Background _background;
+        BackgroundOptions _backgroundOption;
         protected Box _box;
 
         ObservableCollection<MActionItem> _items = new ObservableCollection<MActionItem>();
@@ -23,6 +25,8 @@ namespace Tizen.NET.MaterialComponents
         public MAppBar (EvasObject parent) : base(parent)
         {
             MaterialComponents.VerifyComponentEnabled(this);
+
+            SetTheme("layout", Styles.Application, Styles.Default);
 
             AlignmentX = -1;
             WeightX = 1;
@@ -102,24 +106,42 @@ namespace Tizen.NET.MaterialComponents
             }
         }
 
+        public BackgroundOptions BackgroundOption
+        {
+            get
+            {
+                return _backgroundOption;
+            }
+            set
+            {
+                _backgroundOption = value;
+                if(_background != null)
+                    _background.BackgroundOption = _backgroundOption;
+            }
+        }
+
         public string BackgroundImageFile
         {
             get
             {
-                return _bg;
+                return _bgFile;
             }
             set
             {
-                _bg = value;
-                if(!string.IsNullOrEmpty(_bg))
+                _bgFile = value;
+                if (!string.IsNullOrEmpty(_bgFile))
                 {
                     _oldBackground = _box.GetPartColor(Parts.Widget.Background);
-                    _box.SetPartColor(Parts.Widget.Background, Color.Transparent);
-                    File = _bg;
+                    _box.BackgroundColor = Color.Transparent;
+                    _background = new Background(this);
+                    _background.File = _bgFile;
+                    SetPartContent(Parts.Layout.Bg, _background);
                 }
                 else
                 {
-                    _box.SetPartColor(Parts.Widget.Background, _oldBackground);
+                    _background = null;
+                    SetPartContent(Parts.Layout.Bg, null);
+                    _box.BackgroundColor = _oldBackground;
                 }
             }
         }

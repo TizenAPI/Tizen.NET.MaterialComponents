@@ -5,12 +5,15 @@ using ElmSharp;
 
 namespace Tizen.NET.MaterialComponents
 {
-    public class MNavigationView : Background, IColorSchemeComponent, IOptionalComponent
+    public class MNavigationView : Layout, IColorSchemeComponent, IOptionalComponent
     {
         Box _box;
         EvasObject _header;
         GenList _menu;
         Image _bg;
+        string _bgFile;
+        Background _background;
+        BackgroundOptions _backgroundOption;
         Color _backgroundColor = Color.Default;
         Color _defaultBackgroundColor;
         Color _defaultBackgroundColorForDisabled;
@@ -45,10 +48,11 @@ namespace Tizen.NET.MaterialComponents
             {
                 _backgroundColor = value;
                 Color effectiveColor = _backgroundColor.IsDefault ? _defaultBackgroundColor : _backgroundColor;
-                _menu.BackgroundColor = effectiveColor;
+                _box.BackgroundColor = effectiveColor;
             }
         }
 
+        [ObsoleteAttribute("This property is obsolete, please use BackgroundImageFile instead")]
         public Image BackgroundImage
         {
             get => _bg;
@@ -58,13 +62,53 @@ namespace Tizen.NET.MaterialComponents
                 if (_bg != null)
                 {
                     _menu.BackgroundColor = Color.Transparent;
-                    SetPartContent(Parts.Background.Bg, _bg);
+                    SetPartContent(Parts.Layout.Bg, _bg);
                 }
                 else
                 {
                     Color effectiveColor = _backgroundColor.IsDefault ? _defaultBackgroundColor : _backgroundColor;
                     _menu.BackgroundColor = effectiveColor;
-                    SetPartContent(Parts.Background.Bg, null);
+                    SetPartContent(Parts.Layout.Bg, null);
+                }
+            }
+        }
+
+        public BackgroundOptions BackgroundOption
+        {
+            get
+            {
+                return _backgroundOption;
+            }
+            set
+            {
+                _backgroundOption = value;
+                if (_background != null)
+                    _background.BackgroundOption = _backgroundOption;
+            }
+        }
+
+        public string BackgroundImageFile
+        {
+            get
+            {
+                return _bgFile;
+            }
+            set
+            {
+                _bgFile = value;
+                if (!string.IsNullOrEmpty(_bgFile))
+                {
+                    _box.BackgroundColor = Color.Transparent;
+                    _background = new Background(this);
+                    _background.File = _bgFile;
+                    SetPartContent(Parts.Layout.Bg, _background);
+                }
+                else
+                {
+                    _background = null;
+                    SetPartContent(Parts.Layout.Bg, null);
+                    Color effectiveColor = _backgroundColor.IsDefault ? _defaultBackgroundColor : _backgroundColor;
+                    _box.BackgroundColor = effectiveColor;
                 }
             }
         }
@@ -156,6 +200,8 @@ namespace Tizen.NET.MaterialComponents
 
         void Initialize(EvasObject parent)
         {
+            SetTheme("layout", Styles.Application, Styles.Default);
+
             _box = new Box(parent)
             {
                 AlignmentX = -1,

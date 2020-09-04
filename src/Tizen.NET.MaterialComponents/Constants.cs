@@ -5,6 +5,8 @@ namespace Tizen.NET.MaterialComponents
     public static class Styles
     {
         public static readonly string Material = "material";
+        public static readonly string Application = "application";
+        public static readonly string Default = "default";
 
         public class CheckBox
         {
@@ -104,6 +106,7 @@ namespace Tizen.NET.MaterialComponents
             public static readonly string Border = "border";
             public static readonly string FloatingButton = "elm.swallow.floatingbutton";
             public static readonly string Sheets = "elm.swallow.sheets";
+            public static readonly string Bg = "elm.swallow.bg";
         }
 
         public class Check

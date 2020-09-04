@@ -118,6 +118,7 @@ namespace MaterialGallery
             items.Add(new MItem("Play", "icon.png"));
 
             nv.Menu = items;
+            nv.BackgroundColor = Color.Yellow;
 
             var main1 = new MButton(parent)
             {
