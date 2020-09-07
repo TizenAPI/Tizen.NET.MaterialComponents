@@ -1,8 +1,9 @@
-﻿using ElmSharp;
+using ElmSharp;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using TSystemInfo = Tizen.System.Information;
 
 namespace Tizen.NET.MaterialComponents
 {
@@ -11,6 +12,7 @@ namespace Tizen.NET.MaterialComponents
         static Lazy<TargetProfile> s_profile = new Lazy<TargetProfile>(() =>
         {
             var profile = Elementary.GetProfile();
+
             if (profile == "mobile")
             {
                 return TargetProfile.Mobile;
@@ -55,11 +57,14 @@ namespace Tizen.NET.MaterialComponents
                 {
                     case TargetProfile.TV:
                         fileName = "elmsharp-theme-material-tv.edj";
-                        Elementary.AddThemeOverlay("elmsharp-theme-material-tv.edj");
                         break;
                     case TargetProfile.Wearable:
                         fileName = "elmsharp-theme-material-wearable.edj";
-                        Elementary.AddThemeOverlay("elmsharp-theme-material-wearable.edj");
+                        break;
+                    case TargetProfile.Mobile:
+                        TSystemInfo.TryGetValue("http://tizen.org/system/device_type", out string deviceType);
+                        if (deviceType.Contains("Refrigerator"))
+                            fileName = "elmsharp-theme-material-fhub.edj";
                         break;
                 }
                 Elementary.AddThemeOverlay(Path.Combine(resourcePath, fileName));
