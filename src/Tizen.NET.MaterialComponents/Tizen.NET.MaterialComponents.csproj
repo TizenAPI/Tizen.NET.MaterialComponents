@@ -24,6 +24,9 @@
     <Content Include="Theme\elmsharp-theme-material-wearable.edj">
       <Pack>true</Pack>
     </Content>
+    <Content Include="Theme\elmsharp-theme-material-fhub.edj">
+      <Pack>true</Pack>
+    </Content>
     <Content Include="Theme\elmsharp-theme-material.edj">
       <Pack>true</Pack>
     </Content>
