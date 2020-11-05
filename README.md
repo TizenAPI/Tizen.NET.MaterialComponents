@@ -81,6 +81,10 @@ Material Components for Tizen .NET help developers execute [Material Design](htt
 - **MTooltip**
   A material Tooltips display informative text when users focus on, tap or long press an element. ([guideline](https://material.io/design/components/tooltips.html))
  
+
+## Status of Supported Components for each Tizen Profiles
+https://github.com/TizenAPI/Tizen.NET.MaterialComponents/wiki/Limitation-on-Tizen.NET.MaterialComponents
+
 ## Getting Started
 ### Install package 
 #### nuget.exe
